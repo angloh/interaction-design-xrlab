@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stroop Task</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white;
+            color: black;
+            overflow: hidden;
+            cursor: default;
+        }
+
+        #experiment-container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Participant Info Screen Styles */
+        #info-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        .info-title {
+            font-size: 4vh;
+            font-weight: normal;
+            margin-bottom: 5vh;
+            color: black;
+            font-weight: bold;
+        }
+
+        .info-form {
+            display: flex;
+            flex-direction: column;
+            gap: 3vh;
+            align-items: center;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 1vh;
+            min-width: 30vh;
+        }
+
+        .form-group label {
+            font-size: 2.5vh;
+            color: black;
+        }
+
+        .form-input {
+            font-size: 2.5vh;
+            padding: 1vh 1.5vh;
+            border: 0.2vh solid #ccc;
+            border-radius: 0.5vh;
+            font-family: Arial, sans-serif;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: rgb(77, 153, 255);
+        }
+
+        .start-button {
+            font-size: 2.5vh;
+            padding: 1.5vh 4vh;
+            background-color: rgb(77, 153, 255);
+            color: white;
+            border: none;
+            border-radius: 0.5vh;
+            cursor: pointer;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            margin-top: 2vh;
+        }
+
+        .start-button:hover {
+            background-color: rgb(51, 133, 235);
+        }
+
+        .start-button:active {
+            background-color: rgb(26, 113, 215);
+        }
+
+        /* Instruction Screen Styles */
+        #instruction-screen {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        .title {
+            font-size: 4vh;
+            font-weight: normal;
+            margin-bottom: 3vh;
+            color: black;
+            font-weight: bold;
+        }
+
+        .main-instructions {
+            font-size: 2.67vh;
+            text-align: center;
+            max-width: 80%;
+            line-height: 1.5;
+            margin-bottom: 3vh;
+            color: black;
+        }
+
+        .keys-label {
+            font-size: 2.33vh;
+            margin-bottom: 2vh;
+            color: black;
+        }
+
+        .key-boxes {
+            display: flex;
+            gap: 5vh;
+            margin-bottom: 3vh;
+        }
+
+        .key-box {
+            width: 8vh;
+            height: 8vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4vh;
+            font-weight: bold;
+            color: white;
+            border-width: 0.3vh;
+            border-style: solid;
+            border-radius: 0.5vh;
+        }
+
+        .key-box.red {
+            background-color: rgb(219, 38, 38);
+            border-color: rgb(255, 77, 77);
+        }
+
+        .key-box.green {
+            background-color: rgb(23, 163, 74);
+            border-color: rgb(51, 204, 102);
+        }
+
+        .key-box.blue {
+            background-color: rgb(38, 99, 237);
+            border-color: rgb(77, 128, 255);
+        }
+
+        .example-section {
+            text-align: center;
+            margin-top: 1vh;
+        }
+
+        .example-label {
+            font-size: 2vh;
+            color: black;
+            margin-bottom: 1vh;
+        }
+
+        .example-word {
+            font-size: 5.33vh;
+            font-weight: normal;
+            margin: 1vh 0;
+        }
+
+        .example-instruction {
+            font-size: 2.33vh;
+            color: black;
+            margin-top: 1vh;
+        }
+
+        .practice-info {
+            font-size: 2vh;
+            color: black;
+            margin-top: 2vh;
+        }
+
+        .start-prompt {
+            font-size: 2.67vh;
+            color: rgb(77, 153, 255);
+            margin-top: 3vh;
+        }
+
+        /* Trial Screen Styles */
+        #trial-screen {
+            display: none;
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .progress-indicator {
+            position: absolute;
+            top: 5vh;
+            left: 5vh;
+            font-size: 2vh;
+            color: rgb(179, 179, 179);
+        }
+
+        .stimulus-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+
+        .stimulus-word {
+            font-size: 12vh;
+            font-weight: normal;
+            margin-bottom: 5vh;
+        }
+
+        .bottom-instruction {
+            font-size: 1.67vh;
+            color: rgb(128, 128, 128);
+            position: absolute;
+            bottom: 30vh;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Feedback Screen Styles */
+        #feedback-screen {
+            display: none;
+            width: 100%;
+            height: 100%;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .feedback-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2vh;
+        }
+
+        .feedback-result {
+            font-size: 6vh;
+            font-weight: bold;
+        }
+
+        .feedback-result.correct {
+            color: rgb(23, 163, 74);
+        }
+
+        .feedback-result.incorrect {
+            color: rgb(219, 38, 38);
+        }
+
+        .feedback-correct-answer {
+            font-size: 3vh;
+            color: black;
+        }
+
+        /* Transition Screen Styles */
+        #transition-screen {
+            display: none;
+            width: 100%;
+            height: 100%;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .transition-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3vh;
+            text-align: center;
+        }
+
+        .transition-title {
+            font-size: 4.5vh;
+            font-weight: bold;
+            color: black;
+        }
+
+        .transition-message {
+            font-size: 2.67vh;
+            line-height: 1.6;
+            color: black;
+            max-width: 80%;
+        }
+
+        .transition-prompt {
+            font-size: 2.67vh;
+            color: rgb(77, 153, 255);
+            margin-top: 2vh;
+        }
+
+        /* Thank You Screen Styles */
+        #thanks-screen {
+            display: none;
+            width: 100%;
+            height: 100%;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .thanks-text {
+            font-size: 3.33vh;
+            text-align: center;
+            line-height: 1.8;
+            color: black;
+        }
+
+        /* Hidden class */
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <div id="experiment-container">
+        <!-- Participant Info Screen -->
+        <div id="info-screen">
+            <div class="info-title">Stroop Color Task</div>
+            <div class="info-form">
+                <div class="form-group">
+                    <label for="participant-id">Participant ID:</label>
+                    <input type="text" id="participant-id" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label for="session-number">Session #:</label>
+                    <input type="text" id="session-number" class="form-input" value="01" required>
+                </div>
+                <button id="start-button" class="start-button">START</button>
+            </div>
+        </div>
+
+        <!-- Instruction Screen -->
+        <div id="instruction-screen">
+            <div class="title">Stroop Task</div>
+            
+            <div class="main-instructions">
+                Press the key matching the COLOR of the text<br><br>
+                The word itself doesn't matter—respond to the color only
+            </div>
+
+            <div class="keys-label">Use these three keys:</div>
+
+            <div class="key-boxes">
+                <div class="key-box red">←</div>
+                <div class="key-box green">↓</div>
+                <div class="key-box blue">→</div>
+            </div>
+
+            <div class="example-section">
+                <div class="example-label">Example: If you see</div>
+                <div class="example-word" id="example-word">red</div>
+                <div class="example-instruction">Press ↓ (for GREEN color)</div>
+            </div>
+
+            <div class="practice-info">3 practice rounds with feedback → <span id="total-trials-text">9</span> test trials</div>
+            
+            <div class="start-prompt">Press any key to BEGIN EXPERIMENT</div>
+        </div>
+
+        <!-- Trial Screen -->
+        <div id="trial-screen">
+            <div class="progress-indicator" id="progress-text"></div>
+            
+            <div class="stimulus-container">
+                <div class="stimulus-word" id="stimulus-word"></div>
+            </div>
+
+            <div class="bottom-instruction">Press ←, ↓, or →</div>
+        </div>
+
+        <!-- Feedback Screen -->
+        <div id="feedback-screen">
+            <div class="feedback-container">
+                <div class="feedback-result" id="feedback-result"></div>
+                <div class="feedback-correct-answer" id="feedback-correct-answer"></div>
+            </div>
+        </div>
+
+        <!-- Transition Screen -->
+        <div id="transition-screen">
+            <div class="transition-container">
+                <div class="transition-title">Practice Complete!</div>
+                <div class="transition-message">
+                    You will now begin the test trials.<br><br>
+                    Remember: Press the key matching the COLOR of the text.
+                </div>
+                <div class="key-boxes">
+                    <div class="key-box red">←</div>
+                    <div class="key-box green">↓</div>
+                    <div class="key-box blue">→</div>
+                </div>
+                <div class="transition-prompt">Press any key to continue</div>
+            </div>
+        </div>
+
+        <!-- Thanks Screen -->
+        <div id="thanks-screen">
+            <div class="thanks-text">
+                This is the end of the experiment.<br><br>
+                Your accuracy: <span id="accuracy-text">0%</span><br><br>
+                Thank you for participating.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Color constants
+        const COLORS = {
+            RED: 'rgb(219, 38, 38)',
+            GREEN: 'rgb(23, 163, 74)',
+            BLUE: 'rgb(38, 99, 237)'
+        };
+
+        // Experiment configuration
+        const config = {
+            numPracticeTrials: 3,
+            numRepetitions: 1, // Will generate approximately 10 trials (1 rep × 9 trial types + 1 extra)
+            stimulusDelay: 500, // milliseconds
+            feedbackDuration: 800, // milliseconds
+            thanksScreenDuration: 2000 // milliseconds
+        };
+
+        // Practice trials (fixed set of 3)
+        const practiceTrials = [
+            { text: 'blue', letterColor: COLORS.GREEN, corrAns: 'down', congruent: 0 },
+            { text: 'green', letterColor: COLORS.RED, corrAns: 'left', congruent: 0 },
+            { text: 'red', letterColor: COLORS.BLUE, corrAns: 'right', congruent: 0 }
+        ];
+
+        // Trial conditions
+        const trialTypes = [
+            { text: 'red', letterColor: COLORS.RED, corrAns: 'left', congruent: 1 },
+            { text: 'red', letterColor: COLORS.GREEN, corrAns: 'down', congruent: 0 },
+            { text: 'red', letterColor: COLORS.BLUE, corrAns: 'right', congruent: 0 },
+            { text: 'green', letterColor: COLORS.RED, corrAns: 'left', congruent: 0 },
+            { text: 'green', letterColor: COLORS.GREEN, corrAns: 'down', congruent: 1 },
+            { text: 'green', letterColor: COLORS.BLUE, corrAns: 'right', congruent: 0 },
+            { text: 'blue', letterColor: COLORS.RED, corrAns: 'left', congruent: 0 },
+            { text: 'blue', letterColor: COLORS.GREEN, corrAns: 'down', congruent: 0 },
+            { text: 'blue', letterColor: COLORS.BLUE, corrAns: 'right', congruent: 1 }
+        ];
+
+        // Experiment state
+        let participantId = '';
+        let sessionNumber = '';
+        let experimentDate = '';
+        let currentTrialIndex = 0;
+        let isPractice = true;
+        let trials = [];
+        let results = [];
+        let trialStartTime = 0;
+        let trialStartTimestamp = 0;
+        let awaitingResponse = false;
+
+        // DOM elements
+        const infoScreen = document.getElementById('info-screen');
+        const participantIdInput = document.getElementById('participant-id');
+        const sessionNumberInput = document.getElementById('session-number');
+        const startButton = document.getElementById('start-button');
+        const instructionScreen = document.getElementById('instruction-screen');
+        const trialScreen = document.getElementById('trial-screen');
+        const feedbackScreen = document.getElementById('feedback-screen');
+        const transitionScreen = document.getElementById('transition-screen');
+        const thanksScreen = document.getElementById('thanks-screen');
+        const progressText = document.getElementById('progress-text');
+        const stimulusWord = document.getElementById('stimulus-word');
+        const exampleWord = document.getElementById('example-word');
+        const feedbackResult = document.getElementById('feedback-result');
+        const feedbackCorrectAnswer = document.getElementById('feedback-correct-answer');
+        const accuracyText = document.getElementById('accuracy-text');
+
+        // Key mapping
+        const keyMap = {
+            'ArrowLeft': 'left',
+            'ArrowDown': 'down',
+            'ArrowRight': 'right'
+        };
+
+        // Initialize experiment
+        function initExperiment() {
+            // Set example word color using color constant
+            exampleWord.style.color = COLORS.GREEN;
+            
+            // Calculate total test trials for display
+            const totalTestTrials = config.numRepetitions * trialTypes.length;
+            
+            console.log(`${config.numPracticeTrials} practice trials + ${totalTestTrials} test trials`);
+        }
+
+        // Handle start button click
+        function handleStartClick() {
+            participantId = participantIdInput.value.trim();
+            sessionNumber = sessionNumberInput.value.trim();
+
+            if (!participantId) {
+                alert('Please enter a Participant ID');
+                participantIdInput.focus();
+                return;
+            }
+
+            if (!sessionNumber) {
+                alert('Please enter a Session #');
+                sessionNumberInput.focus();
+                return;
+            }
+
+            // Get current date
+            experimentDate = new Date().toISOString().split('T')[0]; // YYYY-MM-DD format
+
+            // Update the total trials text on instruction screen
+            const totalTestTrials = config.numRepetitions * trialTypes.length;
+            document.getElementById('total-trials-text').textContent = totalTestTrials;
+
+            // Hide info screen, show instruction screen
+            infoScreen.classList.add('hidden');
+            instructionScreen.style.display = 'flex';
+            
+            // Listen for any key press to start experiment
+            document.addEventListener('keydown', startExperiment, { once: true });
+        }
+
+        // Shuffle array in place (Fisher-Yates)
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        // Start experiment
+        function startExperiment(event) {
+            // Check for escape key
+            if (event.key === 'Escape') {
+                endExperiment();
+                return;
+            }
+
+            instructionScreen.classList.add('hidden');
+            trialScreen.style.display = 'block';
+            
+            // Start first trial
+            setTimeout(() => {
+                runTrial();
+            }, 100);
+        }
+
+        // Run a single trial
+        function runTrial() {
+            // Check if we need to transition from practice to real trials
+            if (isPractice && currentTrialIndex >= practiceTrials.length) {
+                // Practice complete, show transition screen
+                showTransitionScreen();
+                return;
+            }
+            
+            // Check if all trials (including real trials) are complete
+            if (!isPractice && currentTrialIndex >= trials.length) {
+                showThanksScreen();
+                return;
+            }
+
+            // Get the current trial from either practice or real trials
+            const trial = isPractice ? practiceTrials[currentTrialIndex] : trials[currentTrialIndex];
+            
+            // Update progress
+            if (isPractice) {
+                progressText.textContent = `Practice ${currentTrialIndex + 1} / ${practiceTrials.length}`;
+            } else {
+                progressText.textContent = `Trial ${currentTrialIndex + 1} / ${trials.length}`;
+            }
+            
+            // Clear previous stimulus
+            stimulusWord.textContent = '';
+            stimulusWord.style.color = 'transparent';
+            awaitingResponse = false;
+
+            // Show stimulus after delay
+            setTimeout(() => {
+                stimulusWord.textContent = trial.text;
+                stimulusWord.style.color = trial.letterColor;
+                trialStartTime = performance.now();
+                trialStartTimestamp = new Date().toISOString();
+                awaitingResponse = true;
+            }, config.stimulusDelay);
+        }
+
+        // Handle keyboard response
+        function handleResponse(event) {
+            // Always check for escape
+            if (event.key === 'Escape') {
+                endExperiment();
+                return;
+            }
+
+            if (!awaitingResponse) {
+                return;
+            }
+
+            const pressedKey = keyMap[event.key];
+            if (!pressedKey) {
+                return; // Ignore other keys
+            }
+
+            // Get trial from correct array based on practice mode
+            const trial = isPractice ? practiceTrials[currentTrialIndex] : trials[currentTrialIndex];
+            
+            // Record response
+            const reactionTime = performance.now() - trialStartTime;
+            const trialEndTimestamp = new Date().toISOString();
+            const isCorrect = pressedKey === trial.corrAns ? 1 : 0;
+
+            // Convert RGB to color name using color constants
+            const colorName = trial.letterColor === COLORS.RED ? 'red' :
+                            trial.letterColor === COLORS.GREEN ? 'green' : 'blue';
+            
+            // Convert key direction to color name
+            const correctAnsColor = trial.corrAns === 'left' ? 'red' :
+                                  trial.corrAns === 'down' ? 'green' : 'blue';
+            
+            const userInputColor = pressedKey === 'left' ? 'red' :
+                                 pressedKey === 'down' ? 'green' : 'blue';
+
+            // Only record results if not in practice mode
+            if (!isPractice) {
+                results.push({
+                    trial: currentTrialIndex + 1,
+                    participant: participantId,
+                    session: sessionNumber,
+                    date: experimentDate,
+                    text: trial.text,
+                    letterColor: colorName,
+                    correctAns: correctAnsColor,
+                    congruent: trial.congruent,
+                    userInput: userInputColor,
+                    correct: isCorrect,
+                    responseTime: reactionTime.toFixed(3),
+                    responseKey: event.key,
+                    trialStartTimestamp: trialStartTimestamp,
+                    trialEndTimestamp: trialEndTimestamp
+                });
+            }
+
+            const trialType = isPractice ? 'Practice' : 'Trial';
+            console.log(`${trialType} ${currentTrialIndex + 1}: ${pressedKey} (${isCorrect ? 'correct' : 'incorrect'}) - ${reactionTime.toFixed(3)}ms`);
+
+            awaitingResponse = false;
+            currentTrialIndex++;
+
+            // Show feedback
+            showFeedback(isCorrect, correctAnsColor);
+        }
+
+        // Show feedback screen
+        function showFeedback(isCorrect, correctAnsColor) {
+            // Hide trial screen, show feedback screen
+            trialScreen.style.display = 'none';
+            feedbackScreen.style.display = 'flex';
+
+            // Set feedback text and color
+            if (isCorrect) {
+                feedbackResult.textContent = '✅';
+                feedbackResult.className = 'feedback-result correct';
+                feedbackCorrectAnswer.textContent = '';
+            } else {
+                // Convert color to arrow key direction
+                const correctKey = correctAnsColor === 'red' ? '← left' :
+                                 correctAnsColor === 'green' ? '↓ down' : '→ right';
+                
+                feedbackResult.textContent = '❌';
+                feedbackResult.className = 'feedback-result incorrect';
+                feedbackCorrectAnswer.textContent = `Answer: ${correctKey} (${correctAnsColor})`;
+            }
+
+            // Hide feedback and move to next trial after delay
+            setTimeout(() => {
+                feedbackScreen.style.display = 'none';
+                trialScreen.style.display = 'block';
+                runTrial();
+            }, config.feedbackDuration);
+        }
+
+        // Show transition screen
+        function showTransitionScreen() {
+            // Clear any remaining stimulus from previous trial
+            stimulusWord.textContent = '';
+            stimulusWord.style.color = 'transparent';
+            
+            trialScreen.style.display = 'none';
+            feedbackScreen.style.display = 'none';
+            transitionScreen.style.display = 'flex';
+            
+            console.log('Practice complete. Waiting for user to continue...');
+            
+            // Listen for any key press to start real trials
+            document.addEventListener('keydown', startRealTrials, { once: true });
+        }
+
+        // Start real trials after transition
+        function startRealTrials(event) {
+            // Check for escape key
+            if (event.key === 'Escape') {
+                endExperiment();
+                return;
+            }
+
+            // Switch to real trials
+            isPractice = false;
+            currentTrialIndex = 0;
+            trials = [];
+            for (let i = 0; i < config.numRepetitions; i++) {
+                trials = trials.concat([...trialTypes]);
+            }
+            shuffleArray(trials);
+            console.log(`Starting ${trials.length} test trials.`);
+
+            // Hide transition screen, show trial screen
+            transitionScreen.style.display = 'none';
+            trialScreen.style.display = 'block';
+            
+            // Start first real trial
+            setTimeout(() => {
+                runTrial();
+            }, 100);
+        }
+
+        // Show thanks screen
+        function showThanksScreen() {
+            trialScreen.style.display = 'none';
+            thanksScreen.style.display = 'flex';
+
+            // Calculate summary statistics
+            const correctTrials = results.filter(r => r.correct === 1).length;
+            const accuracy = ((correctTrials / results.length) * 100).toFixed(1);
+            accuracyText.textContent = `${accuracy}%`;
+
+            console.log('Experiment complete!');
+            console.log('Results:', results);
+
+            // Auto-download results
+            setTimeout(() => {
+                downloadResults();
+            }, 1000);
+
+            // Close after duration
+            setTimeout(() => {
+                endExperiment();
+            }, config.thanksScreenDuration);
+        }
+
+        // Download results as CSV
+        function downloadResults() {
+            const headers = ['session', 'participant', 'date', 'trial', 'text', 'letterColor', 'correctAns', 'congruent', 'responseKey', 'userInput', 'correct', 'trialStartTimestamp', 'trialEndTimestamp', 'responseTime(ms)'];
+            const csvContent = [
+                headers.join(','),
+                ...results.map(r => {
+                    return [r.session, r.participant, r.date, r.trial, r.text, r.letterColor, r.correctAns, r.congruent, r.responseKey, r.userInput, r.correct, r.trialStartTimestamp, r.trialEndTimestamp, r.responseTime].join(',');
+                })
+            ].join('\n');
+
+            const blob = new Blob([csvContent], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `stroop_${participantId}_${sessionNumber}_${experimentDate}.csv`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // End experiment
+        function endExperiment() {
+            console.log('Experiment ended');
+            // In a real experiment, you might want to prevent closing
+            // For now, we'll just log it
+        }
+
+        // Event listeners
+        startButton.addEventListener('click', handleStartClick);
+        document.addEventListener('keydown', handleResponse);
+
+        // Initialize when page loads
+        window.addEventListener('load', () => {
+            initExperiment();
+            participantIdInput.focus();
+        });
+    </script>
+</body>
+</html>

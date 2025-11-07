@@ -1,0 +1,1348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stroop Task</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white;
+            color: black;
+            overflow: hidden;
+            cursor: default;
+        }
+
+        #experiment-container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Configuration Screen Styles */
+        #config-screen {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        .config-title {
+            font-size: 4vh;
+            font-weight: bold;
+            margin-bottom: 3vh;
+            color: black;
+        }
+
+        .config-form {
+            display: flex;
+            flex-direction: column;
+            gap: 2vh;
+            align-items: center;
+            max-width: 60vh;
+        }
+
+        .config-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5vh;
+            width: 100%;
+        }
+
+        .config-practice-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0vh;
+            width: 100%;
+        }
+
+        .config-practice-container .config-group:not(:last-child) {
+            margin-bottom: 2vh;
+        }
+
+        #config-practice-trials-group {
+            min-height: 0;
+            overflow: hidden;
+            transition: min-height 0.3s ease;
+        }
+
+        .config-toggle-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .config-group label {
+            font-size: 2.5vh;
+            color: black;
+            font-weight: bold;
+        }
+
+        .config-description {
+            font-size: 1.8vh;
+            color: rgb(128, 128, 128);
+            margin-top: 0.5vh;
+        }
+
+        .config-input {
+            font-size: 2.5vh;
+            padding: 1vh 1.5vh;
+            border: 0.2vh solid #ccc;
+            border-radius: 0.5vh;
+            font-family: Arial, sans-serif;
+        }
+
+        .config-input:focus {
+            outline: none;
+            border-color: rgb(77, 153, 255);
+        }
+
+        .config-input.invalid {
+            border-color: rgb(219, 38, 38);
+        }
+
+        .config-error {
+            font-size: 1.8vh;
+            color: rgb(219, 38, 38);
+            margin-top: 0.5vh;
+            min-height: 2.5vh;
+        }
+
+        /* Toggle Switch Styles */
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 6vh;
+            height: 3vh;
+            cursor: pointer;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgb(204, 204, 204);
+            transition: 0.3s;
+            border-radius: 3vh;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 2.2vh;
+            width: 2.2vh;
+            left: 0.4vh;
+            bottom: 0.4vh;
+            background-color: white;
+            transition: 0.3s;
+            border-radius: 50%;
+        }
+
+        .toggle-switch input:checked + .toggle-slider {
+            background-color: rgb(77, 153, 255);
+        }
+
+        .toggle-switch input:checked + .toggle-slider:before {
+            transform: translateX(3vh);
+        }
+
+        .toggle-switch input:focus + .toggle-slider {
+            box-shadow: 0 0 0.2vh rgb(77, 153, 255);
+        }
+
+        .config-buttons {
+            display: flex;
+            gap: 2vh;
+            margin-top: 1vh;
+        }
+
+        .config-button {
+            font-size: 2.5vh;
+            padding: 1.5vh 4vh;
+            background-color: rgb(77, 153, 255);
+            color: white;
+            border: none;
+            border-radius: 0.5vh;
+            cursor: pointer;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+        }
+
+        .config-button:hover {
+            background-color: rgb(51, 133, 235);
+        }
+
+        .config-button:active {
+            background-color: rgb(26, 113, 215);
+        }
+
+        .config-button.secondary {
+            background-color: rgb(128, 128, 128);
+        }
+
+        .config-button.secondary:hover {
+            background-color: rgb(102, 102, 102);
+        }
+
+        .config-button.secondary:active {
+            background-color: rgb(77, 77, 77);
+        }
+
+        .config-status {
+            font-size: 2vh;
+            color: rgb(23, 163, 74);
+            margin-top: 1vh;
+            min-height: 3vh;
+        }
+
+        /* Participant Info Screen Styles */
+        #info-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        .info-title {
+            font-size: 4vh;
+            font-weight: bold;
+            margin-bottom: 5vh;
+            color: black;
+        }
+
+        .info-form {
+            display: flex;
+            flex-direction: column;
+            gap: 3vh;
+            align-items: center;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 1vh;
+            min-width: 30vh;
+        }
+
+        .form-group label {
+            font-size: 2.5vh;
+            color: black;
+        }
+
+        .form-input {
+            font-size: 2.5vh;
+            padding: 1vh 1.5vh;
+            border: 0.2vh solid #ccc;
+            border-radius: 0.5vh;
+            font-family: Arial, sans-serif;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: rgb(77, 153, 255);
+        }
+
+        .start-button {
+            font-size: 2.5vh;
+            padding: 1.5vh 4vh;
+            background-color: rgb(77, 153, 255);
+            color: white;
+            border: none;
+            border-radius: 0.5vh;
+            cursor: pointer;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            margin-top: 2vh;
+        }
+
+        .start-button:hover {
+            background-color: rgb(51, 133, 235);
+        }
+
+        .start-button:active {
+            background-color: rgb(26, 113, 215);
+        }
+
+        /* Instruction Screen Styles */
+        #instruction-screen {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        .title {
+            font-size: 4vh;
+            font-weight: bold;
+            margin-bottom: 3vh;
+            color: black;
+        }
+
+        .main-instructions {
+            font-size: 2.67vh;
+            text-align: center;
+            max-width: 80%;
+            line-height: 1.5;
+            margin-bottom: 3vh;
+            color: black;
+        }
+
+        .keys-label {
+            font-size: 2.33vh;
+            margin-bottom: 2vh;
+            color: black;
+        }
+
+        .key-boxes {
+            display: flex;
+            gap: 5vh;
+            margin-bottom: 3vh;
+        }
+
+        .key-box {
+            width: 8vh;
+            height: 8vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4vh;
+            font-weight: bold;
+            color: white;
+            border-width: 0.3vh;
+            border-style: solid;
+            border-radius: 0.5vh;
+        }
+
+        .key-box.red {
+            background-color: rgb(219, 38, 38);
+            border-color: rgb(255, 77, 77);
+        }
+
+        .key-box.green {
+            background-color: rgb(23, 163, 74);
+            border-color: rgb(51, 204, 102);
+        }
+
+        .key-box.blue {
+            background-color: rgb(38, 99, 237);
+            border-color: rgb(77, 128, 255);
+        }
+
+        .example-section {
+            text-align: center;
+            margin-top: 1vh;
+        }
+
+        .example-label {
+            font-size: 2vh;
+            color: black;
+            margin-bottom: 1vh;
+        }
+
+        .example-word {
+            font-size: 5.33vh;
+            font-weight: normal;
+            margin: 1vh 0;
+        }
+
+        .example-instruction {
+            font-size: 2.33vh;
+            color: black;
+            margin-top: 1vh;
+        }
+
+        .practice-info {
+            font-size: 2vh;
+            color: black;
+            margin-top: 2vh;
+        }
+
+        .start-prompt {
+            font-size: 2.67vh;
+            color: rgb(77, 153, 255);
+            margin-top: 3vh;
+        }
+
+        /* Trial Screen Styles */
+        #trial-screen {
+            display: none;
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .progress-indicator {
+            position: absolute;
+            top: 5vh;
+            left: 5vh;
+            font-size: 2vh;
+            color: rgb(179, 179, 179);
+        }
+
+        .stimulus-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+
+        .stimulus-word {
+            font-size: 12vh;
+            font-weight: normal;
+            margin-bottom: 5vh;
+        }
+
+        .bottom-instruction {
+            font-size: 1.67vh;
+            color: rgb(128, 128, 128);
+            position: absolute;
+            bottom: 30vh;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Feedback Screen Styles */
+        #feedback-screen {
+            display: none;
+            width: 100%;
+            height: 100%;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .feedback-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2vh;
+        }
+
+        .feedback-result {
+            font-size: 6vh;
+            font-weight: bold;
+        }
+
+        .feedback-result.correct {
+            color: rgb(23, 163, 74);
+        }
+
+        .feedback-result.incorrect {
+            color: rgb(219, 38, 38);
+        }
+
+        .feedback-correct-answer {
+            font-size: 3vh;
+            color: black;
+        }
+
+        /* Transition Screen Styles */
+        #transition-screen {
+            display: none;
+            width: 100%;
+            height: 100%;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .transition-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3vh;
+            text-align: center;
+        }
+
+        .transition-title {
+            font-size: 4.5vh;
+            font-weight: bold;
+            color: black;
+        }
+
+        .transition-message {
+            font-size: 2.67vh;
+            line-height: 1.6;
+            color: black;
+            max-width: 80%;
+        }
+
+        .transition-prompt {
+            font-size: 2.67vh;
+            color: rgb(77, 153, 255);
+            margin-top: 2vh;
+        }
+
+        /* Thank You Screen Styles */
+        #thanks-screen {
+            display: none;
+            width: 100%;
+            height: 100%;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .thanks-text {
+            font-size: 3.33vh;
+            text-align: center;
+            line-height: 1.8;
+            color: black;
+        }
+
+        /* Hidden class */
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <div id="experiment-container">
+        <!-- Configuration Screen -->
+        <div id="config-screen">
+            <div class="config-title">Experiment Configuration</div>
+            <div class="config-form">
+                <div class="config-group">
+                    <label for="config-num-trials">Number of Test Trials</label>
+                    <div class="config-description">Total number of test trials (must be multiple of 9)</div>
+                    <input type="number" id="config-num-trials" class="config-input" value="9" min="9" step="9">
+                    <div class="config-error" id="config-num-trials-error"></div>
+                </div>
+                <div class="config-practice-container">
+                    <div class="config-group">
+                        <div class="config-toggle-row">
+                            <label for="config-practice-enabled">Practice Trials</label>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="config-practice-enabled" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        <div class="config-description">Enable practice trials before the test trials</div>
+                    </div>
+                    <div class="config-group" id="config-practice-trials-group">
+                        <label for="config-practice-trials">Number of Practice Trials</label>
+                        <div class="config-description">Number of practice trials before test trials</div>
+                        <input type="number" id="config-practice-trials" class="config-input" value="3" min="1" step="1">
+                        <div class="config-error" id="config-practice-trials-error"></div>
+                    </div>
+                </div>
+                <div class="config-group">
+                    <label for="config-stimulus-delay">Stimulus Delay (ms)</label>
+                    <div class="config-description">Time before showing stimulus after blank screen</div>
+                    <input type="number" id="config-stimulus-delay" class="config-input" value="500" min="0" step="50">
+                    <div class="config-error" id="config-stimulus-delay-error"></div>
+                </div>
+                <div class="config-group">
+                    <label for="config-feedback-duration">Feedback Duration (ms)</label>
+                    <div class="config-description">How long to show feedback after each response</div>
+                    <input type="number" id="config-feedback-duration" class="config-input" value="800" min="0" step="50">
+                    <div class="config-error" id="config-feedback-duration-error"></div>
+                </div>
+                <div class="config-buttons">
+                    <button id="reset-config-button" class="config-button secondary">Reset</button>
+                    <button id="save-config-button" class="config-button">Save</button>
+                </div>
+                <div class="config-status" id="config-status"></div>
+            </div>
+        </div>
+
+        <!-- Participant Info Screen -->
+        <div id="info-screen">
+            <div class="info-title">Stroop Color Task</div>
+            <div class="info-form">
+                <div class="form-group">
+                    <label for="participant-id">Participant ID:</label>
+                    <input type="text" id="participant-id" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label for="session-number">Session #:</label>
+                    <input type="text" id="session-number" class="form-input" value="01" required>
+                </div>
+                <button id="start-button" class="start-button">START</button>
+            </div>
+        </div>
+
+        <!-- Instruction Screen -->
+        <div id="instruction-screen">
+            <div class="title">Stroop Task</div>
+            
+            <div class="main-instructions">
+                Press the key matching the COLOR of the text<br><br>
+                The word itself doesn't matter—respond to the color only
+            </div>
+
+            <div class="keys-label">Use these three keys:</div>
+
+            <div class="key-boxes">
+                <div class="key-box red">←</div>
+                <div class="key-box green">↓</div>
+                <div class="key-box blue">→</div>
+            </div>
+
+            <div class="example-section">
+                <div class="example-label">Example: If you see</div>
+                <div class="example-word" id="example-word">red</div>
+                <div class="example-instruction">Press ↓ (for GREEN color)</div>
+            </div>
+
+            <div class="practice-info"><span id="practice-trials-text">3</span> practice rounds with feedback → <span id="total-trials-text">9</span> test trials</div>
+            
+            <div class="start-prompt">Press any key to BEGIN EXPERIMENT</div>
+        </div>
+
+        <!-- Trial Screen -->
+        <div id="trial-screen">
+            <div class="progress-indicator" id="progress-text"></div>
+            
+            <div class="stimulus-container">
+                <div class="stimulus-word" id="stimulus-word"></div>
+            </div>
+
+            <div class="bottom-instruction">Press ←, ↓, or →</div>
+        </div>
+
+        <!-- Feedback Screen -->
+        <div id="feedback-screen">
+            <div class="feedback-container">
+                <div class="feedback-result" id="feedback-result"></div>
+                <div class="feedback-correct-answer" id="feedback-correct-answer"></div>
+            </div>
+        </div>
+
+        <!-- Transition Screen -->
+        <div id="transition-screen">
+            <div class="transition-container">
+                <div class="transition-title">Practice Complete!</div>
+                <div class="transition-message">
+                    You will now begin the test trials.<br><br>
+                    Remember: Press the key matching the COLOR of the text.
+                </div>
+                <div class="key-boxes">
+                    <div class="key-box red">←</div>
+                    <div class="key-box green">↓</div>
+                    <div class="key-box blue">→</div>
+                </div>
+                <div class="transition-prompt">Press any key to continue</div>
+            </div>
+        </div>
+
+        <!-- Thanks Screen -->
+        <div id="thanks-screen">
+            <div class="thanks-text">
+                This is the end of the experiment.<br><br>
+                Your accuracy: <span id="accuracy-text">0%</span><br><br>
+                Thank you for participating.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Color constants
+        const COLORS = {
+            RED: 'rgb(219, 38, 38)',
+            GREEN: 'rgb(23, 163, 74)',
+            BLUE: 'rgb(38, 99, 237)'
+        };
+
+        // Default configuration
+        const DEFAULT_CONFIG = {
+            practiceEnabled: true,
+            numPracticeTrials: 3,
+            numRepetitions: 1, // 1 repetition × 9 trial types = 9 trials
+            stimulusDelay: 500, // milliseconds
+            feedbackDuration: 800, // milliseconds
+            thanksScreenDuration: 2000 // milliseconds
+        };
+
+        // Experiment configuration (will be loaded from localStorage or defaults)
+        let config = { ...DEFAULT_CONFIG };
+
+        // Practice trials (fixed set)
+        let practiceTrials = [
+            { text: 'blue', letterColor: COLORS.GREEN, corrAns: 'down', congruent: 0 },
+            { text: 'green', letterColor: COLORS.RED, corrAns: 'left', congruent: 0 },
+            { text: 'red', letterColor: COLORS.BLUE, corrAns: 'right', congruent: 0 }
+        ];
+
+        // Trial conditions
+        const trialTypes = [
+            { text: 'red', letterColor: COLORS.RED, corrAns: 'left', congruent: 1 },
+            { text: 'red', letterColor: COLORS.GREEN, corrAns: 'down', congruent: 0 },
+            { text: 'red', letterColor: COLORS.BLUE, corrAns: 'right', congruent: 0 },
+            { text: 'green', letterColor: COLORS.RED, corrAns: 'left', congruent: 0 },
+            { text: 'green', letterColor: COLORS.GREEN, corrAns: 'down', congruent: 1 },
+            { text: 'green', letterColor: COLORS.BLUE, corrAns: 'right', congruent: 0 },
+            { text: 'blue', letterColor: COLORS.RED, corrAns: 'left', congruent: 0 },
+            { text: 'blue', letterColor: COLORS.GREEN, corrAns: 'down', congruent: 0 },
+            { text: 'blue', letterColor: COLORS.BLUE, corrAns: 'right', congruent: 1 }
+        ];
+
+        // Experiment state
+        let participantId = '';
+        let sessionNumber = '';
+        let experimentDate = '';
+        let currentTrialIndex = 0;
+        let isPractice = true;
+        let trials = [];
+        let results = [];
+        let trialStartTime = 0;
+        let trialStartTimestamp = 0;
+        let awaitingResponse = false;
+
+        // DOM elements
+        const configScreen = document.getElementById('config-screen');
+        const configNumTrialsInput = document.getElementById('config-num-trials');
+        const configPracticeEnabledInput = document.getElementById('config-practice-enabled');
+        const configPracticeTrialsGroup = document.getElementById('config-practice-trials-group');
+        const configStimulusDelayInput = document.getElementById('config-stimulus-delay');
+        const configFeedbackDurationInput = document.getElementById('config-feedback-duration');
+        const configPracticeTrialsInput = document.getElementById('config-practice-trials');
+        const configNumTrialsError = document.getElementById('config-num-trials-error');
+        const configStimulusDelayError = document.getElementById('config-stimulus-delay-error');
+        const configFeedbackDurationError = document.getElementById('config-feedback-duration-error');
+        const configPracticeTrialsError = document.getElementById('config-practice-trials-error');
+        const saveConfigButton = document.getElementById('save-config-button');
+        const resetConfigButton = document.getElementById('reset-config-button');
+        const configStatus = document.getElementById('config-status');
+        const infoScreen = document.getElementById('info-screen');
+        const participantIdInput = document.getElementById('participant-id');
+        const sessionNumberInput = document.getElementById('session-number');
+        const startButton = document.getElementById('start-button');
+        const instructionScreen = document.getElementById('instruction-screen');
+        const trialScreen = document.getElementById('trial-screen');
+        const feedbackScreen = document.getElementById('feedback-screen');
+        const transitionScreen = document.getElementById('transition-screen');
+        const thanksScreen = document.getElementById('thanks-screen');
+        const progressText = document.getElementById('progress-text');
+        const stimulusWord = document.getElementById('stimulus-word');
+        const exampleWord = document.getElementById('example-word');
+        const feedbackResult = document.getElementById('feedback-result');
+        const feedbackCorrectAnswer = document.getElementById('feedback-correct-answer');
+        const accuracyText = document.getElementById('accuracy-text');
+        const practiceTrialsText = document.getElementById('practice-trials-text');
+        const totalTrialsText = document.getElementById('total-trials-text');
+
+        // Key mapping
+        const keyMap = {
+            'ArrowLeft': 'left',
+            'ArrowDown': 'down',
+            'ArrowRight': 'right'
+        };
+
+        // Check URL parameters for mode
+        function checkMode() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const mode = urlParams.get('mode');
+            
+            if (mode === 'config') {
+                showConfigScreen();
+            } else {
+                loadConfiguration();
+                showParticipantScreen();
+            }
+        }
+
+        // Toggle practice trials input visibility
+        function togglePracticeTrialsInput() {
+            if (configPracticeEnabledInput.checked) {
+                configPracticeTrialsGroup.style.display = 'flex';
+                configPracticeTrialsGroup.style.marginBottom = '0';
+            } else {
+                configPracticeTrialsGroup.style.display = 'none';
+                configPracticeTrialsGroup.style.marginBottom = '0';
+                // Clear any errors when hiding
+                configPracticeTrialsInput.classList.remove('invalid');
+                configPracticeTrialsError.textContent = '';
+            }
+        }
+
+        // Show configuration screen
+        function showConfigScreen() {
+            loadConfiguration();
+            updateConfigInputs();
+            togglePracticeTrialsInput();
+            configScreen.style.display = 'flex';
+            infoScreen.style.display = 'none';
+        }
+
+        // Show participant screen
+        function showParticipantScreen() {
+            configScreen.style.display = 'none';
+            infoScreen.style.display = 'flex';
+        }
+
+        // Load configuration from localStorage
+        function loadConfiguration() {
+            const savedConfig = localStorage.getItem('stroopExperimentConfig');
+            if (savedConfig) {
+                try {
+                    const parsed = JSON.parse(savedConfig);
+                    config = { ...DEFAULT_CONFIG, ...parsed };
+                    console.log('Loaded configuration from localStorage:', config);
+                } catch (e) {
+                    console.error('Error loading configuration:', e);
+                    config = { ...DEFAULT_CONFIG };
+                }
+            } else {
+                config = { ...DEFAULT_CONFIG };
+            }
+        }
+
+        // Save configuration to localStorage
+        function saveConfiguration() {
+            // Clear all previous errors first
+            clearConfigErrors();
+
+            // Validate all inputs
+            let hasError = false;
+
+            const numTrials = parseInt(configNumTrialsInput.value);
+            const stimulusDelay = parseInt(configStimulusDelayInput.value);
+            const feedbackDuration = parseInt(configFeedbackDurationInput.value);
+            const practiceEnabled = configPracticeEnabledInput.checked;
+            const practiceTrials = parseInt(configPracticeTrialsInput.value);
+
+            // Validate number of trials
+            if (isNaN(numTrials) || numTrials < 9) {
+                showConfigError(configNumTrialsInput, configNumTrialsError, 'Must be at least 9');
+                hasError = true;
+            } else if (numTrials % 9 !== 0) {
+                showConfigError(configNumTrialsInput, configNumTrialsError, 'Must be a multiple of 9');
+                hasError = true;
+            }
+
+            // Validate practice trials only if enabled
+            if (practiceEnabled) {
+                if (isNaN(practiceTrials) || practiceTrials < 1) {
+                    showConfigError(configPracticeTrialsInput, configPracticeTrialsError, 'Must be at least 1');
+                    hasError = true;
+                }
+            }
+
+            // Validate stimulus delay
+            if (isNaN(stimulusDelay) || stimulusDelay < 0) {
+                showConfigError(configStimulusDelayInput, configStimulusDelayError, 'Must be 0 or greater');
+                hasError = true;
+            }
+
+            // Validate feedback duration
+            if (isNaN(feedbackDuration) || feedbackDuration < 0) {
+                showConfigError(configFeedbackDurationInput, configFeedbackDurationError, 'Must be 0 or greater');
+                hasError = true;
+            }
+
+            // If there are any errors, show error message at bottom and don't save
+            if (hasError) {
+                configStatus.textContent = '✗ Please fix the errors above';
+                configStatus.style.color = 'rgb(219, 38, 38)';
+                return;
+            }
+
+            config.numRepetitions = numTrials / 9;
+            config.practiceEnabled = practiceEnabled;
+            config.numPracticeTrials = practiceEnabled ? practiceTrials : 0;
+            config.stimulusDelay = stimulusDelay;
+            config.feedbackDuration = feedbackDuration;
+
+            // Update practice trials array based on config
+            updatePracticeTrials();
+
+            localStorage.setItem('stroopExperimentConfig', JSON.stringify(config));
+            
+            configStatus.textContent = '✓ Configuration saved successfully!';
+            configStatus.style.color = 'rgb(23, 163, 74)';
+            
+            console.log('Saved configuration:', config);
+
+            setTimeout(() => {
+                configStatus.textContent = '';
+            }, 3000);
+        }
+
+        // Show config error
+        function showConfigError(inputElement, errorElement, message) {
+            inputElement.classList.add('invalid');
+            errorElement.textContent = message;
+        }
+
+        // Clear all config errors
+        function clearConfigErrors() {
+            configNumTrialsInput.classList.remove('invalid');
+            configStimulusDelayInput.classList.remove('invalid');
+            configFeedbackDurationInput.classList.remove('invalid');
+            configPracticeTrialsInput.classList.remove('invalid');
+            
+            configNumTrialsError.textContent = '';
+            configStimulusDelayError.textContent = '';
+            configFeedbackDurationError.textContent = '';
+            configPracticeTrialsError.textContent = '';
+            configStatus.textContent = '';
+        }
+
+        // Validate individual input fields on blur
+        function validateNumTrials() {
+            const numTrials = parseInt(configNumTrialsInput.value);
+            configNumTrialsInput.classList.remove('invalid');
+            configNumTrialsError.textContent = '';
+            
+            if (isNaN(numTrials) || numTrials < 9) {
+                showConfigError(configNumTrialsInput, configNumTrialsError, 'Must be at least 9');
+            } else if (numTrials % 9 !== 0) {
+                showConfigError(configNumTrialsInput, configNumTrialsError, 'Must be a multiple of 9');
+            }
+        }
+
+        function validateStimulusDelay() {
+            const stimulusDelay = parseInt(configStimulusDelayInput.value);
+            configStimulusDelayInput.classList.remove('invalid');
+            configStimulusDelayError.textContent = '';
+            
+            if (isNaN(stimulusDelay) || stimulusDelay < 0) {
+                showConfigError(configStimulusDelayInput, configStimulusDelayError, 'Must be 0 or greater');
+            }
+        }
+
+        function validateFeedbackDuration() {
+            const feedbackDuration = parseInt(configFeedbackDurationInput.value);
+            configFeedbackDurationInput.classList.remove('invalid');
+            configFeedbackDurationError.textContent = '';
+            
+            if (isNaN(feedbackDuration) || feedbackDuration < 0) {
+                showConfigError(configFeedbackDurationInput, configFeedbackDurationError, 'Must be 0 or greater');
+            }
+        }
+
+        function validatePracticeTrials() {
+            const practiceTrials = parseInt(configPracticeTrialsInput.value);
+            configPracticeTrialsInput.classList.remove('invalid');
+            configPracticeTrialsError.textContent = '';
+            
+            if (configPracticeEnabledInput.checked && (isNaN(practiceTrials) || practiceTrials < 1)) {
+                showConfigError(configPracticeTrialsInput, configPracticeTrialsError, 'Must be at least 1');
+            }
+        }
+
+        // Reset configuration to defaults
+        function resetConfiguration() {
+            clearConfigErrors();
+            config = { ...DEFAULT_CONFIG };
+            localStorage.removeItem('stroopExperimentConfig');
+            updateConfigInputs();
+            updatePracticeTrials();
+            
+            configStatus.textContent = '✓ Configuration reset to defaults';
+            configStatus.style.color = 'rgb(23, 163, 74)';
+
+            setTimeout(() => {
+                configStatus.textContent = '';
+            }, 3000);
+        }
+
+        // Update configuration input fields
+        function updateConfigInputs() {
+            configNumTrialsInput.value = config.numRepetitions * 9;
+            configPracticeEnabledInput.checked = config.practiceEnabled !== false;
+            configStimulusDelayInput.value = config.stimulusDelay;
+            configFeedbackDurationInput.value = config.feedbackDuration;
+            configPracticeTrialsInput.value = config.numPracticeTrials || 3;
+            togglePracticeTrialsInput();
+        }
+
+        // Update practice trials based on configuration
+        function updatePracticeTrials() {
+            const basePracticeTrials = [
+                { text: 'blue', letterColor: COLORS.GREEN, corrAns: 'down', congruent: 0 },
+                { text: 'green', letterColor: COLORS.RED, corrAns: 'left', congruent: 0 },
+                { text: 'red', letterColor: COLORS.BLUE, corrAns: 'right', congruent: 0 }
+            ];
+
+            practiceTrials = [];
+            const numPractice = config.numPracticeTrials;
+
+            if (numPractice === 0) {
+                return;
+            }
+
+            // Repeat the base practice trials to match the desired number
+            for (let i = 0; i < numPractice; i++) {
+                practiceTrials.push(basePracticeTrials[i % basePracticeTrials.length]);
+            }
+        }
+
+        // Initialize experiment
+        function initExperiment() {
+            // Set example word color using color constant
+            exampleWord.style.color = COLORS.GREEN;
+            
+            // Update practice trials based on config
+            updatePracticeTrials();
+            
+            // Calculate total test trials for display
+            const totalTestTrials = config.numRepetitions * trialTypes.length;
+            totalTrialsText.textContent = totalTestTrials;
+            practiceTrialsText.textContent = config.numPracticeTrials;
+            
+            console.log(`${config.numPracticeTrials} practice trials + ${totalTestTrials} test trials`);
+        }
+
+        // Handle start button click
+        function handleStartClick() {
+            participantId = participantIdInput.value.trim();
+            sessionNumber = sessionNumberInput.value.trim();
+
+            if (!participantId) {
+                alert('Please enter a Participant ID');
+                participantIdInput.focus();
+                return;
+            }
+
+            if (!sessionNumber) {
+                alert('Please enter a Session #');
+                sessionNumberInput.focus();
+                return;
+            }
+
+            // Get current date
+            experimentDate = new Date().toISOString().split('T')[0]; // YYYY-MM-DD format
+
+            // Update the total trials text on instruction screen
+            const totalTestTrials = config.numRepetitions * trialTypes.length;
+            totalTrialsText.textContent = totalTestTrials;
+            
+            // Update practice trials text - hide if 0 practice trials
+            const practiceInfo = document.querySelector('.practice-info');
+            if (config.numPracticeTrials === 0) {
+                practiceInfo.innerHTML = `${totalTestTrials} test trials`;
+            } else {
+                practiceTrialsText.textContent = config.numPracticeTrials;
+                practiceInfo.innerHTML = `<span id="practice-trials-text">${config.numPracticeTrials}</span> practice rounds with feedback → <span id="total-trials-text">${totalTestTrials}</span> test trials`;
+            }
+
+            // Hide info screen, show instruction screen
+            infoScreen.classList.add('hidden');
+            instructionScreen.style.display = 'flex';
+            
+            // Listen for any key press to start experiment
+            document.addEventListener('keydown', startExperiment, { once: true });
+        }
+
+        // Shuffle array in place (Fisher-Yates)
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        // Start experiment
+        function startExperiment(event) {
+            // Check for escape key
+            if (event.key === 'Escape') {
+                endExperiment();
+                return;
+            }
+
+            instructionScreen.classList.add('hidden');
+            trialScreen.style.display = 'block';
+            
+            // If practice is disabled, go straight to real trials
+            if (config.numPracticeTrials === 0 || practiceTrials.length === 0) {
+                isPractice = false;
+                currentTrialIndex = 0;
+                trials = [];
+                for (let i = 0; i < config.numRepetitions; i++) {
+                    trials = trials.concat([...trialTypes]);
+                }
+                shuffleArray(trials);
+                console.log(`Starting ${trials.length} test trials (no practice).`);
+            }
+            
+            // Start first trial
+            setTimeout(() => {
+                runTrial();
+            }, 100);
+        }
+
+        // Run a single trial
+        function runTrial() {
+            // Check if we need to transition from practice to real trials
+            if (isPractice && currentTrialIndex >= practiceTrials.length) {
+                // Practice complete, show transition screen
+                showTransitionScreen();
+                return;
+            }
+            
+            // Check if all trials (including real trials) are complete
+            if (!isPractice && currentTrialIndex >= trials.length) {
+                showThanksScreen();
+                return;
+            }
+
+            // Get the current trial from either practice or real trials
+            const trial = isPractice ? practiceTrials[currentTrialIndex] : trials[currentTrialIndex];
+            
+            // Update progress
+            if (isPractice) {
+                progressText.textContent = `Practice ${currentTrialIndex + 1} / ${practiceTrials.length}`;
+            } else {
+                progressText.textContent = `Trial ${currentTrialIndex + 1} / ${trials.length}`;
+            }
+            
+            // Clear previous stimulus
+            stimulusWord.textContent = '';
+            stimulusWord.style.color = 'transparent';
+            awaitingResponse = false;
+
+            // Show stimulus after delay
+            setTimeout(() => {
+                stimulusWord.textContent = trial.text;
+                stimulusWord.style.color = trial.letterColor;
+                trialStartTime = performance.now();
+                trialStartTimestamp = new Date().toISOString();
+                awaitingResponse = true;
+            }, config.stimulusDelay);
+        }
+
+        // Handle keyboard response
+        function handleResponse(event) {
+            // Always check for escape
+            if (event.key === 'Escape') {
+                endExperiment();
+                return;
+            }
+
+            if (!awaitingResponse) {
+                return;
+            }
+
+            const pressedKey = keyMap[event.key];
+            if (!pressedKey) {
+                return; // Ignore other keys
+            }
+
+            // Get trial from correct array based on practice mode
+            const trial = isPractice ? practiceTrials[currentTrialIndex] : trials[currentTrialIndex];
+            
+            // Record response
+            const reactionTime = performance.now() - trialStartTime;
+            const trialEndTimestamp = new Date().toISOString();
+            const isCorrect = pressedKey === trial.corrAns ? 1 : 0;
+
+            // Convert RGB to color name using color constants
+            const colorName = trial.letterColor === COLORS.RED ? 'red' :
+                            trial.letterColor === COLORS.GREEN ? 'green' : 'blue';
+            
+            // Convert key direction to color name
+            const correctAnsColor = trial.corrAns === 'left' ? 'red' :
+                                  trial.corrAns === 'down' ? 'green' : 'blue';
+            
+            const userInputColor = pressedKey === 'left' ? 'red' :
+                                 pressedKey === 'down' ? 'green' : 'blue';
+
+            // Only record results if not in practice mode
+            if (!isPractice) {
+                results.push({
+                    trial: currentTrialIndex + 1,
+                    participant: participantId,
+                    session: sessionNumber,
+                    date: experimentDate,
+                    text: trial.text,
+                    letterColor: colorName,
+                    correctAns: correctAnsColor,
+                    congruent: trial.congruent,
+                    userInput: userInputColor,
+                    correct: isCorrect,
+                    responseTime: reactionTime.toFixed(3),
+                    responseKey: event.key,
+                    trialStartTimestamp: trialStartTimestamp,
+                    trialEndTimestamp: trialEndTimestamp
+                });
+            }
+
+            const trialType = isPractice ? 'Practice' : 'Trial';
+            console.log(`${trialType} ${currentTrialIndex + 1}: ${pressedKey} (${isCorrect ? 'correct' : 'incorrect'}) - ${reactionTime.toFixed(3)}ms`);
+
+            awaitingResponse = false;
+            currentTrialIndex++;
+
+            // Show feedback
+            showFeedback(isCorrect, correctAnsColor);
+        }
+
+        // Show feedback screen
+        function showFeedback(isCorrect, correctAnsColor) {
+            // Hide trial screen, show feedback screen
+            trialScreen.style.display = 'none';
+            feedbackScreen.style.display = 'flex';
+
+            // Set feedback text and color
+            if (isCorrect) {
+                feedbackResult.textContent = '✓';
+                feedbackResult.className = 'feedback-result correct';
+                feedbackCorrectAnswer.textContent = '';
+            } else {
+                // Convert color to arrow key direction
+                const correctKey = correctAnsColor === 'red' ? '← left' :
+                                 correctAnsColor === 'green' ? '↓ down' : '→ right';
+                
+                feedbackResult.textContent = '✗';
+                feedbackResult.className = 'feedback-result incorrect';
+                feedbackCorrectAnswer.textContent = `Answer: ${correctKey} (${correctAnsColor})`;
+            }
+
+            // Hide feedback and move to next trial after delay
+            setTimeout(() => {
+                feedbackScreen.style.display = 'none';
+                trialScreen.style.display = 'block';
+                runTrial();
+            }, config.feedbackDuration);
+        }
+
+        // Show transition screen
+        function showTransitionScreen() {
+            // Clear any remaining stimulus from previous trial
+            stimulusWord.textContent = '';
+            stimulusWord.style.color = 'transparent';
+            
+            trialScreen.style.display = 'none';
+            feedbackScreen.style.display = 'none';
+            transitionScreen.style.display = 'flex';
+            
+            console.log('Practice complete. Waiting for user to continue...');
+            
+            // Listen for any key press to start real trials
+            document.addEventListener('keydown', startRealTrials, { once: true });
+        }
+
+        // Start real trials after transition
+        function startRealTrials(event) {
+            // Check for escape key
+            if (event.key === 'Escape') {
+                endExperiment();
+                return;
+            }
+
+            // Switch to real trials
+            isPractice = false;
+            currentTrialIndex = 0;
+            trials = [];
+            for (let i = 0; i < config.numRepetitions; i++) {
+                trials = trials.concat([...trialTypes]);
+            }
+            shuffleArray(trials);
+            console.log(`Starting ${trials.length} test trials.`);
+
+            // Hide transition screen, show trial screen
+            transitionScreen.style.display = 'none';
+            trialScreen.style.display = 'block';
+            
+            // Start first real trial
+            setTimeout(() => {
+                runTrial();
+            }, 100);
+        }
+
+        // Show thanks screen
+        function showThanksScreen() {
+            trialScreen.style.display = 'none';
+            thanksScreen.style.display = 'flex';
+
+            // Calculate summary statistics
+            const correctTrials = results.filter(r => r.correct === 1).length;
+            const accuracy = ((correctTrials / results.length) * 100).toFixed(1);
+            accuracyText.textContent = `${accuracy}%`;
+
+            console.log('Experiment complete!');
+            console.log('Results:', results);
+
+            // Auto-download results
+            setTimeout(() => {
+                downloadResults();
+            }, 1000);
+
+            // Close after duration
+            setTimeout(() => {
+                endExperiment();
+            }, config.thanksScreenDuration);
+        }
+
+        // Download results as CSV
+        function downloadResults() {
+            const headers = ['session', 'participant', 'date', 'trial', 'text', 'letterColor', 'correctAns', 'congruent', 'responseKey', 'userInput', 'correct', 'trialStartTimestamp', 'trialEndTimestamp', 'responseTime(ms)'];
+            const csvContent = [
+                headers.join(','),
+                ...results.map(r => {
+                    return [r.session, r.participant, r.date, r.trial, r.text, r.letterColor, r.correctAns, r.congruent, r.responseKey, r.userInput, r.correct, r.trialStartTimestamp, r.trialEndTimestamp, r.responseTime].join(',');
+                })
+            ].join('\n');
+
+            const blob = new Blob([csvContent], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `stroop_${participantId}_${sessionNumber}_${experimentDate}.csv`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // End experiment
+        function endExperiment() {
+            console.log('Experiment ended');
+            // In a real experiment, you might want to prevent closing
+            // For now, we'll just log it
+        }
+
+        // Event listeners for config screen
+        saveConfigButton.addEventListener('click', saveConfiguration);
+        resetConfigButton.addEventListener('click', resetConfiguration);
+        configPracticeEnabledInput.addEventListener('change', togglePracticeTrialsInput);
+        
+        // Add blur event listeners for real-time validation
+        configNumTrialsInput.addEventListener('blur', validateNumTrials);
+        configStimulusDelayInput.addEventListener('blur', validateStimulusDelay);
+        configFeedbackDurationInput.addEventListener('blur', validateFeedbackDuration);
+        configPracticeTrialsInput.addEventListener('blur', validatePracticeTrials);
+
+        // Event listeners for experiment
+        startButton.addEventListener('click', handleStartClick);
+        document.addEventListener('keydown', handleResponse);
+
+        // Initialize when page loads
+        window.addEventListener('load', () => {
+            checkMode();
+            if (configScreen.style.display === 'none') {
+                initExperiment();
+                participantIdInput.focus();
+            }
+        });
+    </script>
+</body>
+</html>

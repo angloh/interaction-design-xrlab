@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stroop Color Task</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white;
+            color: black;
+            overflow: hidden;
+            cursor: default;
+        }
+
+        #experiment-container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Participant Info Screen Styles */
+        #info-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        .info-title {
+            font-size: 4vh;
+            font-weight: normal;
+            margin-bottom: 5vh;
+            color: black;
+        }
+
+        .info-form {
+            display: flex;
+            flex-direction: column;
+            gap: 3vh;
+            align-items: center;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 1vh;
+            min-width: 30vh;
+        }
+
+        .form-group label {
+            font-size: 2.5vh;
+            color: black;
+        }
+
+        .form-input {
+            font-size: 2.5vh;
+            padding: 1vh 1.5vh;
+            border: 0.2vh solid #ccc;
+            border-radius: 0.5vh;
+            font-family: Arial, sans-serif;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: rgb(77, 153, 255);
+        }
+
+        .start-button {
+            font-size: 2.5vh;
+            padding: 1.5vh 4vh;
+            background-color: rgb(77, 153, 255);
+            color: white;
+            border: none;
+            border-radius: 0.5vh;
+            cursor: pointer;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            margin-top: 2vh;
+        }
+
+        .start-button:hover {
+            background-color: rgb(51, 133, 235);
+        }
+
+        .start-button:active {
+            background-color: rgb(26, 113, 215);
+        }
+
+        /* Instruction Screen Styles */
+        #instruction-screen {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        .title {
+            font-size: 4vh;
+            font-weight: normal;
+            margin-bottom: 3vh;
+            color: black;
+        }
+
+        .main-instructions {
+            font-size: 2.67vh;
+            text-align: center;
+            max-width: 80%;
+            line-height: 1.5;
+            margin-bottom: 3vh;
+            color: black;
+        }
+
+        .keys-label {
+            font-size: 2.33vh;
+            margin-bottom: 2vh;
+            color: black;
+        }
+
+        .key-boxes {
+            display: flex;
+            gap: 5vh;
+            margin-bottom: 3vh;
+        }
+
+        .key-box {
+            width: 8vh;
+            height: 8vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4vh;
+            font-weight: bold;
+            color: white;
+            border-width: 0.3vh;
+            border-style: solid;
+            border-radius: 0.5vh;
+        }
+
+        .key-box.red {
+            background-color: rgb(219, 38, 38);
+            border-color: rgb(255, 77, 77);
+        }
+
+        .key-box.green {
+            background-color: rgb(23, 163, 74);
+            border-color: rgb(51, 204, 102);
+        }
+
+        .key-box.blue {
+            background-color: rgb(38, 99, 237);
+            border-color: rgb(77, 128, 255);
+        }
+
+        .example-section {
+            text-align: center;
+            margin-top: 1vh;
+        }
+
+        .example-label {
+            font-size: 2vh;
+            color: black;
+            margin-bottom: 1vh;
+        }
+
+        .example-word {
+            font-size: 5.33vh;
+            font-weight: normal;
+            margin: 1vh 0;
+        }
+
+        .example-instruction {
+            font-size: 2.33vh;
+            color: black;
+            margin-top: 1vh;
+        }
+
+        .practice-info {
+            font-size: 2vh;
+            color: black;
+            margin-top: 2vh;
+        }
+
+        .start-prompt {
+            font-size: 2.67vh;
+            color: rgb(77, 153, 255);
+            margin-top: 3vh;
+        }
+
+        /* Trial Screen Styles */
+        #trial-screen {
+            display: none;
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .progress-indicator {
+            position: absolute;
+            top: 5vh;
+            left: 5vh;
+            font-size: 2vh;
+            color: rgb(179, 179, 179);
+        }
+
+        .stimulus-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+
+        .stimulus-word {
+            font-size: 12vh;
+            font-weight: normal;
+            margin-bottom: 5vh;
+        }
+
+        .bottom-instruction {
+            font-size: 1.67vh;
+            color: rgb(128, 128, 128);
+            position: absolute;
+            bottom: 30vh;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Thank You Screen Styles */
+        #thanks-screen {
+            display: none;
+            width: 100%;
+            height: 100%;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .thanks-text {
+            font-size: 3.33vh;
+            text-align: center;
+            line-height: 1.8;
+            color: black;
+        }
+
+        /* Hidden class */
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <div id="experiment-container">
+        <!-- Participant Info Screen -->
+        <div id="info-screen">
+            <div class="info-title">Stroop Color Task</div>
+            <div class="info-form">
+                <div class="form-group">
+                    <label for="participant-id">Participant ID:</label>
+                    <input type="text" id="participant-id" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label for="session-number">Session #:</label>
+                    <input type="text" id="session-number" class="form-input" value="01" required>
+                </div>
+                <button id="start-button" class="start-button">START</button>
+            </div>
+        </div>
+
+        <!-- Instruction Screen -->
+        <div id="instruction-screen">
+            <div class="title">Stroop Color Task</div>
+            
+            <div class="main-instructions">
+                Press the key matching the COLOR of the text<br><br>
+                The word itself doesn't matter—respond to the color only
+            </div>
+
+            <div class="keys-label">Use these three keys:</div>
+
+            <div class="key-boxes">
+                <div class="key-box red">←</div>
+                <div class="key-box green">↓</div>
+                <div class="key-box blue">→</div>
+            </div>
+
+            <div class="example-section">
+                <div class="example-label">Example: If you see</div>
+                <div class="example-word" style="color: rgb(23, 163, 74);">red</div>
+                <div class="example-instruction">Press ↓ (for GREEN color)</div>
+            </div>
+
+            <div class="practice-info">3 practice rounds with feedback → <span id="total-trials-text">9</span> test trials</div>
+            
+            <div class="start-prompt">Press any key to BEGIN EXPERIMENT</div>
+        </div>
+
+        <!-- Trial Screen -->
+        <div id="trial-screen">
+            <div class="progress-indicator" id="progress-text"></div>
+            
+            <div class="stimulus-container">
+                <div class="stimulus-word" id="stimulus-word"></div>
+            </div>
+
+            <div class="bottom-instruction">Press ←, ↓, or →</div>
+        </div>
+
+        <!-- Thanks Screen -->
+        <div id="thanks-screen">
+            <div class="thanks-text">
+                This is the end of the experiment.<br><br>
+                Thanks!
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Experiment configuration
+        const config = {
+            numRepetitions: 1, // Will generate approximately 10 trials (1 rep × 9 trial types + 1 extra)
+            stimulusDelay: 500, // milliseconds
+            thanksScreenDuration: 2000 // milliseconds
+        };
+
+        // Trial conditions
+        const trialTypes = [
+            { text: 'red', letterColor: 'rgb(219, 38, 38)', corrAns: 'left', congruent: 1 },
+            { text: 'red', letterColor: 'rgb(23, 163, 74)', corrAns: 'down', congruent: 0 },
+            { text: 'red', letterColor: 'rgb(38, 99, 237)', corrAns: 'right', congruent: 0 },
+            { text: 'green', letterColor: 'rgb(219, 38, 38)', corrAns: 'left', congruent: 0 },
+            { text: 'green', letterColor: 'rgb(23, 163, 74)', corrAns: 'down', congruent: 1 },
+            { text: 'green', letterColor: 'rgb(38, 99, 237)', corrAns: 'right', congruent: 0 },
+            { text: 'blue', letterColor: 'rgb(219, 38, 38)', corrAns: 'left', congruent: 0 },
+            { text: 'blue', letterColor: 'rgb(23, 163, 74)', corrAns: 'down', congruent: 0 },
+            { text: 'blue', letterColor: 'rgb(38, 99, 237)', corrAns: 'right', congruent: 1 }
+        ];
+
+        // Experiment state
+        let participantId = '';
+        let sessionNumber = '';
+        let experimentDate = '';
+        let currentTrialIndex = 0;
+        let trials = [];
+        let results = [];
+        let trialStartTime = 0;
+        let awaitingResponse = false;
+
+        // DOM elements
+        const infoScreen = document.getElementById('info-screen');
+        const participantIdInput = document.getElementById('participant-id');
+        const sessionNumberInput = document.getElementById('session-number');
+        const startButton = document.getElementById('start-button');
+        const instructionScreen = document.getElementById('instruction-screen');
+        const trialScreen = document.getElementById('trial-screen');
+        const thanksScreen = document.getElementById('thanks-screen');
+        const progressText = document.getElementById('progress-text');
+        const stimulusWord = document.getElementById('stimulus-word');
+
+        // Key mapping
+        const keyMap = {
+            'ArrowLeft': 'left',
+            'ArrowDown': 'down',
+            'ArrowRight': 'right'
+        };
+
+        // Initialize experiment
+        function initExperiment() {
+            // Generate trial list (repeat trial types multiple times and shuffle)
+            trials = [];
+            for (let i = 0; i < config.numRepetitions; i++) {
+                trials = trials.concat([...trialTypes]);
+            }
+            shuffleArray(trials);
+            
+            console.log(`Total trials: ${trials.length}`);
+        }
+
+        // Handle start button click
+        function handleStartClick() {
+            participantId = participantIdInput.value.trim();
+            sessionNumber = sessionNumberInput.value.trim();
+
+            if (!participantId) {
+                alert('Please enter a Participant ID');
+                participantIdInput.focus();
+                return;
+            }
+
+            if (!sessionNumber) {
+                alert('Please enter a Session #');
+                sessionNumberInput.focus();
+                return;
+            }
+
+            // Get current date
+            experimentDate = new Date().toISOString().split('T')[0]; // YYYY-MM-DD format
+
+            // Update the total trials text on instruction screen
+            document.getElementById('total-trials-text').textContent = trials.length;
+
+            // Hide info screen, show instruction screen
+            infoScreen.classList.add('hidden');
+            instructionScreen.style.display = 'flex';
+            
+            // Listen for any key press to start experiment
+            document.addEventListener('keydown', startExperiment, { once: true });
+        }
+
+        // Shuffle array in place (Fisher-Yates)
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        // Start experiment
+        function startExperiment(event) {
+            // Check for escape key
+            if (event.key === 'Escape') {
+                endExperiment();
+                return;
+            }
+
+            instructionScreen.classList.add('hidden');
+            trialScreen.style.display = 'block';
+            
+            // Start first trial
+            setTimeout(() => {
+                runTrial();
+            }, 100);
+        }
+
+        // Run a single trial
+        function runTrial() {
+            if (currentTrialIndex >= trials.length) {
+                showThanksScreen();
+                return;
+            }
+
+            const trial = trials[currentTrialIndex];
+            
+            // Update progress
+            progressText.textContent = `Trial ${currentTrialIndex + 1} / ${trials.length}`;
+            
+            // Clear previous stimulus
+            stimulusWord.textContent = '';
+            stimulusWord.style.color = 'transparent';
+            awaitingResponse = false;
+
+            // Show stimulus after delay
+            setTimeout(() => {
+                stimulusWord.textContent = trial.text;
+                stimulusWord.style.color = trial.letterColor;
+                trialStartTime = performance.now();
+                awaitingResponse = true;
+            }, config.stimulusDelay);
+        }
+
+        // Handle keyboard response
+        function handleResponse(event) {
+            // Always check for escape
+            if (event.key === 'Escape') {
+                endExperiment();
+                return;
+            }
+
+            if (!awaitingResponse) {
+                return;
+            }
+
+            const pressedKey = keyMap[event.key];
+            if (!pressedKey) {
+                return; // Ignore other keys
+            }
+
+            // Record response
+            const reactionTime = performance.now() - trialStartTime;
+            const trial = trials[currentTrialIndex];
+            const isCorrect = pressedKey === trial.corrAns ? 1 : 0;
+
+            // Convert RGB to color name
+            const colorName = trial.letterColor === 'rgb(219, 38, 38)' ? 'red' :
+                            trial.letterColor === 'rgb(23, 163, 74)' ? 'green' : 'blue';
+            
+            // Convert key direction to color name
+            const correctAnsColor = trial.corrAns === 'left' ? 'red' :
+                                  trial.corrAns === 'down' ? 'green' : 'blue';
+            
+            const userInputColor = pressedKey === 'left' ? 'red' :
+                                 pressedKey === 'down' ? 'green' : 'blue';
+
+            results.push({
+                trial: currentTrialIndex + 1,
+                participant: participantId,
+                session: sessionNumber,
+                date: experimentDate,
+                text: trial.text,
+                letterColor: colorName,
+                correctAns: correctAnsColor,
+                congruent: trial.congruent,
+                userInput: userInputColor,
+                correct: isCorrect,
+                responseTime: reactionTime.toFixed(3)
+            });
+
+            console.log(`Trial ${currentTrialIndex + 1}: ${pressedKey} (${isCorrect ? 'correct' : 'incorrect'}) - ${reactionTime.toFixed(3)}ms`);
+
+            awaitingResponse = false;
+            currentTrialIndex++;
+
+            // Move to next trial
+            setTimeout(() => {
+                runTrial();
+            }, 200);
+        }
+
+        // Show thanks screen
+        function showThanksScreen() {
+            trialScreen.style.display = 'none';
+            thanksScreen.style.display = 'flex';
+
+            // Calculate summary statistics
+            const correctTrials = results.filter(r => r.correct === 1).length;
+
+            console.log('Experiment complete!');
+            console.log('Results:', results);
+
+            // Auto-download results
+            setTimeout(() => {
+                downloadResults();
+            }, 1000);
+
+            // Close after duration
+            setTimeout(() => {
+                endExperiment();
+            }, config.thanksScreenDuration);
+        }
+
+        // Download results as CSV
+        function downloadResults() {
+            const headers = ['trial', 'participant', 'session', 'date', 'text', 'letterColor', 'correctAns', 'congruent', 'userInput', 'correct', 'responseTime(ms)'];
+            const csvContent = [
+                headers.join(','),
+                ...results.map(r => {
+                    return [r.trial, r.participant, r.session, r.date, r.text, r.letterColor, r.correctAns, r.congruent, r.userInput, r.correct, r.responseTime].join(',');
+                })
+            ].join('\n');
+
+            const blob = new Blob([csvContent], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `stroop_${participantId}_${sessionNumber}_${experimentDate}.csv`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // End experiment
+        function endExperiment() {
+            console.log('Experiment ended');
+            // In a real experiment, you might want to prevent closing
+            // For now, we'll just log it
+        }
+
+        // Event listeners
+        startButton.addEventListener('click', handleStartClick);
+        document.addEventListener('keydown', handleResponse);
+
+        // Initialize when page loads
+        window.addEventListener('load', () => {
+            initExperiment();
+            participantIdInput.focus();
+        });
+    </script>
+</body>
+</html>
