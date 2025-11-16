@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Antisaccade Task</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <button id="expToggle" class="exp-toggle">Experimenter view</button>
+
+  <aside id="expPanel" class="exp-panel">
+    <header class="exp-header-main">
+      <button id="expClose" class="exp-close">Close</button>
+      <h2>Experimenter view</h2>
+    </header>
+
+    <section class="exp-section exp-participants-detail">
+      <h3>Participants</h3>
+      <div id="expParticipantsDetail"></div>
+    </section>
+  </aside>
+
+  <div class="page">
+    <!-- Screen 1: full-screen instructions -->
+    <section id="screen-instructions" class="screen is-active">
+      <header class="screen-header screen-header--center">
+        <h1>Antisaccade Task</h1>
+        <p class="tagline">Learn the rule, then practice.</p>
+        <p class="rule-one-liner">Red: press the opposite arrow. Green: press the same arrow.</p>
+      </header>
+
+      <main class="screen-main">
+        <div class="rule-visuals">
+          <div class="rule-column">
+            <div class="rule-title">
+              <span class="cue-circle cue-circle--red mini-cue-big"></span>
+              <span class="rule-label-text">Red = opposite side</span>
+            </div>
+            <div class="mini-scenes">
+              <div class="mini-scene">
+                <div class="mini-side mini-side--left">
+                  <span class="mini-cue cue-circle cue-circle--red"></span>
+                </div>
+                <div class="mini-side mini-side--right">
+                  <span class="mini-arrow">→</span>
+                </div>
+              </div>
+              <div class="mini-scene">
+                <div class="mini-side mini-side--left">
+                  <span class="mini-arrow">←</span>
+                </div>
+                <div class="mini-side mini-side--right">
+                  <span class="mini-cue cue-circle cue-circle--red"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="rule-column">
+            <div class="rule-title">
+              <span class="cue-circle cue-circle--green mini-cue-big"></span>
+              <span class="rule-label-text">Green = same side</span>
+            </div>
+            <div class="mini-scenes">
+              <div class="mini-scene">
+                <div class="mini-side mini-side--left">
+                  <span class="mini-cue cue-circle cue-circle--green"></span>
+                </div>
+                <div class="mini-side mini-side--right">
+                  <span class="mini-arrow">←</span>
+                </div>
+              </div>
+              <div class="mini-scene">
+                <div class="mini-side mini-side--left">
+                  <span class="mini-arrow">→</span>
+                </div>
+                <div class="mini-side mini-side--right">
+                  <span class="mini-cue cue-circle cue-circle--green"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <footer class="screen-footer">
+        <p>Use only the left (←) and right (→) arrow keys.</p>
+        <p class="hint-line hint-line--big">Press <span class="key-hint">space</span> to start a short practice (3 trials).</p>
+      </footer>
+    </section>
+
+    <!-- Screen 2 & 3: practice + main trials (full-screen) -->
+    <section id="screen-trials" class="screen">
+      <header class="screen-header screen-header--bar">
+        <div class="phase-label" id="phaseLabel">Practice</div>
+        <div class="phase-counter" id="trialCounter">0/3</div>
+      </header>
+
+      <main class="screen-main">
+        <div class="trial-stage">
+          <div id="phaseBigLabel" class="phase-big-label">Practice</div>
+          <div class="fixation">+</div>
+          <div class="cue-row">
+            <div class="cue-slot">
+              <div id="leftCue" class="cue-circle cue-circle--placeholder big-cue"></div>
+            </div>
+            <div class="cue-slot">
+              <div id="rightCue" class="cue-circle cue-circle--placeholder big-cue"></div>
+            </div>
+          </div>
+          <div id="feedbackText" class="feedback-text"></div>
+        </div>
+      </main>
+
+      <footer class="screen-footer">
+        <p class="hint-line" id="bottomHint"></p>
+      </footer>
+    </section>
+
+    <!-- Screen 3: thank you -->
+    <section id="screen-thanks" class="screen">
+      <div class="thanks-center">
+        <p class="thanks-text">Thank you for participating.</p>
+      </div>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

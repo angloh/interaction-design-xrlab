@@ -1,0 +1,403 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui,
+    -webkit-system-font, 'Segoe UI', sans-serif;
+  background: #ffffff;
+  color: #000000;
+}
+
+body {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+}
+
+/* Experimenter toggle */
+
+.exp-toggle {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 60;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(15, 23, 42, 0.18);
+  background: rgba(249, 250, 251, 0.96);
+  font-size: 0.85rem;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Experimenter panel: full-screen overlay */
+
+.exp-panel {
+  position: fixed;
+  inset: 0;
+  background: #f9fafb;
+  padding: 14px 18px 16px;
+  z-index: 70;
+  display: none;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 0.85rem;
+  overflow-y: auto;
+}
+
+.exp-panel.is-open {
+  display: flex;
+}
+
+.exp-header-main {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.exp-header-main h2 {
+  margin: 4px 0 6px;
+  font-size: 1.1rem;
+}
+
+.exp-close {
+  border-radius: 999px;
+  padding: 4px 10px;
+  border: 1px solid rgba(15, 23, 42, 0.18);
+  background: #ffffff;
+  cursor: pointer;
+}
+
+.exp-section {
+  border-top: 1px solid rgba(15, 23, 42, 0.12);
+  padding-top: 6px;
+  margin-top: 4px;
+}
+
+.exp-section h3 {
+  margin: 2px 0 8px;
+  font-size: 0.95rem;
+}
+
+.exp-participant-block {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 8px 10px 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
+}
+
+.exp-participant-header {
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.exp-participant-subheader {
+  font-size: 0.8rem;
+  margin-bottom: 6px;
+  color: #4b5563;
+}
+
+.exp-participant-block table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.78rem;
+}
+
+.exp-participant-block th,
+.exp-participant-block td {
+  border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+  padding: 2px 4px;
+  text-align: left;
+}
+
+.exp-participant-block th {
+  font-weight: 600;
+}
+
+/* Main participant view */
+
+.page {
+  width: 100%;
+}
+
+.screen {
+  display: none;
+}
+
+.screen.is-active {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.screen-header {
+  padding: 20px 24px 12px;
+}
+
+.screen-header--center {
+  text-align: center;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.screen-header--bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.screen-header h1 {
+  margin: 0;
+  font-size: 2.4rem;
+  letter-spacing: 0.02em;
+}
+
+.tagline {
+  margin: 8px 0 0;
+  font-size: 1.2rem;
+}
+
+.rule-one-liner {
+  margin: 10px 0 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.screen-main {
+  flex: 1;
+  padding: 10px 48px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.screen-footer {
+  padding: 10px 24px 22px;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.phase-label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #eff6ff;
+}
+
+.phase-counter {
+  font-size: 0.95rem;
+}
+
+/* Instruction visuals */
+
+.rule-visuals {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 40px;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.rule-column {
+  background: #f3f4f6;
+  border-radius: 22px;
+  padding: 26px 22px 20px;
+}
+
+.rule-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.rule-label-text {
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.cue-circle {
+  border-radius: 50%;
+  border: 2px solid rgba(15, 23, 42, 0.14);
+}
+
+.cue-circle--red {
+  background: #ef4444;
+  border-color: #9f1239;
+}
+
+.cue-circle--green {
+  background: #16a34a;
+  border-color: #166534;
+}
+
+.cue-circle--placeholder {
+  background: #d1d5db;
+}
+
+.mini-cue-big {
+  width: 42px;
+  height: 42px;
+}
+
+.mini-scenes {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mini-scene {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  background: #e5e7eb;
+  border-radius: 14px;
+  padding: 12px 14px;
+}
+
+.mini-side {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 64px;
+}
+
+.mini-cue {
+  width: 36px;
+  height: 36px;
+}
+
+.mini-arrow {
+  font-size: 2rem;
+}
+
+.key-hint {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.4em;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(15, 23, 42, 0.18);
+  font-size: 0.9rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    'Liberation Mono', 'Courier New', monospace;
+  background: #f9fafb;
+}
+
+.hint-line {
+  margin: 4px 0;
+}
+
+.hint-line--big {
+  font-size: 1.1rem;
+  margin-top: 10px;
+}
+
+/* Trial screen */
+
+.trial-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.phase-big-label {
+  font-size: 1.6rem;
+  margin-bottom: 10px;
+}
+
+.fixation {
+  font-size: 2rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  margin-bottom: 18px;
+}
+
+.cue-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 220px;
+  justify-items: center;
+  margin-bottom: 26px;
+}
+
+.cue-slot {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.big-cue {
+  width: 80px;
+  height: 80px;
+}
+
+.feedback-text {
+  min-height: 2.2em;
+  font-size: 2.1rem;
+  font-weight: 600;
+}
+
+.feedback-text--correct {
+  color: #16a34a;
+}
+
+.feedback-text--incorrect {
+  color: #dc2626;
+}
+
+.cue-circle--active {
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.25);
+}
+
+/* Thanks */
+
+.thanks-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.thanks-text {
+  font-size: 1.4rem;
+}
+
+/* Responsive */
+
+@media (max-width: 1100px) {
+  .rule-visuals {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .cue-row {
+    gap: 160px;
+  }
+}
+
+@media (max-width: 650px) {
+  .screen-main {
+    padding: 10px 16px 14px;
+  }
+
+  .cue-row {
+    gap: 90px;
+  }
+
+  .big-cue {
+    width: 64px;
+    height: 64px;
+  }
+}
