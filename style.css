@@ -1,0 +1,386 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui,
+    -webkit-system-font, 'Segoe UI', sans-serif;
+  background: #747679;
+  color: #111827;
+}
+
+body {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+}
+
+/* Experimenter toggle */
+
+.exp-toggle {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 40;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(15, 23, 42, 0.18);
+  background: rgba(249, 250, 251, 0.92);
+  font-size: 0.85rem;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Experimenter panel */
+
+.exp-panel {
+  position: fixed;
+  inset-block: 0;
+  right: -360px;
+  width: 340px;
+  background: #f9fafb;
+  border-left: 1px solid rgba(15, 23, 42, 0.15);
+  box-shadow: -10px 0 30px rgba(0, 0, 0, 0.3);
+  padding: 10px 12px 12px;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: right 0.2s ease-out;
+  font-size: 0.85rem;
+}
+
+.exp-panel.is-open {
+  right: 0;
+}
+
+.exp-header h2 {
+  margin: 4px 0 6px;
+  font-size: 1rem;
+}
+
+.exp-section {
+  border-top: 1px solid rgba(15, 23, 42, 0.12);
+  padding-top: 6px;
+  margin-top: 4px;
+}
+
+.exp-row {
+  display: flex;
+  justify-content: space-between;
+  margin: 2px 0;
+}
+
+.exp-section h3 {
+  margin: 2px 0 4px;
+  font-size: 0.9rem;
+}
+
+.exp-section table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+}
+
+.exp-section th,
+.exp-section td {
+  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+  padding: 2px 4px;
+  text-align: left;
+}
+
+.exp-section th {
+  font-weight: 600;
+}
+
+/* Main participant view */
+
+.page {
+  width: 100%;
+  max-width: 960px;
+  margin: 20px auto;
+}
+
+.card {
+  background: #f9fafb;
+  border-radius: 18px;
+  padding: 20px 24px;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.screen {
+  display: none;
+}
+
+.screen.is-active {
+  display: block;
+}
+
+.screen-header {
+  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+  padding-bottom: 10px;
+  margin-bottom: 18px;
+  text-align: center;
+}
+
+.screen-header h1 {
+  margin: 0;
+  font-size: 1.7rem;
+  letter-spacing: 0.02em;
+}
+
+.tagline {
+  margin: 4px 0 0;
+  font-size: 0.96rem;
+  color: #4b5563;
+}
+
+.rule-one-liner {
+  margin: 6px 0 0;
+  font-size: 0.96rem;
+  font-weight: 500;
+}
+
+.screen-header--compact {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: left;
+}
+
+.phase-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+
+.phase-counter {
+  font-size: 0.9rem;
+  color: #4b5563;
+}
+
+/* Instruction visuals */
+
+.rule-visuals {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.rule-column {
+  background: #f3f4f6;
+  border-radius: 14px;
+  padding: 12px 12px 10px;
+}
+
+.rule-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.rule-label-text {
+  font-size: 0.96rem;
+  font-weight: 600;
+}
+
+.cue-circle {
+  border-radius: 50%;
+  border: 2px solid rgba(15, 23, 42, 0.14);
+}
+
+.cue-circle--red {
+  background: #ef4444;
+  border-color: #9f1239;
+}
+
+.cue-circle--green {
+  background: #16a34a;
+  border-color: #166534;
+}
+
+.cue-circle--placeholder {
+  background: #d1d5db;
+}
+
+.mini-scenes {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mini-scene {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  background: #e5e7eb;
+  border-radius: 10px;
+  padding: 6px 8px;
+}
+
+.mini-side {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 40px;
+}
+
+.mini-cue {
+  width: 26px;
+  height: 26px;
+}
+
+.mini-arrow {
+  font-size: 1.3rem;
+}
+
+.screen-footer {
+  margin-top: 18px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #4b5563;
+}
+
+.key-hint {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.4em;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(15, 23, 42, 0.18);
+  font-size: 0.8rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    'Liberation Mono', 'Courier New', monospace;
+  background: #f9fafb;
+}
+
+.hint-line {
+  margin: 2px 0;
+}
+
+/* Trial screen: full-height feel */
+
+#screen-trials.card {
+  max-width: 100%;
+  height: calc(100vh - 40px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.trial-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+.phase-big-label {
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+}
+
+.fixation {
+  font-size: 1.7rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  margin-bottom: 16px;
+}
+
+.cue-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 200px;
+  justify-items: center;
+  margin-bottom: 24px;
+}
+
+.cue-slot {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#leftCue,
+#rightCue {
+  width: 80px;
+  height: 80px;
+}
+
+.feedback-text {
+  min-height: 1.8em;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.feedback-text--correct {
+  color: #16a34a;
+}
+
+.feedback-text--incorrect {
+  color: #dc2626;
+}
+
+.cue-circle--active {
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.25);
+}
+
+/* Thanks */
+
+.thanks-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 180px;
+}
+
+.thanks-text {
+  font-size: 1.3rem;
+}
+
+/* Responsive */
+
+@media (max-width: 820px) {
+  .card {
+    padding: 16px 14px 14px;
+  }
+
+  .rule-visuals {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .cue-row {
+    gap: 110px;
+  }
+
+  #leftCue,
+  #rightCue {
+    width: 70px;
+    height: 70px;
+  }
+}
+
+@media (max-width: 600px) {
+  .cue-row {
+    gap: 70px;
+  }
+
+  #leftCue,
+  #rightCue {
+    width: 60px;
+    height: 60px;
+  }
+}
