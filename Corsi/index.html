@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Corsi Block Memory Task — Participant View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="site-title">
+      <h1>Corsi Block Memory Task</h1>
+      <p class="site-subtitle">Follow the pictures from left to right</p>
+    </div>
+  </header>
+
+  <main class="page-layout">
+    <!-- SCREEN 1: Instructions only -->
+    <section id="instructions-screen" class="panel instructions-panel" aria-label="Visual instructions">
+      <h2 class="section-title">Before you begin</h2>
+
+      <div class="step-strip" aria-label="Overall flow">
+        <div class="step-pill active" data-stage="instructions">
+          <span class="step-number">1</span>
+          <span class="step-label">Instructions</span>
+        </div>
+        <div class="step-pill" data-stage="practice">
+          <span class="step-number">2</span>
+          <span class="step-label">Practice (1 trial)</span>
+        </div>
+        <div class="step-pill" data-stage="experiment">
+          <span class="step-number">3</span>
+          <span class="step-label">Experiment (10 trials)</span>
+        </div>
+        <div class="step-pill" data-stage="done">
+          <span class="step-number">4</span>
+          <span class="step-label">Thank you</span>
+        </div>
+      </div>
+
+      <div class="visual-steps">
+        <article class="visual-step">
+          <header>
+            <span class="badge">Step 1</span>
+            <h3>Watch</h3>
+          </header>
+          <p>The blocks light up one by one.</p>
+          <div class="mini-grid watch-grid" aria-hidden="true">
+            <div class="mini-block"></div>
+            <div class="mini-block active"></div>
+            <div class="mini-block"></div>
+            <div class="mini-block"></div>
+            <div class="mini-block"></div>
+            <div class="mini-block"></div>
+            <div class="mini-block"></div>
+            <div class="mini-block"></div>
+            <div class="mini-block"></div>
+          </div>
+        </article>
+
+        <article class="visual-step">
+          <header>
+            <span class="badge">Step 2</span>
+            <h3>Remember</h3>
+          </header>
+          <p>Imagine the path the light took.</p>
+          <div class="mini-grid remember-grid" aria-hidden="true">
+            <div class="mini-block trail"></div>
+            <div class="mini-block trail"></div>
+            <div class="mini-block trail"></div>
+            <div class="mini-block"></div>
+            <div class="mini-block"></div>
+            <div class="mini-block"></div>
+            <div class="mini-block"></div>
+            <div class="mini-block"></div>
+            <div class="mini-block"></div>
+          </div>
+        </article>
+
+        <article class="visual-step">
+          <header>
+            <span class="badge">Step 3</span>
+            <h3>Tap</h3>
+          </header>
+          <p>Tap the same blocks in the <strong>same order</strong>.</p>
+          <div class="mini-grid tap-grid" aria-hidden="true">
+            <div class="mini-block tap-target"></div>
+            <div class="mini-block tap-target"></div>
+            <div class="mini-block tap-target"></div>
+          </div>
+        </article>
+      </div>
+
+      <div class="summary-card">
+        <p class="summary-line">
+          <span class="dot practice-dot"></span>
+          <strong>Practice</strong>: 1 trial to get used to the task.
+        </p>
+        <p class="summary-line">
+          <span class="dot experiment-dot"></span>
+          <strong>Experiment</strong>: 10 trials that count.
+        </p>
+      </div>
+
+      <div class="cta-block">
+        <button id="start-practice-btn" class="btn primary">
+          Start practice<span class="hint"> or press <kbd>space</kbd></span>
+        </button>
+        <p class="cta-caption">
+          You can only move on to the experiment after the practice trial.
+        </p>
+      </div>
+    </section>
+
+    <!-- SCREEN 2: Task only (practice + experiment + thank you) -->
+    <section id="task-screen" class="panel task-panel" aria-label="Block tapping area" hidden>
+      <header class="task-header">
+        <div class="task-header-text">
+          <p id="stage-label" class="stage-label">Practice</p>
+          <h2 id="task-title" class="task-title">
+            Practice round: watch the sequence, then tap the same blocks.
+          </h2>
+          <p id="trial-label" class="trial-label" aria-live="polite"></p>
+        </div>
+      </header>
+
+      <div id="task-content">
+        <div class="grid-wrapper">
+          <div id="corsi-grid" class="corsi-grid" aria-label="Corsi block grid">
+            <!-- blocks added by JS -->
+          </div>
+        </div>
+
+        <div class="controls-row">
+          <button id="play-sequence-btn" class="btn primary">Show the sequence</button>
+          <button id="clear-response-btn" class="btn ghost" disabled>Clear taps</button>
+        </div>
+
+        <div class="feedback-row">
+          <p id="feedback-text" class="feedback-text" aria-live="polite"></p>
+        </div>
+      </div>
+
+      <div id="thankyou-content" class="thankyou" hidden>
+        <h2>All done!</h2>
+        <p>Thank you for taking part in this memory task.</p>
+        <p class="subtle">Please tell the experimenter that you have finished.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>This is a standalone HTML prototype inspired by the Pavlovia “corsi_blocks” demo. No data is stored or sent anywhere.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
