@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Digit Memory Task — Participant View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app-shell">
+    <!-- HEADER -->
+    <header class="app-header">
+      <div class="title-block">
+        <h1>Digit Memory Task</h1>
+        <p class="subtitle">Follow the 3 visual steps below, then start the practice round.</p>
+      </div>
+      <div class="status-block">
+        <div id="phaseLabel" class="pill pill--phase">Instructions</div>
+        <div id="trialLabel" class="pill pill--trial" aria-live="polite">Practice · 1 of 1</div>
+      </div>
+    </header>
+
+    <!-- PROGRESS BAR -->
+    <section class="progress-row" aria-hidden="true">
+      <div class="progress-track">
+        <div id="progressFill" class="progress-fill" style="width: 0%;"></div>
+      </div>
+    </section>
+
+    <!-- INSTRUCTION SCREEN -->
+    <section id="screenInstructions" class="screen screen--active" aria-labelledby="instructionsHeading">
+      <div class="card card--instructions">
+        <h2 id="instructionsHeading">Your task in 3 pictures</h2>
+
+        <div class="visual-grid" aria-hidden="true">
+          <!-- STEP 1 -->
+          <article class="visual-step">
+            <header class="visual-step-header">
+              <span class="step-badge">1</span>
+              <div class="visual-label">
+                <p class="visual-title">Watch the digits</p>
+                <p class="visual-caption">They appear one by one.</p>
+              </div>
+            </header>
+            <div class="mini-screen">
+              <div class="mini-status-row">
+                <span class="mini-pill mini-pill--phase">Showing</span>
+                <span class="mini-pill mini-pill--count">3 digits</span>
+              </div>
+              <div class="mini-stim-area">
+                <span class="mini-digit">4</span>
+              </div>
+              <div class="mini-timeline">
+                <span class="mini-dot mini-dot--on"></span>
+                <span class="mini-dot"></span>
+                <span class="mini-dot"></span>
+              </div>
+            </div>
+          </article>
+
+          <!-- STEP 2 -->
+          <article class="visual-step">
+            <header class="visual-step-header">
+              <span class="step-badge">2</span>
+              <div class="visual-label">
+                <p class="visual-title">Keep the order</p>
+                <p class="visual-caption">Hold all the digits in mind.</p>
+              </div>
+            </header>
+            <div class="mini-screen">
+              <div class="mini-status-row">
+                <span class="mini-pill mini-pill--phase">Remember</span>
+                <span class="mini-pill mini-pill--ghost">•••</span>
+              </div>
+              <div class="mini-stim-area mini-stim-area--ghost">
+                <span class="mini-ghost">● ● ●</span>
+              </div>
+              <p class="mini-note">Think: “4 → 1 → 7”</p>
+            </div>
+          </article>
+
+          <!-- STEP 3 -->
+          <article class="visual-step">
+            <header class="visual-step-header">
+              <span class="step-badge">3</span>
+              <div class="visual-label">
+                <p class="visual-title">Type them back</p>
+                <p class="visual-caption">No spaces · Then press Enter.</p>
+              </div>
+            </header>
+            <div class="mini-screen">
+              <div class="mini-status-row">
+                <span class="mini-pill mini-pill--phase">Your turn</span>
+                <span class="mini-pill mini-pill--count">Answer</span>
+              </div>
+              <div class="mini-input-row">
+                <span class="mini-input-label">Digits:</span>
+                <div class="mini-input-field">417</div>
+              </div>
+              <div class="mini-button-row">
+                <div class="mini-btn">Submit</div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="legend-row" aria-label="Text version of the instructions">
+          <ul class="legend-list">
+            <li><strong>Step 1:</strong> Look at each number as it appears in the center.</li>
+            <li><strong>Step 2:</strong> Keep the <strong>exact order</strong> in your head.</li>
+            <li><strong>Step 3:</strong> Type all the digits in order (no spaces) and press <strong>Enter</strong>.</li>
+          </ul>
+        </div>
+
+        <div class="tip-row">
+          <div class="tip-icon" aria-hidden="true">💡</div>
+          <p class="tip-text">
+            You will do <strong>1 practice round</strong> with feedback, followed by 
+            <strong>10 actual trials</strong>. The screen will change automatically as you go.
+          </p>
+        </div>
+
+        <div class="actions-row">
+          <button id="btnStartPractice" class="btn btn--primary">
+            Start practice round
+            <span class="btn-kbd">Space</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRIAL SCREEN -->
+    <section id="screenTrial" class="screen" aria-live="polite">
+      <div class="card card--trial">
+        <div class="trial-top-row">
+          <p id="trialPhaseLabel" class="trial-phase-label">Get ready…</p>
+          <p id="trialHint" class="trial-hint">Focus on the center of the screen.</p>
+        </div>
+
+        <div class="stimulus-area" aria-label="Digit display area">
+          <div id="digitDisplay" class="digit-display">+</div>
+        </div>
+
+        <form id="responseForm" class="response-area" autocomplete="off">
+          <label for="responseInput" class="response-label">
+            Type the digits in order:
+          </label>
+          <div class="response-row">
+            <input
+              id="responseInput"
+              class="response-input"
+              type="text"
+              inputmode="numeric"
+              pattern="[0-9]*"
+              autocomplete="off"
+              disabled
+              aria-disabled="true"
+            />
+            <button id="btnSubmit" class="btn btn--primary" type="submit" disabled>
+              Submit
+            </button>
+          </div>
+        </form>
+
+        <p id="feedback" class="feedback" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <!-- THANK YOU SCREEN -->
+    <section id="screenThanks" class="screen" aria-labelledby="thanksHeading">
+      <div class="card card--thanks">
+        <h2 id="thanksHeading">Thank you for participating!</h2>
+        <p class="thanks-text">
+          You have completed this digit memory task.
+        </p>
+        <div class="summary-row">
+          <div class="summary-item">
+            <span class="summary-label">Total trials</span>
+            <span id="summaryTrials" class="summary-value">—</span>
+          </div>
+          <div class="summary-item">
+            <span class="summary-label">Correct responses</span>
+            <span id="summaryCorrect" class="summary-value">—</span>
+          </div>
+        </div>
+        <p class="thanks-note">
+          You may now let the experimenter know that you are finished.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
