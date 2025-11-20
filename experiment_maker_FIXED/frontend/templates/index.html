@@ -1,0 +1,16 @@
+
+<!doctype html><html><head><meta charset="utf-8"><title>Experiment Maker — Student Kit</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}"></head><body>
+<header><a href="{{ url_for('consent') }}">Consent</a>{% if subject_id %}<span> · Subject: <code>{{ subject_id }}</code></span>{% endif %}</header>
+<section class="docs-entry">
+  <h2>Getting Started</h2>
+  <p><a href="/docs/UNDERGRADUATE_TESTING_GUIDE.html" target="_blank">Undergraduate Testing Guide (HTML)</a></p>
+  <p><a href="/docs/UNDERGRADUATE_TESTING_GUIDE.md" target="_blank">Undergraduate Testing Guide (MD)</a></p>
+</section>
+<h1>Experiment Maker — Student Kit</h1>
+<p>Choose an experiment to configure or run. This homepage scales to dozens of tasks.</p>
+<div class="grid">{% for c in cards %}
+<div class="card"><h3>{{ c.title }}</h3><p>{{ c.description }}</p>
+<div class="actions"><a href="{{ url_for('experimenter', exp_type=c.experiment_type) }}">Configure</a>
+<a href="{{ url_for('subject', exp_type=c.experiment_type) }}">Subject View</a></div></div>
+{% endfor %}</div></body></html>

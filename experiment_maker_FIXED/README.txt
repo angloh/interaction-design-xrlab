@@ -1,1 +1,1 @@
-create experiment_maker_FIXED folder
+Fixed Version - See docs/SETUP_GUIDE_FIXED_VERSION.md

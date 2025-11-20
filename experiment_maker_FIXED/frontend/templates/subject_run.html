@@ -1,0 +1,10 @@
+
+<!doctype html><html><head><meta charset="utf-8"><title>Subject — {{ exp_type }}</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+<script src="{{ url_for('static', filename='js/subject_runner.js') }}"></script></head><body>
+<h2>Subject — {{ exp_type }}</h2>
+<div id="screen" class="screen"></div>
+<div id="controls"><button id="start">Start</button> <button id="helpBtn">Help</button></div>
+<div id="modal" class="modal hidden"><div class="modal-content"><div id="helpText"></div>
+<div class="modal-actions"><button id="closeHelp">Close</button></div></div></div>
+<script>window.EXP_TYPE = "{{ exp_type }}";</script></body></html>

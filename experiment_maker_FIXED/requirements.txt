@@ -1,0 +1,13 @@
+# Core Flask
+Flask==2.3.0
+Werkzeug==2.3.0
+
+# Security
+Flask-WTF==1.1.1
+cryptography==41.0.0
+
+# Development (optional)
+python-dotenv==1.0.0
+
+# Production WSGI server (optional but recommended)
+gunicorn==21.2.0

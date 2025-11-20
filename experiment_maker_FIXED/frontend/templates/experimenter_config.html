@@ -1,0 +1,52 @@
+
+<!doctype html><html><head><meta charset="utf-8"><title>Experimenter — {{ exp_type }}</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+<script>
+async function startRun(){
+  const cfg = {}; for (const [group, fields] of Object.entries(window.schema)){
+    for (const [k,spec] of Object.entries(fields)){
+      const el=document.getElementById(k); if(!el) continue;
+      let v=(spec.type==='boolean')?el.checked:(spec.type==='number')?Number(el.value):el.value;
+      cfg[k]=v;
+    }}
+  const subject_id = document.getElementById('subject_id').value||'';
+  const resp = await fetch(`/api/{{exp_type}}/start`, {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({config: cfg, subject_id})});
+  const data = await resp.json(); document.getElementById('session').textContent=data.session_id||'ERROR';
+  document.getElementById('instructions').textContent=JSON.stringify(data.instructions,null,2);
+}
+</script></head><body>
+<h2>Experimenter — {{ exp_type }}</h2>
+<label>Subject ID <input id="subject_id" placeholder="optional"></label>
+<div id="form"><script>
+window.schema = {{ schema|tojson }};
+function inputFor(k,spec){ if(spec.type==='boolean') return `<input id="${k}" type="checkbox" ${spec.default?'checked':''}>`;
+ if(spec.type==='number') return `<input id="${k}" type="number" value="${spec.default??''}" step="${spec.step??1}">`;
+ return `<input id="${k}" type="text" value="${spec.default??''}">`; }
+document.write('<div class="fieldset"><h3>Basic</h3>');
+for (const [k,s] of Object.entries(window.schema.basic||{})){ document.write(`<label>${s.label||k}${inputFor(k,s)}</label>`); }
+document.write('</div>');
+if (window.schema.advanced && Object.keys(window.schema.advanced).length){
+  document.write('<div class="fieldset"><h3>Advanced</h3>');
+  for (const [k,s] of Object.entries(window.schema.advanced)){ document.write(`<label>${s.label||k}${inputFor(k,s)}</label>`); }
+  document.write('</div>');
+}
+</script></div>
+<button onclick="startRun()">Start Session</button>
+<p>Session ID: <code id="session"></code></p>
+<pre id="instructions" class="box"></pre>
+<hr>
+<h3>Upload GUI Snapshot</h3>
+<form method="post" action="/snapshot/upload" enctype="multipart/form-data">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <input type="hidden" name="experiment_type" value="{{ exp_type }}">
+  <label>Session ID <input name="session_id" id="snap_session_id" placeholder="paste after start"></label>
+  <label>Notes <input name="notes" placeholder="what to change / rationale"></label>
+  <label>File <input type="file" name="file" accept="image/*" required></label>
+  <button type="submit">Upload Snapshot</button>
+</form>
+<script>
+const sesEl=document.getElementById('session'); const snapEl=document.getElementById('snap_session_id');
+const obs=new MutationObserver(()=>{ if(sesEl.textContent && snapEl && !snapEl.value){ snapEl.value=sesEl.textContent; } });
+obs.observe(sesEl,{childList:true});
+</script>
+</body></html>

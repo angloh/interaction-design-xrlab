@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Undergraduate Testing Guide</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="/static/css/styles.css" />
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Undergraduate Testing Guide</h1>
+</header>
+<h1 id="undergraduate-student-guide">🎓 Undergraduate Student Guide</h1>
+<h2
+id="experiment-maker-platform---getting-started-testing-tasks">Experiment
+Maker Platform - Getting Started &amp; Testing Tasks</h2>
+<p><strong>Version 1.0 - For Undergraduate Students</strong></p>
+<hr />
+<h2 id="what-is-this">📚 WHAT IS THIS?</h2>
+<p>This is a web-based platform for creating and running cognitive
+psychology experiments. You’ll be testing it out and helping us improve
+it before we deploy it for real research.</p>
+<p><strong>Your mission:</strong> 1. Learn how the platform works 2.
+Test all the features 3. Report what works and what doesn’t 4. Suggest
+improvements</p>
+<hr />
+<h2 id="part-1-getting-started-15-minutes">🚀 PART 1: GETTING STARTED
+(15 minutes)</h2>
+<h3 id="step-1-get-the-files"><strong>Step 1: Get the
+Files</strong></h3>
+<p>Your instructor should have given you a ZIP file:
+<code>experiment_maker_redesign.zip</code></p>
+<p><strong>On Mac:</strong> 1. Find the ZIP in your Downloads folder 2.
+Double-click it → It extracts automatically 3. You’ll see a folder
+called <code>experiment_maker_redesign</code> 4. Open that folder</p>
+<p><strong>On Windows:</strong> 1. Find the ZIP in your Downloads folder
+2. Right-click → Extract All 3. Choose where to extract (Desktop is
+fine) 4. Open the <code>experiment_maker_redesign</code> folder</p>
+<p><strong>On Linux:</strong> 1. Navigate to Downloads:
+<code>cd ~/Downloads</code> 2. Extract:
+<code>unzip experiment_maker_redesign.zip</code> 3. Enter folder:
+<code>cd experiment_maker_redesign</code></p>
+<hr />
+<h3 id="step-2-open-the-platform"><strong>Step 2: Open the
+Platform</strong></h3>
+<p><strong>Find the file called:</strong> <code>INDEX.html</code></p>
+<p><strong>Open it:</strong> - <strong>Mac:</strong> Double-click
+INDEX.html (opens in Safari) - <strong>Windows:</strong> Double-click
+INDEX.html (opens in Edge or Chrome) - <strong>Linux:</strong>
+Right-click → Open With → Firefox/Chrome</p>
+<p><strong>You should see:</strong> - A welcome page with “Experiment
+Maker” at the top - 4 big cards showing different options - Some
+information about how data works - A FAQ section</p>
+<p><strong>✅ If you see this, you’re ready!</strong></p>
+<p><strong>❌ If you see weird code or errors:</strong> - Make sure you
+opened INDEX.html (not a different file) - Try a different browser
+(Chrome works best) - Ask your instructor for help</p>
+<hr />
+<h3 id="step-3-look-around-5-minutes"><strong>Step 3: Look Around (5
+minutes)</strong></h3>
+<p><strong>Task:</strong> Just click around and explore. Don’t worry
+about breaking anything!</p>
+<p><strong>Try clicking:</strong> - Each of the 4 main cards - The FAQ
+questions (they expand when you click) - The “Back to Home” links - Any
+buttons you see</p>
+<p><strong>Write down:</strong> - What looks confusing? - What’s
+interesting? - Any questions you have?</p>
+<hr />
+<h2 id="part-2-testing-tasks-2-3-hours-total">🧪 PART 2: TESTING TASKS
+(2-3 hours total)</h2>
+<p>You’ll complete 5 testing tasks. Each tests a different part of the
+platform.</p>
+<hr />
+<h2 id="task-1-test-a-pre-made-experiment-30-minutes">📋 TASK 1: Test a
+Pre-Made Experiment (30 minutes)</h2>
+<p><strong>Goal:</strong> Experience what a participant would
+experience.</p>
+<h3 id="instructions"><strong>Instructions:</strong></h3>
+<ol type="1">
+<li><p><strong>Go back to INDEX.html</strong> (the home page)</p></li>
+<li><p><strong>Scroll down to “Pre-Made Experiments”</strong></p></li>
+<li><p><strong>Click on the “Digit Span” card</strong></p></li>
+<li><p><strong>Try to complete the experiment:</strong></p>
+<ul>
+<li>Read the instructions</li>
+<li>Try a few practice trials</li>
+<li>See how it works</li>
+<li>Note: This is a DEMO so it won’t actually save real data yet</li>
+</ul></li>
+</ol>
+<h3 id="what-to-document"><strong>What to Document:</strong></h3>
+<p><strong>In your testing report, answer:</strong></p>
+<ol type="1">
+<li><strong>User Experience:</strong>
+<ul>
+<li>Were the instructions clear?</li>
+<li>Could you figure out what to do?</li>
+<li>Did the experiment work smoothly?</li>
+<li>Any confusing parts?</li>
+</ul></li>
+<li><strong>Technical Issues:</strong>
+<ul>
+<li>Did anything break?</li>
+<li>Any error messages?</li>
+<li>Did buttons work?</li>
+<li>Did trials display correctly?</li>
+</ul></li>
+<li><strong>Suggestions:</strong>
+<ul>
+<li>What would make it better?</li>
+<li>What’s missing?</li>
+<li>What did you like?</li>
+</ul></li>
+</ol>
+<h3 id="testing-checklist"><strong>Testing Checklist:</strong></h3>
+<ul class="task-list">
+<li><label><input type="checkbox" />Opened the Digit Span
+experiment</label></li>
+<li><label><input type="checkbox" />Read instructions</label></li>
+<li><label><input type="checkbox" />Completed at least 5
+trials</label></li>
+<li><label><input type="checkbox" />Tested with correct and incorrect
+responses</label></li>
+<li><label><input type="checkbox" />Noted reaction time (if
+shown)</label></li>
+<li><label><input type="checkbox" />Reached the end or debriefing
+screen</label></li>
+<li><label><input type="checkbox" />Documented your
+experience</label></li>
+</ul>
+<p><strong>Repeat with at least ONE other pre-made experiment:</strong>
+- [ ] Stroop Task - [ ] SART - [ ] IAT Demo</p>
+<hr />
+<h2 id="task-2-create-a-custom-iat-45-minutes">🧠 TASK 2: Create a
+Custom IAT (45 minutes)</h2>
+<p><strong>Goal:</strong> Test the IAT Customization Wizard.</p>
+<h3 id="instructions-1"><strong>Instructions:</strong></h3>
+<ol type="1">
+<li><p><strong>Go back to INDEX.html</strong></p></li>
+<li><p><strong>Click the “Customize an IAT” card</strong></p>
+<ul>
+<li>This should open <code>IAT_WIZARD.html</code></li>
+</ul></li>
+<li><p><strong>Follow the wizard to create your own IAT:</strong></p>
+<p><strong>Scenario:</strong> You’re studying attitudes toward coffee
+vs. tea</p>
+<ul>
+<li><p><strong>Step 1:</strong> Choose “Custom IAT”</p></li>
+<li><p><strong>Step 2:</strong> Define categories:</p>
+<ul>
+<li>Target A: “Coffee”</li>
+<li>Target B: “Tea”<br />
+</li>
+<li>Attribute A: “Energizing”</li>
+<li>Attribute B: “Relaxing”</li>
+</ul></li>
+<li><p><strong>Step 3:</strong> Add stimuli:</p>
+<ul>
+<li>Coffee items: espresso, cappuccino, latte, americano, mocha, cold
+brew, french press, drip coffee, flat white, macchiato</li>
+<li>Tea items: green tea, black tea, chamomile, earl grey, oolong,
+jasmine, matcha, rooibos, peppermint, pu-erh</li>
+<li>Energizing: active, alert, focused, motivated, powerful, strong,
+dynamic, vigorous, lively, stimulated</li>
+<li>Relaxing: calm, peaceful, serene, gentle, soothing, tranquil,
+restful, mellow, comfortable, easygoing</li>
+</ul></li>
+<li><p><strong>Step 4:</strong> Keep default parameters (or experiment
+with them)</p></li>
+<li><p><strong>Step 5:</strong> Preview a few trials</p></li>
+<li><p><strong>Step 6:</strong> Try to generate the IAT</p></li>
+</ul></li>
+</ol>
+<h3 id="what-to-document-1"><strong>What to Document:</strong></h3>
+<ol type="1">
+<li><strong>Wizard Experience:</strong>
+<ul>
+<li>Was each step clear?</li>
+<li>Did the hints help?</li>
+<li>Did the FAQs answer your questions?</li>
+<li>Could you complete all 6 steps?</li>
+</ul></li>
+<li><strong>Validation:</strong>
+<ul>
+<li>Did the stimulus validator give you feedback?</li>
+<li>Were warnings helpful?</li>
+<li>Did it catch any mistakes?</li>
+</ul></li>
+<li><strong>Preview:</strong>
+<ul>
+<li>Did preview trials work?</li>
+<li>Could you tell which key to press?</li>
+<li>Were the categories clear?</li>
+</ul></li>
+<li><strong>Problems:</strong>
+<ul>
+<li>What was confusing?</li>
+<li>What didn’t work?</li>
+<li>What would you change?</li>
+</ul></li>
+</ol>
+<h3 id="testing-checklist-1"><strong>Testing Checklist:</strong></h3>
+<ul class="task-list">
+<li><label><input type="checkbox" />Completed all 6 wizard
+steps</label></li>
+<li><label><input type="checkbox" />Added at least 10 items per
+category</label></li>
+<li><label><input type="checkbox" />Read and understood the
+hints</label></li>
+<li><label><input type="checkbox" />Checked at least one
+FAQ</label></li>
+<li><label><input type="checkbox" />Previewed some trials</label></li>
+<li><label><input type="checkbox" />Noted any validation
+warnings</label></li>
+<li><label><input type="checkbox" />Tried to generate the final
+IAT</label></li>
+<li><label><input type="checkbox" />Documented your
+experience</label></li>
+</ul>
+<h3 id="extra-credit"><strong>Extra Credit:</strong></h3>
+<p>Try creating IATs for these scenarios: - [ ] Political attitudes
+(Democrats vs. Republicans) - [ ] Food preferences (Healthy vs. Junk
+Food) - [ ] Gender stereotypes (your own categories)</p>
+<p>Document which one was easiest/hardest to create.</p>
+<hr />
+<h2 id="task-3-generate-an-experiment-with-ai-60-minutes">🤖 TASK 3:
+Generate an Experiment with AI (60 minutes)</h2>
+<p><strong>Goal:</strong> Test the AI-to-Platform workflow.</p>
+<h3 id="prerequisites"><strong>Prerequisites:</strong></h3>
+<p>You need access to either: - Claude.ai (free account) - ChatGPT (free
+account)</p>
+<h3 id="instructions-2"><strong>Instructions:</strong></h3>
+<ol type="1">
+<li><p><strong>Download the AI prompt template:</strong></p>
+<ul>
+<li>Go back to INDEX.html</li>
+<li>Click “Create New Experiment”</li>
+<li>Click “Download Prompt Template” button</li>
+<li>This downloads: <code>AI_PROMPT_COPY_PASTE.txt</code></li>
+</ul></li>
+<li><p><strong>Open the template in a text editor</strong></p>
+<ul>
+<li>Mac: TextEdit</li>
+<li>Windows: Notepad</li>
+<li>Linux: gedit</li>
+</ul></li>
+<li><p><strong>Read through the template</strong> (5 minutes)</p>
+<ul>
+<li>Notice it has detailed specifications</li>
+<li>Find Section 8: “MY EXPERIMENT SPECIFICATION”</li>
+<li>This is where you describe YOUR experiment</li>
+</ul></li>
+<li><p><strong>Choose an experiment to create:</strong></p>
+<p><strong>Option A - Simple:</strong> Recognition Memory Test</p>
+<pre><code>Participants see 15 words for 2 seconds each.
+After a 10-second delay, they see 30 words (15 old, 15 new).
+For each word, they press Y if they saw it before, N if new.
+Record reaction times and accuracy.</code></pre>
+<p><strong>Option B - Medium:</strong> Visual Search Task</p>
+<pre><code>Display 12 shapes on screen (circles and squares).
+One shape is red, others are blue.
+Participant clicks the red shape as fast as possible.
+Record reaction time.
+Do 20 trials.</code></pre>
+<p><strong>Option C - Complex:</strong> N-Back Task</p>
+<pre><code>Show letters one at a time for 500ms each.
+Participant presses spacebar if current letter matches 
+the letter from 2 trials ago (2-back).
+Do 50 trials with 30% targets.
+Record accuracy and reaction times.</code></pre></li>
+<li><p><strong>Fill in Section 8 of the template:</strong></p>
+<ul>
+<li>Experiment Type: [Your choice]</li>
+<li>Detailed Description: [What happens step by step]</li>
+<li>Stimuli: [What participants see]</li>
+<li>Trial Structure: [Timing, responses]</li>
+<li>Specific Requirements: [Any special needs]</li>
+</ul></li>
+<li><p><strong>Copy the ENTIRE template</strong> (all of it, not just
+Section 8)</p></li>
+<li><p><strong>Go to Claude.ai or ChatGPT</strong></p></li>
+<li><p><strong>Paste the entire template and hit enter</strong></p></li>
+<li><p><strong>Wait for the AI to generate the code</strong> (30-60
+seconds)</p></li>
+<li><p><strong>Copy ALL the generated code</strong></p></li>
+<li><p><strong>Go back to the platform:</strong></p>
+<ul>
+<li>Click “Create New Experiment”</li>
+<li>Find the big text box</li>
+<li>Paste the code</li>
+</ul></li>
+<li><p><strong>Click “Validate Code Quality”</strong></p>
+<ul>
+<li>Read the validation report</li>
+<li>Check the score (0-100)</li>
+<li>Note any errors or warnings</li>
+</ul></li>
+<li><p><strong>If there are errors:</strong></p>
+<ul>
+<li>Go back to the AI</li>
+<li>Say: “Please fix these errors: [paste the errors]”</li>
+<li>Get updated code</li>
+<li>Paste again</li>
+<li>Validate again</li>
+</ul></li>
+<li><p><strong>When validation passes (score &gt; 70):</strong></p>
+<ul>
+<li>Click “Convert &amp; Preview” (if available)</li>
+<li>Or just note that validation passed</li>
+</ul></li>
+</ol>
+<h3 id="what-to-document-2"><strong>What to Document:</strong></h3>
+<ol type="1">
+<li><strong>Prompt Quality:</strong>
+<ul>
+<li>Was the template easy to understand?</li>
+<li>Did you know what to fill in Section 8?</li>
+<li>Was anything confusing?</li>
+</ul></li>
+<li><strong>AI Performance:</strong>
+<ul>
+<li>Did the AI understand the template?</li>
+<li>Did it generate valid code?</li>
+<li>Did it follow the specifications?</li>
+<li>How long did it take?</li>
+</ul></li>
+<li><strong>Validation Results:</strong>
+<ul>
+<li>What was your initial score?</li>
+<li>What errors/warnings did you get?</li>
+<li>Did fixing them work?</li>
+<li>Final score?</li>
+</ul></li>
+<li><strong>Overall Experience:</strong>
+<ul>
+<li>Could you complete the task?</li>
+<li>What was hardest?</li>
+<li>What would make it easier?</li>
+</ul></li>
+</ol>
+<h3 id="testing-checklist-2"><strong>Testing Checklist:</strong></h3>
+<ul class="task-list">
+<li><label><input type="checkbox" />Downloaded AI prompt
+template</label></li>
+<li><label><input type="checkbox" />Read and understood the
+template</label></li>
+<li><label><input type="checkbox" />Filled in Section 8 with experiment
+details</label></li>
+<li><label><input type="checkbox" />Copied ENTIRE template to
+AI</label></li>
+<li><label><input type="checkbox" />AI generated code</label></li>
+<li><label><input type="checkbox" />Pasted code into
+platform</label></li>
+<li><label><input type="checkbox" />Ran validator</label></li>
+<li><label><input type="checkbox" />Got a validation score</label></li>
+<li><label><input type="checkbox" />Fixed any errors (if
+needed)</label></li>
+<li><label><input type="checkbox" />Achieved score &gt; 70</label></li>
+<li><label><input type="checkbox" />Documented your
+experience</label></li>
+</ul>
+<h3 id="common-problems-solutions"><strong>Common Problems &amp;
+Solutions:</strong></h3>
+<p><strong>Problem:</strong> “AI didn’t follow the template” → Make sure
+you pasted the ENTIRE template, not just Section 8</p>
+<p><strong>Problem:</strong> “Validator shows lots of errors” → Go back
+to AI and say “Please fix these errors” with the error list</p>
+<p><strong>Problem:</strong> “AI code doesn’t include EXPERIMENT_CONFIG”
+→ You probably used a simple prompt, not the template. Use the full
+template!</p>
+<p><strong>Problem:</strong> “Don’t have Claude.ai or ChatGPT access” →
+Ask a classmate to help, or ask instructor for alternative</p>
+<hr />
+<h2 id="task-4-test-the-validator-30-minutes">🔍 TASK 4: Test the
+Validator (30 minutes)</h2>
+<p><strong>Goal:</strong> Understand what makes good vs. bad experiment
+code.</p>
+<h3 id="instructions-3"><strong>Instructions:</strong></h3>
+<p>We’ll give you three code samples to test. Copy each one, paste it
+into the creator, and validate it.</p>
+<h4 id="sample-1-perfect-code"><strong>Sample 1: Perfect
+Code</strong></h4>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode html"><code class="sourceCode html"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;!DOCTYPE</span> html<span class="dt">&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">html</span><span class="dt">&gt;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">head</span><span class="dt">&gt;&lt;</span><span class="kw">title</span><span class="dt">&gt;</span>Perfect Experiment<span class="dt">&lt;/</span><span class="kw">title</span><span class="dt">&gt;&lt;/</span><span class="kw">head</span><span class="dt">&gt;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">body</span><span class="dt">&gt;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">script</span><span class="dt">&gt;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> EXPERIMENT_CONFIG <span class="op">=</span> {</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">metadata</span><span class="op">:</span> {<span class="dt">name</span><span class="op">:</span> <span class="st">&quot;Test&quot;</span><span class="op">,</span> <span class="dt">version</span><span class="op">:</span> <span class="st">&quot;1.0&quot;</span><span class="op">,</span> <span class="dt">description</span><span class="op">:</span> <span class="st">&quot;Good experiment&quot;</span>}<span class="op">,</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">stimuli</span><span class="op">:</span> [{<span class="dt">id</span><span class="op">:</span> <span class="st">&quot;s1&quot;</span><span class="op">,</span> <span class="dt">type</span><span class="op">:</span> <span class="st">&quot;text&quot;</span><span class="op">,</span> <span class="dt">content</span><span class="op">:</span> <span class="st">&quot;apple&quot;</span><span class="op">,</span> <span class="dt">category</span><span class="op">:</span> <span class="st">&quot;fruit&quot;</span>}]<span class="op">,</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">trials</span><span class="op">:</span> {<span class="dt">practiceTrials</span><span class="op">:</span> <span class="dv">5</span><span class="op">,</span> <span class="dt">experimentTrials</span><span class="op">:</span> <span class="dv">20</span><span class="op">,</span> <span class="dt">presentationTime</span><span class="op">:</span> <span class="dv">2000</span><span class="op">,</span> <span class="dt">isi</span><span class="op">:</span> <span class="dv">500</span>}<span class="op">,</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">instructions</span><span class="op">:</span> {<span class="dt">welcome</span><span class="op">:</span> <span class="st">&quot;Welcome&quot;</span><span class="op">,</span> <span class="dt">practice</span><span class="op">:</span> <span class="st">&quot;Practice&quot;</span><span class="op">,</span> <span class="dt">experiment</span><span class="op">:</span> <span class="st">&quot;Main&quot;</span><span class="op">,</span> <span class="dt">debrief</span><span class="op">:</span> <span class="st">&quot;Thanks&quot;</span>}<span class="op">,</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="dt">responses</span><span class="op">:</span> {<span class="dt">type</span><span class="op">:</span> <span class="st">&quot;keyboard&quot;</span><span class="op">,</span> <span class="dt">keys</span><span class="op">:</span> {<span class="st">&quot;y&quot;</span><span class="op">:</span> <span class="st">&quot;yes&quot;</span><span class="op">,</span> <span class="st">&quot;n&quot;</span><span class="op">:</span> <span class="st">&quot;no&quot;</span>}}</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> EXPERIMENT_DATA <span class="op">=</span> {</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="dt">sessionInfo</span><span class="op">:</span> {<span class="dt">startTime</span><span class="op">:</span> <span class="kw">null</span>}<span class="op">,</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    <span class="dt">trials</span><span class="op">:</span> []<span class="op">,</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    <span class="dt">summary</span><span class="op">:</span> {}</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">initExperiment</span>() {</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    EXPERIMENT_DATA<span class="op">.</span><span class="at">sessionInfo</span><span class="op">.</span><span class="at">startTime</span> <span class="op">=</span> <span class="bu">Date</span><span class="op">.</span><span class="fu">now</span>()<span class="op">;</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">runTrial</span>(stimulus) {</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> start <span class="op">=</span> <span class="bu">performance</span><span class="op">.</span><span class="fu">now</span>()<span class="op">;</span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> rt <span class="op">=</span> <span class="bu">performance</span><span class="op">.</span><span class="fu">now</span>() <span class="op">-</span> start<span class="op">;</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>    EXPERIMENT_DATA<span class="op">.</span><span class="at">trials</span><span class="op">.</span><span class="fu">push</span>({</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>        <span class="dt">trialNumber</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>        <span class="dt">stimulusId</span><span class="op">:</span> stimulus<span class="op">.</span><span class="at">id</span><span class="op">,</span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>        <span class="dt">response</span><span class="op">:</span> <span class="st">&quot;y&quot;</span><span class="op">,</span></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>        <span class="dt">responseTime</span><span class="op">:</span> rt<span class="op">,</span></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>        <span class="dt">correct</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>        <span class="dt">timestamp</span><span class="op">:</span> <span class="bu">Date</span><span class="op">.</span><span class="fu">now</span>()</span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>    })<span class="op">;</span></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">calculateResults</span>() {</span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Calculate summary</span></span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">getExperimentData</span>() {</span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">JSON</span><span class="op">.</span><span class="fu">stringify</span>(EXPERIMENT_DATA)<span class="op">;</span></span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">script</span><span class="dt">&gt;</span></span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">body</span><span class="dt">&gt;</span></span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">html</span><span class="dt">&gt;</span></span></code></pre></div>
+<p><strong>Expected:</strong> High score (90-100), no errors</p>
+<hr />
+<h4 id="sample-2-missing-required-objects"><strong>Sample 2: Missing
+Required Objects</strong></h4>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode html"><code class="sourceCode html"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">html</span><span class="dt">&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">body</span><span class="dt">&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">script</span><span class="dt">&gt;</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> myExperiment <span class="op">=</span> {</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">name</span><span class="op">:</span> <span class="st">&quot;Test&quot;</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">runExperiment</span>() {</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">alert</span>(<span class="st">&quot;Hello!&quot;</span>)<span class="op">;</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">script</span><span class="dt">&gt;</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">body</span><span class="dt">&gt;</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">html</span><span class="dt">&gt;</span></span></code></pre></div>
+<p><strong>Expected:</strong> Many errors about missing
+EXPERIMENT_CONFIG and EXPERIMENT_DATA</p>
+<hr />
+<h4 id="sample-3-has-objects-but-missing-functions"><strong>Sample 3:
+Has Objects But Missing Functions</strong></h4>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode html"><code class="sourceCode html"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;!DOCTYPE</span> html<span class="dt">&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">html</span><span class="dt">&gt;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">body</span><span class="dt">&gt;</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">script</span><span class="dt">&gt;</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> EXPERIMENT_CONFIG <span class="op">=</span> {</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">metadata</span><span class="op">:</span> {<span class="dt">name</span><span class="op">:</span> <span class="st">&quot;Test&quot;</span>}<span class="op">,</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">stimuli</span><span class="op">:</span> []<span class="op">,</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">trials</span><span class="op">:</span> {}<span class="op">,</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">instructions</span><span class="op">:</span> {}<span class="op">,</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">responses</span><span class="op">:</span> {}</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> EXPERIMENT_DATA <span class="op">=</span> {</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="dt">sessionInfo</span><span class="op">:</span> {}<span class="op">,</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    <span class="dt">trials</span><span class="op">:</span> []<span class="op">,</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    <span class="dt">summary</span><span class="op">:</span> {}</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="co">// Functions missing!</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">script</span><span class="dt">&gt;</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">body</span><span class="dt">&gt;</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">html</span><span class="dt">&gt;</span></span></code></pre></div>
+<p><strong>Expected:</strong> Has structure but missing functions,
+medium score</p>
+<hr />
+<h3 id="what-to-document-3"><strong>What to Document:</strong></h3>
+<p>For each sample, record:</p>
+<ol type="1">
+<li><strong>Validation Score:</strong> (0-100)</li>
+<li><strong>Number of Errors:</strong></li>
+<li><strong>Number of Warnings:</strong></li>
+<li><strong>Number of Suggestions:</strong></li>
+<li><strong>Most Useful Feedback:</strong> What was most helpful?</li>
+<li><strong>Did the validator help you understand the
+problem?</strong></li>
+</ol>
+<h3 id="testing-checklist-3"><strong>Testing Checklist:</strong></h3>
+<ul class="task-list">
+<li><label><input type="checkbox" />Tested Sample 1 (perfect
+code)</label></li>
+<li><label><input type="checkbox" />Tested Sample 2 (bad
+code)</label></li>
+<li><label><input type="checkbox" />Tested Sample 3 (incomplete
+code)</label></li>
+<li><label><input type="checkbox" />Compared the validation
+reports</label></li>
+<li><label><input type="checkbox" />Understood why each got its
+score</label></li>
+<li><label><input type="checkbox" />Can explain what makes good
+experiment code</label></li>
+</ul>
+<hr />
+<h2 id="task-5-test-offline-mode-30-minutes">💻 TASK 5: Test Offline
+Mode (30 minutes)</h2>
+<p><strong>Goal:</strong> Make sure experiments can run without
+internet.</p>
+<p><strong>Note:</strong> The offline mode generator is built (backend
+code exists) but may not have a “Download Offline” button in the demos
+yet. This task tests whether you can understand how it WOULD work.</p>
+<h3 id="instructions-4"><strong>Instructions:</strong></h3>
+<ol type="1">
+<li><p><strong>Find any pre-made experiment</strong> (Digit Span,
+Stroop, etc.)</p></li>
+<li><p><strong>Look for a “Download Offline Version” button</strong></p>
+<ul>
+<li>It might be in the configuration screen</li>
+<li>Or it might not be implemented yet in the demos</li>
+</ul></li>
+<li><p><strong>If the button exists:</strong></p>
+<ul>
+<li>Click it</li>
+<li>Download the standalone HTML file</li>
+<li>Open the downloaded file</li>
+<li>Try running the experiment</li>
+<li>See if data export works</li>
+</ul></li>
+<li><p><strong>If the button doesn’t exist:</strong></p>
+<ul>
+<li>Read the documentation about offline mode</li>
+<li>Look at <code>backend/offline_generator.py</code> in the files</li>
+<li>Read the code comments</li>
+<li>Answer the questions below based on understanding</li>
+</ul></li>
+</ol>
+<h3 id="what-to-document-4"><strong>What to Document:</strong></h3>
+<p><strong>If offline mode button exists:</strong> 1. Did the download
+work? 2. Did the file open correctly? 3. Could you run the experiment?
+4. Did data save? 5. Could you export data? 6. What format was the
+export? (CSV, JSON?)</p>
+<p><strong>If offline mode button doesn’t exist yet:</strong> 1. Did you
+find the offline_generator.py file? 2. Can you understand from reading
+it how offline mode would work? 3. What would be the benefits of offline
+mode? 4. What use cases would benefit from it?</p>
+<p><strong>For everyone:</strong> 5. Why would a researcher want offline
+mode? 6. How is it different from the online mode? 7. What are the
+trade-offs?</p>
+<h3 id="testing-checklist-4"><strong>Testing Checklist:</strong></h3>
+<ul class="task-list">
+<li><label><input type="checkbox" />Looked for offline mode
+option</label></li>
+<li><label><input type="checkbox" />Documented whether it exists in
+demos</label></li>
+<li><label><input type="checkbox" />If exists: tested downloading and
+running</label></li>
+<li><label><input type="checkbox" />If not: read offline_generator.py
+code</label></li>
+<li><label><input type="checkbox" />Understood the purpose of offline
+mode</label></li>
+<li><label><input type="checkbox" />Identified use cases</label></li>
+<li><label><input type="checkbox" />Documented findings</label></li>
+</ul>
+<hr />
+<h2 id="part-3-final-report-30-minutes">📝 PART 3: FINAL REPORT (30
+minutes)</h2>
+<p>After completing all tasks, write up your findings.</p>
+<h3 id="report-template"><strong>Report Template:</strong></h3>
+<pre><code>EXPERIMENT MAKER PLATFORM - TESTING REPORT
+
+Your Name: _______________
+Date: _______________
+Browser Used: _______________
+Operating System: _______________
+
+---
+
+TASK 1: PRE-MADE EXPERIMENTS
+
+Experiments Tested: 
+- [ ] Digit Span
+- [ ] Stroop
+- [ ] SART  
+- [ ] IAT Demo
+
+Overall Experience (1-5): ___/5
+
+What Worked Well:
+- 
+- 
+- 
+
+Problems Found:
+- 
+- 
+- 
+
+Suggestions:
+- 
+- 
+- 
+
+---
+
+TASK 2: IAT WIZARD
+
+Completed All Steps: [ ] Yes [ ] No
+
+If no, stopped at step: ___
+
+Overall Experience (1-5): ___/5
+
+What Worked Well:
+- 
+- 
+- 
+
+Problems Found:
+- 
+- 
+- 
+
+Were the hints helpful? [ ] Yes [ ] No
+Were the FAQs helpful? [ ] Yes [ ] No
+
+Suggestions:
+- 
+- 
+- 
+
+---
+
+TASK 3: AI GENERATION
+
+AI Used: [ ] Claude [ ] ChatGPT [ ] Other: ___
+
+Experiment Created: _______________
+
+Validation Score (first attempt): ___/100
+Validation Score (final): ___/100
+
+Did the template help? [ ] Yes [ ] No
+
+What Worked Well:
+- 
+- 
+- 
+
+Problems Found:
+- 
+- 
+- 
+
+Suggestions:
+- 
+- 
+- 
+
+---
+
+TASK 4: VALIDATOR TESTING
+
+Sample 1 Score: ___/100
+Sample 2 Score: ___/100
+Sample 3 Score: ___/100
+
+Did the validator help you understand code quality? [ ] Yes [ ] No
+
+Most useful validation feature:
+- 
+
+Suggestions:
+- 
+- 
+- 
+
+---
+
+TASK 5: OFFLINE MODE
+
+Feature Available: [ ] Yes [ ] No
+
+If yes, did it work? [ ] Yes [ ] No
+
+Understood the purpose? [ ] Yes [ ] No
+
+Suggestions:
+- 
+- 
+- 
+
+---
+
+OVERALL ASSESSMENT
+
+Overall Platform Rating (1-5): ___/5
+
+Top 3 Strengths:
+1. 
+2. 
+3. 
+
+Top 3 Problems:
+1. 
+2. 
+3. 
+
+Top 3 Suggestions:
+1. 
+2. 
+3. 
+
+Would you use this for research? [ ] Yes [ ] No [ ] Maybe
+
+Why or why not?
+
+
+Additional Comments:
+
+
+</code></pre>
+<hr />
+<h2 id="evaluation-criteria">🎯 EVALUATION CRITERIA</h2>
+<p>Your instructor will evaluate based on:</p>
+<p><strong>Completeness (40%):</strong> - [ ] Completed all 5 tasks - [
+] Documented everything requested - [ ] Filled out complete report</p>
+<p><strong>Quality of Testing (30%):</strong> - [ ] Actually tried the
+features thoroughly - [ ] Found real problems (not just cosmetic) - [ ]
+Tested edge cases - [ ] Tried to break things</p>
+<p><strong>Quality of Feedback (20%):</strong> - [ ] Specific problems
+identified - [ ] Constructive suggestions - [ ] Explained WHY things are
+problems - [ ] Suggested realistic solutions</p>
+<p><strong>Understanding (10%):</strong> - [ ] Showed understanding of
+platform purpose - [ ] Understood workflow for each task - [ ]
+Identified use cases correctly - [ ] Asked good questions</p>
+<hr />
+<h2 id="tips-for-good-testing">💡 TIPS FOR GOOD TESTING</h2>
+<h3 id="do"><strong>DO:</strong></h3>
+<p>✅ Actually use the features (don’t just look at them) ✅ Try to
+break things on purpose ✅ Test with realistic data ✅ Note small issues
+(they add up!) ✅ Explain WHY something is a problem ✅ Suggest specific
+improvements ✅ Take screenshots of errors ✅ Ask questions if
+confused</p>
+<h3 id="dont"><strong>DON’T:</strong></h3>
+<p>❌ Just click through quickly ❌ Only report “it’s fine” ❌ Ignore
+small bugs ❌ Say “it’s bad” without explaining why ❌ Give vague
+feedback like “make it better” ❌ Skip tasks because they seem boring ❌
+Test in a rush</p>
+<hr />
+<h2 id="getting-help">🆘 GETTING HELP</h2>
+<p><strong>If you’re stuck:</strong></p>
+<ol type="1">
+<li><strong>Check the FAQ</strong> on the homepage</li>
+<li><strong>Read the STUDENT_GUIDE.md</strong> (this file!)</li>
+<li><strong>Look in the documentation folder</strong> for more
+guides</li>
+<li><strong>Ask a classmate</strong> - they might have figured it
+out</li>
+<li><strong>Ask your instructor</strong> - that’s what they’re here
+for!</li>
+</ol>
+<p><strong>If you find a bug:</strong></p>
+<ol type="1">
+<li><strong>Note exactly what you did</strong> (step-by-step)</li>
+<li><strong>Note what you expected</strong> to happen</li>
+<li><strong>Note what actually happened</strong></li>
+<li><strong>Take a screenshot</strong> if possible</li>
+<li><strong>Write it in your report</strong></li>
+</ol>
+<p><strong>If something is confusing:</strong></p>
+<p>That’s valuable feedback! Write down: - What confused you? - What
+would have made it clearer? - What did you expect to see instead?</p>
+<hr />
+<h2 id="learning-objectives">🎓 LEARNING OBJECTIVES</h2>
+<p>By completing these tasks, you will:</p>
+<p>✅ Understand how cognitive psychology experiments work ✅ Learn what
+makes good experiment design ✅ Experience being both experimenter and
+participant ✅ Practice using AI tools for practical tasks ✅ Develop
+software testing skills ✅ Learn to give constructive feedback ✅
+Understand research methods better</p>
+<hr />
+<h2 id="timeline-suggestion">📅 TIMELINE SUGGESTION</h2>
+<p><strong>Week 1:</strong> - Get files, open platform, explore (30 min)
+- Complete Task 1 (30 min) - Complete Task 2 (45 min)</p>
+<p><strong>Week 2:</strong> - Complete Task 3 (60 min) - Complete Task 4
+(30 min) - Complete Task 5 (30 min)</p>
+<p><strong>Week 3:</strong> - Write final report (30 min) - Review and
+submit</p>
+<p><strong>Total time:</strong> ~4 hours across 3 weeks</p>
+<hr />
+<h2 id="submission-checklist">✅ SUBMISSION CHECKLIST</h2>
+<p>Before you submit, make sure you have:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Completed all 5 tasks</label></li>
+<li><label><input type="checkbox" />Filled out the complete report
+template</label></li>
+<li><label><input type="checkbox" />Included specific
+examples</label></li>
+<li><label><input type="checkbox" />Noted any bugs found</label></li>
+<li><label><input type="checkbox" />Made constructive
+suggestions</label></li>
+<li><label><input type="checkbox" />Proofread your report</label></li>
+<li><label><input type="checkbox" />Saved screenshots (if
+applicable)</label></li>
+<li><label><input type="checkbox" />Named your file:
+LastName_FirstName_ExperimentMaker_Report.pdf</label></li>
+</ul>
+<hr />
+<h2 id="bonus-challenges-optional">🎉 BONUS CHALLENGES (Optional)</h2>
+<p>If you finish early or want extra credit:</p>
+<p><strong>Challenge 1:</strong> Create TWO different experiments with
+AI - Compare how well the AI understood each - Which was easier to
+create? - Document differences</p>
+<p><strong>Challenge 2:</strong> Design your own experiment - Think of
+something you’d want to test - Use the platform to create it - Does it
+work for your idea?</p>
+<p><strong>Challenge 3:</strong> Test on a friend - Have someone else
+try the platform - Watch them (don’t help!) - Note where they get
+confused - Write up their experience</p>
+<p><strong>Challenge 4:</strong> Explore the code - Look at the backend
+Python files - Look at the HTML/JavaScript - Can you understand how it
+works? - Could you fix a bug?</p>
+<hr />
+<h2 id="additional-resources">📚 ADDITIONAL RESOURCES</h2>
+<p><strong>In the package:</strong> - README.md - Package overview -
+STUDENT_GUIDE.md - This file - CRITICAL_GAPS_FIXED.md - What’s been
+built - USER_JOURNEY_ANALYSIS.md - How users should flow through</p>
+<p><strong>Online Resources:</strong> - Cognitive psychology
+experiments: https://pavlovia.org - IAT information:
+https://implicit.harvard.edu - JavaScript basics:
+https://javascript.info - Research methods: Your textbook!</p>
+<hr />
+<p><strong>Good luck with your testing! Your feedback will help make
+this platform better for real research.</strong> 🚀</p>
+<p><strong>Questions? Ask your instructor!</strong></p>
+</body>
+</html>
