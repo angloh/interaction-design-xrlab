@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Butterfly Simon Task</title>
+  <style>
+    /* ============================================================
+       DESIGN TOKENS
+       ============================================================ */
+    :root {
+      --spacing-xs: 0.5rem;
+      --spacing-sm: 1rem;
+      --spacing-md: 1.5rem;
+      --spacing-lg: 2rem;
+      
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --radius-lg: 12px;
+      
+      --font-sm: 0.875rem;
+      --font-base: 1rem;
+      --font-lg: 1.25rem;
+      --font-xl: 1.5rem;
+      --font-xxl: 2rem;
+      
+      --color-primary: #2563eb;
+      --color-success: #16a34a;
+      --color-danger: #dc2626;
+      --color-ink: #1f2937;
+      --color-ink-light: #6b7280;
+      --color-border: #d1d5db;
+      --color-surface: #f9fafb;
+      --color-surface-white: #ffffff;
+      
+      /* Dynamically set from config */
+      --purple: #6a1b9a;
+      --yellow: #f9a825;
+    }
+    
+    /* ============================================================
+       BASE
+       ============================================================ */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--color-surface);
+      color: var(--color-ink);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    
+    .hidden {
+      display: none !important;
+    }
+    
+    /* ============================================================
+       HEADER (sticky across both screens)
+       ============================================================ */
+    .header {
+      background: var(--color-surface-white);
+      border-bottom: 2px solid var(--color-border);
+      padding: var(--spacing-md);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: var(--spacing-sm);
+    }
+    
+    .header-left h1 {
+      font-size: var(--font-xl);
+      margin: 0;
+    }
+    
+    .header-left .participant-id {
+      font-size: var(--font-sm);
+      color: var(--color-ink-light);
+    }
+    
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-md);
+    }
+    
+    .status {
+      font-size: var(--font-sm);
+      font-weight: 600;
+      padding: var(--spacing-xs) var(--spacing-sm);
+      border-radius: var(--radius-sm);
+      background: var(--color-surface);
+    }
+    
+    /* ============================================================
+       INSTRUCTION SCREEN
+       ============================================================ */
+    .instruction-container {
+      max-width: 800px;
+      margin: var(--spacing-lg) auto;
+      padding: var(--spacing-lg);
+    }
+    
+    .rule-tiles {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-lg);
+      margin: var(--spacing-xl) 0;
+    }
+    
+    .rule-tile {
+      background: var(--color-surface-white);
+      border: 3px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-lg);
+      text-align: center;
+    }
+    
+    .rule-tile .color-word {
+      font-size: var(--font-xxl);
+      font-weight: 700;
+      margin-bottom: var(--spacing-md);
+    }
+    
+    .rule-tile .arrow {
+      font-size: 3rem;
+      margin: var(--spacing-md) 0;
+    }
+    
+    .rule-tile .direction {
+      font-size: var(--font-xl);
+      font-weight: 600;
+      margin-bottom: var(--spacing-sm);
+    }
+    
+    .rule-tile kbd {
+      display: inline-block;
+      padding: var(--spacing-xs) var(--spacing-sm);
+      background: var(--color-ink);
+      color: white;
+      border-radius: var(--radius-sm);
+      font-family: monospace;
+      font-size: var(--font-lg);
+      font-weight: 600;
+    }
+    
+    .location-rule {
+      background: #fef3c7;
+      border: 2px solid #f59e0b;
+      border-radius: var(--radius-md);
+      padding: var(--spacing-md);
+      margin: var(--spacing-lg) 0;
+      font-weight: 600;
+      text-align: center;
+    }
+    
+    .demo-image {
+      text-align: center;
+      margin: var(--spacing-lg) 0;
+    }
+    
+    .demo-image img {
+      max-width: 100%;
+      height: auto;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--color-border);
+    }
+    
+    .disclaimer {
+      background: var(--color-surface);
+      border-left: 4px solid var(--color-primary);
+      padding: var(--spacing-md);
+      margin: var(--spacing-lg) 0;
+      font-size: var(--font-sm);
+      color: var(--color-ink-light);
+    }
+    
+    .continue-button {
+      display: block;
+      width: 100%;
+      max-width: 300px;
+      margin: var(--spacing-xl) auto;
+      padding: var(--spacing-md) var(--spacing-lg);
+      font-size: var(--font-lg);
+      font-weight: 600;
+      background: var(--color-primary);
+      color: white;
+      border: none;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    
+    .continue-button:hover {
+      background: #1d4ed8;
+    }
+    
+    .continue-button:focus {
+      outline: 3px solid rgba(37, 99, 235, 0.5);
+      outline-offset: 2px;
+    }
+    
+    /* ============================================================
+       TASK SCREEN
+       ============================================================ */
+    .task-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: var(--spacing-lg);
+    }
+    
+    .controls {
+      display: flex;
+      gap: var(--spacing-sm);
+      margin-bottom: var(--spacing-lg);
+      flex-wrap: wrap;
+    }
+    
+    button {
+      padding: var(--spacing-sm) var(--spacing-lg);
+      font-size: var(--font-base);
+      font-weight: 600;
+      border: none;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+    
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    
+    button:focus {
+      outline: 3px solid rgba(37, 99, 235, 0.5);
+      outline-offset: 2px;
+    }
+    
+    .btn-primary {
+      background: var(--color-primary);
+      color: white;
+    }
+    
+    .btn-primary:hover:not(:disabled) {
+      background: #1d4ed8;
+    }
+    
+    .btn-success {
+      background: var(--color-success);
+      color: white;
+    }
+    
+    .btn-success:hover:not(:disabled) {
+      background: #15803d;
+    }
+    
+    /* ============================================================
+       PROGRESS BAR
+       ============================================================ */
+    .progress-container {
+      margin-bottom: var(--spacing-lg);
+    }
+    
+    .progress-bar {
+      width: 100%;
+      height: 30px;
+      background: var(--color-surface);
+      border: 2px solid var(--color-border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--color-primary), #3b82f6);
+      transition: width 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 600;
+      font-size: var(--font-sm);
+    }
+    
+    .progress-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-weight: 600;
+      color: var(--color-ink);
+      z-index: 1;
+    }
+    
+    /* ============================================================
+       ARENA (Task Canvas)
+       ============================================================ */
+    .arena {
+      background: var(--color-surface-white);
+      border: 3px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      min-height: 400px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      margin-bottom: var(--spacing-lg);
+    }
+    
+    .butterflies {
+      display: flex;
+      width: 100%;
+      justify-content: space-around;
+      align-items: center;
+      padding: var(--spacing-xl);
+    }
+    
+    .butterfly {
+      width: 150px;
+      height: 150px;
+      cursor: pointer;
+      transition: transform 0.2s;
+      user-select: none;
+    }
+    
+    .butterfly:hover {
+      transform: scale(1.1);
+    }
+    
+    .butterfly.disabled {
+      pointer-events: none;
+      opacity: 0.5;
+    }
+    
+    .fixation {
+      font-size: 4rem;
+      color: var(--color-ink);
+    }
+    
+    /* ============================================================
+       FEEDBACK
+       ============================================================ */
+    .feedback {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: var(--font-xxl);
+      font-weight: 700;
+      padding: var(--spacing-lg);
+      border-radius: var(--radius-lg);
+      background: white;
+      border: 3px solid;
+      z-index: 10;
+    }
+    
+    .feedback.correct {
+      color: var(--color-success);
+      border-color: var(--color-success);
+    }
+    
+    .feedback.incorrect {
+      color: var(--color-danger);
+      border-color: var(--color-danger);
+    }
+    
+    /* ============================================================
+       ACCESSIBILITY
+       ============================================================ */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+    
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+    @media (max-width: 768px) {
+      .rule-tiles {
+        grid-template-columns: 1fr;
+      }
+      
+      .header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      
+      .butterflies {
+        flex-direction: column;
+        gap: var(--spacing-xl);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- ============================================================
+       HEADER (visible on both screens)
+       ============================================================ -->
+  <header class="header">
+    <div class="header-left">
+      <h1 id="taskTitle">Butterfly Simon Task</h1>
+      <div class="participant-id">Participant: <span id="participantDisplay"></span></div>
+    </div>
+    <div class="header-right">
+      <div class="status" id="statusDisplay">Ready</div>
+      <button class="btn-primary" id="fullscreenBtn" style="display: none;">⛶ Fullscreen</button>
+    </div>
+  </header>
+  
+  <!-- ============================================================
+       SCREEN A: INSTRUCTION SCREEN
+       ============================================================ -->
+  <div id="instructionScreen" class="instruction-container">
+    <div class="rule-tiles" id="ruleTiles"></div>
+    <div class="location-rule" id="locationRule"></div>
+    <div class="demo-image hidden" id="demoImage"></div>
+    <div class="disclaimer hidden" id="disclaimerText"></div>
+    <button class="continue-button" id="continueBtn">Continue</button>
+  </div>
+  
+  <!-- ============================================================
+       SCREEN B: TASK SCREEN
+       ============================================================ -->
+  <div id="taskScreen" class="task-container hidden">
+    <div class="controls">
+      <button class="btn-primary" id="runPracticeBtn">▶️ Run Practice</button>
+      <button class="btn-success" id="runMainBtn">▶️ Run Main</button>
+      <button class="btn-primary" id="downloadBtn" disabled>⬇️ Download CSV</button>
+    </div>
+    
+    <div class="progress-container">
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+        <div class="progress-text" id="progressText">0 / 0</div>
+      </div>
+    </div>
+    
+    <div class="arena" id="arena">
+      <div class="fixation" id="fixation">+</div>
+      <div class="butterflies hidden" id="butterflies">
+        <svg class="butterfly" id="leftButterfly" data-side="left" width="150" height="150" viewBox="0 0 150 150">
+          <path d="M75,75 Q60,50 45,45 Q30,40 25,55 Q20,70 35,75 Q50,80 60,70 Z" fill="currentColor"/>
+          <path d="M75,75 Q90,50 105,45 Q120,40 125,55 Q130,70 115,75 Q100,80 90,70 Z" fill="currentColor"/>
+          <path d="M75,75 Q70,90 65,105 Q60,120 50,115 Q40,110 45,95 Q50,80 60,80 Z" fill="currentColor"/>
+          <path d="M75,75 Q80,90 85,105 Q90,120 100,115 Q110,110 105,95 Q100,80 90,80 Z" fill="currentColor"/>
+          <ellipse cx="75" cy="75" rx="8" ry="20" fill="#333"/>
+        </svg>
+        <svg class="butterfly" id="rightButterfly" data-side="right" width="150" height="150" viewBox="0 0 150 150">
+          <path d="M75,75 Q60,50 45,45 Q30,40 25,55 Q20,70 35,75 Q50,80 60,70 Z" fill="currentColor"/>
+          <path d="M75,75 Q90,50 105,45 Q120,40 125,55 Q130,70 115,75 Q100,80 90,70 Z" fill="currentColor"/>
+          <path d="M75,75 Q70,90 65,105 Q60,120 50,115 Q40,110 45,95 Q50,80 60,80 Z" fill="currentColor"/>
+          <path d="M75,75 Q80,90 85,105 Q90,120 100,115 Q110,110 105,95 Q100,80 90,80 Z" fill="currentColor"/>
+          <ellipse cx="75" cy="75" rx="8" ry="20" fill="#333"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+  
+  <!-- ARIA live region for feedback -->
+  <div class="sr-only" role="status" aria-live="polite" aria-atomic="true" id="ariaFeedback"></div>
+  
+  <script>
+    /* ============================================================
+       CONFIG MODULE
+       ============================================================ */
+    const Config = {
+      STORAGE_KEY: 'ButterflySimonV2Config',
+      
+      load() {
+        try {
+          const json = localStorage.getItem(this.STORAGE_KEY);
+          return json ? JSON.parse(json) : this.getDefaults();
+        } catch (e) {
+          console.error('Failed to load config:', e);
+          return this.getDefaults();
+        }
+      },
+      
+      getDefaults() {
+        return {
+          participantId: 'DEMO',
+          practiceTrials: 6,
+          mainTrials: 24,
+          isiMs: 400,
+          minRtMs: 120,
+          enableClicks: true,
+          leftKey: 'f',
+          rightKey: 'j',
+          title: 'Butterfly Simon Task',
+          purpleRule: 'When you see a PURPLE butterfly, select the LEFT butterfly.',
+          yellowRule: 'When you see a YELLOW butterfly, select the RIGHT butterfly.',
+          locationRule: 'Ignore where the colored butterfly is located. Color decides the side.',
+          continueText: 'Continue',
+          purpleHex: '#6a1b9a',
+          yellowHex: '#f9a825',
+          showDemo: false,
+          showDisclaimer: false,
+          disclaimer: '',
+          demoImage: null
+        };
+      }
+    };
+    
+    /* ============================================================
+       UI MODULE – Component renderers
+       ============================================================ */
+    const UI = {
+      renderRuleTile({color, colorWord, direction, arrow, keyHint, colorHex}) {
+        return `
+          <div class="rule-tile">
+            <div class="color-word" style="color: ${colorHex}">${colorWord}</div>
+            <div class="arrow">${arrow}</div>
+            <div class="direction">${direction}</div>
+            <div><kbd>${keyHint.toUpperCase()}</kbd></div>
+          </div>
+        `;
+      },
+      
+      updateProgress(current, total) {
+        const percent = total > 0 ? (current / total) * 100 : 0;
+        document.getElementById('progressFill').style.width = percent + '%';
+        document.getElementById('progressText').textContent = `${current} / ${total}`;
+      },
+      
+      showFeedback(correct, isPractice) {
+        if (!isPractice) return; // No feedback in main trials
+        
+        const arena = document.getElementById('arena');
+        const feedback = document.createElement('div');
+        feedback.className = `feedback ${correct ? 'correct' : 'incorrect'}`;
+        feedback.textContent = correct ? '✓ Correct' : '✗ Incorrect';
+        arena.appendChild(feedback);
+        
+        // ARIA announcement
+        document.getElementById('ariaFeedback').textContent = correct ? 'Correct' : 'Incorrect';
+        
+        setTimeout(() => feedback.remove(), 800);
+      },
+      
+      setStatus(text) {
+        document.getElementById('statusDisplay').textContent = text;
+      },
+      
+      setButterflyColors(leftColor, rightColor) {
+        document.getElementById('leftButterfly').style.color = leftColor;
+        document.getElementById('rightButterfly').style.color = rightColor;
+      }
+    };
+    
+    /* ============================================================
+       THEME MODULE – Apply colors from config
+       ============================================================ */
+    const Theme = {
+      apply(config) {
+        document.documentElement.style.setProperty('--purple', config.purpleHex);
+        document.documentElement.style.setProperty('--yellow', config.yellowHex);
+      }
+    };
+    
+    /* ============================================================
+       TASK MODULE – State machine for practice/main trials
+       ============================================================ */
+    const Task = {
+      config: null,
+      state: 'idle', // idle | showing | responding | isi
+      phase: null, // 'practice' | 'main'
+      trials: [],
+      currentTrial: 0,
+      trialData: [],
+      allData: [],
+      trialStartTime: 0,
+      
+      init(config) {
+        this.config = config;
+        this.setupEventListeners();
+      },
+      
+      generateTrials(count) {
+        // Simon task: color determines correct response, position can be congruent or incongruent
+        const trials = [];
+        const colors = ['purple', 'yellow'];
+        const positions = ['left', 'right'];
+        
+        for (let i = 0; i < count; i++) {
+          const targetColor = colors[Math.floor(Math.random() * colors.length)];
+          const targetPosition = positions[Math.floor(Math.random() * positions.length)];
+          const correctResponse = targetColor === 'purple' ? 'left' : 'right';
+          
+          trials.push({
+            targetColor,
+            targetSideOnScreen: targetPosition,
+            correctResponse
+          });
+        }
+        
+        return trials;
+      },
+      
+      async runBlock(phase) {
+        this.phase = phase;
+        this.currentTrial = 0;
+        this.trialData = [];
+        
+        const count = phase === 'practice' ? this.config.practiceTrials : this.config.mainTrials;
+        this.trials = this.generateTrials(count);
+        
+        UI.setStatus(`Running ${phase}...`);
+        document.getElementById('runPracticeBtn').disabled = true;
+        document.getElementById('runMainBtn').disabled = true;
+        
+        for (let i = 0; i < this.trials.length; i++) {
+          this.currentTrial = i + 1;
+          UI.updateProgress(this.currentTrial, this.trials.length);
+          await this.runTrial(this.trials[i]);
+        }
+        
+        this.allData.push(...this.trialData);
+        UI.setStatus(`${phase} complete!`);
+        document.getElementById('runPracticeBtn').disabled = false;
+        document.getElementById('runMainBtn').disabled = false;
+        document.getElementById('downloadBtn').disabled = false;
+      },
+      
+      async runTrial(trial) {
+        // Show fixation
+        this.state = 'idle';
+        this.showFixation();
+        await this.delay(this.config.isiMs);
+        
+        // Show stimuli
+        this.state = 'showing';
+        this.showStimuli(trial);
+        this.trialStartTime = performance.now();
+        
+        // Wait for response
+        const response = await this.waitForResponse();
+        
+        // Log data
+        const rt = response.rt;
+        const correct = response.side === trial.correctResponse;
+        
+        this.trialData.push({
+          participant: this.config.participantId,
+          phase: this.phase,
+          trial: this.currentTrial,
+          targetColor: trial.targetColor,
+          targetSideOnScreen: trial.targetSideOnScreen,
+          correctResponse: trial.correctResponse,
+          responseSide: response.side,
+          responseKey: response.key,
+          rt_ms: Math.round(rt),
+          correct: correct
+        });
+        
+        // Show feedback if practice
+        if (this.phase === 'practice') {
+          UI.showFeedback(correct, true);
+          await this.delay(800);
+        }
+        
+        // ISI
+        this.state = 'isi';
+        this.hideStimuli();
+        await this.delay(this.config.isiMs);
+      },
+      
+      showFixation() {
+        document.getElementById('fixation').classList.remove('hidden');
+        document.getElementById('butterflies').classList.add('hidden');
+      },
+      
+      showStimuli(trial) {
+        document.getElementById('fixation').classList.add('hidden');
+        document.getElementById('butterflies').classList.remove('hidden');
+        
+        // Set colors based on trial
+        const leftColor = trial.targetSideOnScreen === 'left' 
+          ? (trial.targetColor === 'purple' ? this.config.purpleHex : this.config.yellowHex)
+          : '#999'; // neutral gray
+        const rightColor = trial.targetSideOnScreen === 'right'
+          ? (trial.targetColor === 'purple' ? this.config.purpleHex : this.config.yellowHex)
+          : '#999';
+        
+        UI.setButterflyColors(leftColor, rightColor);
+        
+        // Enable clicking if configured
+        const butterflies = document.querySelectorAll('.butterfly');
+        butterflies.forEach(b => {
+          b.classList.remove('disabled');
+          b.style.cursor = this.config.enableClicks ? 'pointer' : 'default';
+        });
+      },
+      
+      hideStimuli() {
+        document.getElementById('fixation').classList.remove('hidden');
+        document.getElementById('butterflies').classList.add('hidden');
+        
+        const butterflies = document.querySelectorAll('.butterfly');
+        butterflies.forEach(b => b.classList.add('disabled'));
+      },
+      
+      waitForResponse() {
+        return new Promise(resolve => {
+          const handler = (side, key) => {
+            if (this.state !== 'showing') return;
+            
+            const rt = performance.now() - this.trialStartTime;
+            
+            // Check minimum RT
+            if (rt < this.config.minRtMs) return;
+            
+            this.state = 'responding';
+            this.hideStimuli();
+            
+            // Remove listeners
+            document.removeEventListener('keydown', keyHandler);
+            if (this.config.enableClicks) {
+              document.getElementById('leftButterfly').removeEventListener('click', leftClickHandler);
+              document.getElementById('rightButterfly').removeEventListener('click', rightClickHandler);
+            }
+            
+            resolve({ side, key, rt });
+          };
+          
+          const keyHandler = (e) => {
+            const key = e.key.toLowerCase();
+            if (key === this.config.leftKey) {
+              handler('left', `key:${this.config.leftKey.toUpperCase()}`);
+            } else if (key === this.config.rightKey) {
+              handler('right', `key:${this.config.rightKey.toUpperCase()}`);
+            }
+          };
+          
+          const leftClickHandler = () => handler('left', 'mouse');
+          const rightClickHandler = () => handler('right', 'mouse');
+          
+          document.addEventListener('keydown', keyHandler);
+          if (this.config.enableClicks) {
+            document.getElementById('leftButterfly').addEventListener('click', leftClickHandler);
+            document.getElementById('rightButterfly').addEventListener('click', rightClickHandler);
+          }
+        });
+      },
+      
+      delay(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+      },
+      
+      setupEventListeners() {
+        document.getElementById('runPracticeBtn').addEventListener('click', () => {
+          this.runBlock('practice');
+        });
+        
+        document.getElementById('runMainBtn').addEventListener('click', () => {
+          this.runBlock('main');
+        });
+      }
+    };
+    
+    /* ============================================================
+       EXPORT MODULE – CSV builder
+       ============================================================ */
+    const Export = {
+      buildCSV(data) {
+        const header = 'participant,phase,trial,targetColor,targetSideOnScreen,correctResponse,responseSide,responseKey,rt_ms,correct';
+        const rows = data.map(row => [
+          row.participant,
+          row.phase,
+          row.trial,
+          row.targetColor,
+          row.targetSideOnScreen,
+          row.correctResponse,
+          row.responseSide,
+          row.responseKey,
+          row.rt_ms,
+          row.correct
+        ].join(','));
+        
+        return [header, ...rows].join('\n');
+      },
+      
+      download(data, filename) {
+        const csv = this.buildCSV(data);
+        const blob = new Blob([csv], { type: 'text/csv' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      }
+    };
+    
+    /* ============================================================
+       INITIALIZATION
+       ============================================================ */
+    window.addEventListener('DOMContentLoaded', function() {
+      // Load config
+      const config = Config.load();
+      
+      // Get participant from URL if present
+      const urlParams = new URLSearchParams(window.location.search);
+      const participantFromUrl = urlParams.get('participant');
+      if (participantFromUrl) {
+        config.participantId = participantFromUrl;
+      }
+      
+      // Apply theme
+      Theme.apply(config);
+      
+      // Set title and participant
+      document.getElementById('taskTitle').textContent = config.title;
+      document.getElementById('participantDisplay').textContent = config.participantId;
+      
+      // Render instruction screen
+      const purpleWord = config.purpleRule.match(/PURPLE/)?.[0] || 'PURPLE';
+      const yellowWord = config.yellowRule.match(/YELLOW/)?.[0] || 'YELLOW';
+      
+      const ruleTilesHtml = [
+        UI.renderRuleTile({
+          colorWord: purpleWord,
+          direction: 'LEFT',
+          arrow: '←',
+          keyHint: config.leftKey,
+          colorHex: config.purpleHex
+        }),
+        UI.renderRuleTile({
+          colorWord: yellowWord,
+          direction: 'RIGHT',
+          arrow: '→',
+          keyHint: config.rightKey,
+          colorHex: config.yellowHex
+        })
+      ].join('');
+      
+      document.getElementById('ruleTiles').innerHTML = ruleTilesHtml;
+      document.getElementById('locationRule').textContent = config.locationRule;
+      document.getElementById('continueBtn').textContent = config.continueText;
+      
+      // Demo image
+      if (config.showDemo && config.demoImage) {
+        const demoDiv = document.getElementById('demoImage');
+        demoDiv.innerHTML = `<img src="${config.demoImage}" alt="Task demonstration">`;
+        demoDiv.classList.remove('hidden');
+      }
+      
+      // Disclaimer
+      if (config.showDisclaimer && config.disclaimer) {
+        const disclaimerDiv = document.getElementById('disclaimerText');
+        disclaimerDiv.textContent = config.disclaimer;
+        disclaimerDiv.classList.remove('hidden');
+      }
+      
+      // Continue button handler
+      document.getElementById('continueBtn').addEventListener('click', function() {
+        document.getElementById('instructionScreen').classList.add('hidden');
+        document.getElementById('taskScreen').classList.remove('hidden');
+        document.getElementById('fullscreenBtn').style.display = 'block';
+      });
+      
+      // Fullscreen toggle
+      document.getElementById('fullscreenBtn').addEventListener('click', function() {
+        if (!document.fullscreenElement) {
+          document.documentElement.requestFullscreen().catch(err => {
+            console.error('Fullscreen failed:', err);
+          });
+        } else {
+          document.exitFullscreen();
+        }
+      });
+      
+      // Download button
+      document.getElementById('downloadBtn').addEventListener('click', function() {
+        const filename = `ButterflySimon_${config.participantId}_${Date.now()}.csv`;
+        Export.download(Task.allData, filename);
+      });
+      
+      // Initialize task
+      Task.init(config);
+    });
+  </script>
+</body>
+</html>

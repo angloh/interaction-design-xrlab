@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Butterfly Simon V2 - Experimenter Setup</title>
+  <style>
+    /* ============================================================
+       DESIGN TOKENS – Edit here to reskin entire GUI
+       ============================================================ */
+    :root {
+      --spacing-xs: 0.5rem;
+      --spacing-sm: 1rem;
+      --spacing-md: 1.5rem;
+      --spacing-lg: 2rem;
+      --spacing-xl: 3rem;
+      
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --radius-lg: 12px;
+      
+      --font-sm: 0.875rem;
+      --font-base: 1rem;
+      --font-lg: 1.25rem;
+      --font-xl: 1.5rem;
+      
+      --color-primary: #2563eb;
+      --color-primary-hover: #1d4ed8;
+      --color-success: #16a34a;
+      --color-danger: #dc2626;
+      --color-ink: #1f2937;
+      --color-ink-light: #6b7280;
+      --color-border: #d1d5db;
+      --color-surface: #f9fafb;
+      --color-surface-white: #ffffff;
+      
+      --purple: #6a1b9a;
+      --yellow: #f9a825;
+    }
+    
+    /* ============================================================
+       BASE STYLES
+       ============================================================ */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--color-surface);
+      color: var(--color-ink);
+      line-height: 1.6;
+      padding: var(--spacing-lg);
+    }
+    
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    
+    /* ============================================================
+       TYPOGRAPHY
+       ============================================================ */
+    h1 {
+      font-size: var(--font-xl);
+      margin-bottom: var(--spacing-md);
+      color: var(--color-ink);
+    }
+    
+    h2 {
+      font-size: var(--font-lg);
+      margin-bottom: var(--spacing-sm);
+      color: var(--color-ink);
+      border-bottom: 2px solid var(--color-border);
+      padding-bottom: var(--spacing-xs);
+    }
+    
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: var(--spacing-xs);
+      font-size: var(--font-sm);
+      color: var(--color-ink);
+    }
+    
+    /* ============================================================
+       CARD LAYOUT
+       ============================================================ */
+    .card {
+      background: var(--color-surface-white);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-lg);
+      margin-bottom: var(--spacing-lg);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* ============================================================
+       FORM CONTROLS
+       ============================================================ */
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: var(--spacing-md);
+      margin-bottom: var(--spacing-lg);
+    }
+    
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    input[type="text"],
+    input[type="number"],
+    input[type="color"],
+    input[type="file"],
+    textarea {
+      padding: var(--spacing-sm);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      font-size: var(--font-base);
+      font-family: inherit;
+      transition: border-color 0.2s;
+    }
+    
+    input:focus,
+    textarea:focus {
+      outline: none;
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+    
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+    
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+    }
+    
+    .checkbox-group input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+    }
+    
+    .checkbox-group label {
+      margin: 0;
+      cursor: pointer;
+    }
+    
+    /* ============================================================
+       BUTTONS
+       ============================================================ */
+    .button-group {
+      display: flex;
+      gap: var(--spacing-sm);
+      flex-wrap: wrap;
+      margin-top: var(--spacing-lg);
+    }
+    
+    button {
+      padding: var(--spacing-sm) var(--spacing-lg);
+      font-size: var(--font-base);
+      font-weight: 600;
+      border: none;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+    
+    button:focus {
+      outline: 3px solid rgba(37, 99, 235, 0.5);
+      outline-offset: 2px;
+    }
+    
+    .btn-primary {
+      background: var(--color-primary);
+      color: white;
+    }
+    
+    .btn-primary:hover {
+      background: var(--color-primary-hover);
+    }
+    
+    .btn-success {
+      background: var(--color-success);
+      color: white;
+    }
+    
+    .btn-success:hover {
+      background: #15803d;
+    }
+    
+    .btn-danger {
+      background: var(--color-danger);
+      color: white;
+    }
+    
+    .btn-danger:hover {
+      background: #b91c1c;
+    }
+    
+    .btn-secondary {
+      background: var(--color-surface);
+      color: var(--color-ink);
+      border: 1px solid var(--color-border);
+    }
+    
+    .btn-secondary:hover {
+      background: #e5e7eb;
+    }
+    
+    /* ============================================================
+       TOAST NOTIFICATIONS
+       ============================================================ */
+    .toast {
+      position: fixed;
+      top: var(--spacing-lg);
+      right: var(--spacing-lg);
+      background: var(--color-ink);
+      color: white;
+      padding: var(--spacing-md);
+      border-radius: var(--radius-md);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+      z-index: 1000;
+      animation: slideIn 0.3s ease;
+    }
+    
+    @keyframes slideIn {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+    
+    .toast.success {
+      background: var(--color-success);
+    }
+    
+    .toast.error {
+      background: var(--color-danger);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🦋 Butterfly Simon V2 - Experimenter Setup</h1>
+    
+    <div class="card">
+      <h2>Parameters</h2>
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="participantId">Participant ID *</label>
+          <input type="text" id="participantId" required>
+        </div>
+        <div class="form-group">
+          <label for="practiceTrials">Practice Trials</label>
+          <input type="number" id="practiceTrials" value="6" min="0">
+        </div>
+        <div class="form-group">
+          <label for="mainTrials">Main Trials</label>
+          <input type="number" id="mainTrials" value="24" min="1">
+        </div>
+        <div class="form-group">
+          <label for="isiMs">ISI (ms)</label>
+          <input type="number" id="isiMs" value="400" min="0">
+        </div>
+        <div class="form-group">
+          <label for="minRtMs">Min RT (ms)</label>
+          <input type="number" id="minRtMs" value="120" min="0">
+        </div>
+        <div class="form-group">
+          <label for="leftKey">Left Key</label>
+          <input type="text" id="leftKey" value="f" maxlength="1">
+        </div>
+        <div class="form-group">
+          <label for="rightKey">Right Key</label>
+          <input type="text" id="rightKey" value="j" maxlength="1">
+        </div>
+        <div class="form-group">
+          <div class="checkbox-group">
+            <input type="checkbox" id="enableClicks" checked>
+            <label for="enableClicks">Enable Mouse Clicks</label>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="card">
+      <h2>Instruction Authoring</h2>
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="title">Task Title</label>
+          <input type="text" id="title" value="Butterfly Simon Task">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="purpleRule">Purple Rule</label>
+        <input type="text" id="purpleRule" value="When you see a PURPLE butterfly, select the LEFT butterfly.">
+      </div>
+      <div class="form-group">
+        <label for="yellowRule">Yellow Rule</label>
+        <input type="text" id="yellowRule" value="When you see a YELLOW butterfly, select the RIGHT butterfly.">
+      </div>
+      <div class="form-group">
+        <label for="locationRule">Location Rule</label>
+        <input type="text" id="locationRule" value="Ignore where the colored butterfly is located. Color decides the side.">
+      </div>
+      <div class="form-group">
+        <label for="continueText">Continue Button Text</label>
+        <input type="text" id="continueText" value="Continue">
+      </div>
+    </div>
+    
+    <div class="card">
+      <h2>Colors & Media</h2>
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="purpleHex">Purple Color</label>
+          <input type="color" id="purpleHex" value="#6a1b9a">
+        </div>
+        <div class="form-group">
+          <label for="yellowHex">Yellow Color</label>
+          <input type="color" id="yellowHex" value="#f9a825">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="checkbox-group">
+          <input type="checkbox" id="showDemo">
+          <label for="showDemo">Show Demo Image</label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="demoFile">Demo Image (optional)</label>
+        <input type="file" id="demoFile" accept="image/*">
+      </div>
+      <div class="form-group">
+        <div class="checkbox-group">
+          <input type="checkbox" id="showDisclaimer">
+          <label for="showDisclaimer">Show Disclaimer</label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="disclaimer">Disclaimer Text</label>
+        <textarea id="disclaimer" placeholder="Enter disclaimer text here..."></textarea>
+      </div>
+    </div>
+    
+    <div class="button-group">
+      <button class="btn-success" onclick="saveConfig()">💾 Save Config</button>
+      <button class="btn-secondary" onclick="loadConfig()">📂 Load Existing</button>
+      <button class="btn-danger" onclick="clearStorage()">🗑️ Clear Storage</button>
+      <button class="btn-primary" onclick="openSubjectView()">▶️ Open Subject View</button>
+    </div>
+  </div>
+  
+  <script>
+    /* ============================================================
+       CONFIG MODULE – Safe localStorage wrapper
+       ============================================================ */
+    const Config = {
+      STORAGE_KEY: 'ButterflySimonV2Config',
+      
+      save(data) {
+        try {
+          const json = JSON.stringify(data);
+          localStorage.setItem(this.STORAGE_KEY, json);
+          return true;
+        } catch (e) {
+          if (e.name === 'QuotaExceededError') {
+            UI.toast('Storage quota exceeded!', 'error');
+          } else {
+            UI.toast('Failed to save config: ' + e.message, 'error');
+          }
+          return false;
+        }
+      },
+      
+      load() {
+        try {
+          const json = localStorage.getItem(this.STORAGE_KEY);
+          return json ? JSON.parse(json) : null;
+        } catch (e) {
+          UI.toast('Failed to load config: ' + e.message, 'error');
+          return null;
+        }
+      },
+      
+      clear() {
+        try {
+          localStorage.removeItem(this.STORAGE_KEY);
+          return true;
+        } catch (e) {
+          UI.toast('Failed to clear storage: ' + e.message, 'error');
+          return false;
+        }
+      }
+    };
+    
+    /* ============================================================
+       UI MODULE – Toast notifications and helpers
+       ============================================================ */
+    const UI = {
+      toast(message, type = 'success') {
+        const toast = document.createElement('div');
+        toast.className = `toast ${type}`;
+        toast.textContent = message;
+        document.body.appendChild(toast);
+        
+        setTimeout(() => {
+          toast.style.animation = 'slideIn 0.3s ease reverse';
+          setTimeout(() => toast.remove(), 300);
+        }, 2500);
+      },
+      
+      getFormData() {
+        return {
+          participantId: document.getElementById('participantId').value.trim(),
+          practiceTrials: parseInt(document.getElementById('practiceTrials').value),
+          mainTrials: parseInt(document.getElementById('mainTrials').value),
+          isiMs: parseInt(document.getElementById('isiMs').value),
+          minRtMs: parseInt(document.getElementById('minRtMs').value),
+          enableClicks: document.getElementById('enableClicks').checked,
+          leftKey: document.getElementById('leftKey').value.toLowerCase(),
+          rightKey: document.getElementById('rightKey').value.toLowerCase(),
+          title: document.getElementById('title').value,
+          purpleRule: document.getElementById('purpleRule').value,
+          yellowRule: document.getElementById('yellowRule').value,
+          locationRule: document.getElementById('locationRule').value,
+          continueText: document.getElementById('continueText').value,
+          purpleHex: document.getElementById('purpleHex').value,
+          yellowHex: document.getElementById('yellowHex').value,
+          showDemo: document.getElementById('showDemo').checked,
+          showDisclaimer: document.getElementById('showDisclaimer').checked,
+          disclaimer: document.getElementById('disclaimer').value,
+          demoImage: window.demoImageBase64 || null
+        };
+      },
+      
+      setFormData(data) {
+        document.getElementById('participantId').value = data.participantId || '';
+        document.getElementById('practiceTrials').value = data.practiceTrials || 6;
+        document.getElementById('mainTrials').value = data.mainTrials || 24;
+        document.getElementById('isiMs').value = data.isiMs || 400;
+        document.getElementById('minRtMs').value = data.minRtMs || 120;
+        document.getElementById('enableClicks').checked = data.enableClicks !== false;
+        document.getElementById('leftKey').value = data.leftKey || 'f';
+        document.getElementById('rightKey').value = data.rightKey || 'j';
+        document.getElementById('title').value = data.title || 'Butterfly Simon Task';
+        document.getElementById('purpleRule').value = data.purpleRule || 'When you see a PURPLE butterfly, select the LEFT butterfly.';
+        document.getElementById('yellowRule').value = data.yellowRule || 'When you see a YELLOW butterfly, select the RIGHT butterfly.';
+        document.getElementById('locationRule').value = data.locationRule || 'Ignore where the colored butterfly is located. Color decides the side.';
+        document.getElementById('continueText').value = data.continueText || 'Continue';
+        document.getElementById('purpleHex').value = data.purpleHex || '#6a1b9a';
+        document.getElementById('yellowHex').value = data.yellowHex || '#f9a825';
+        document.getElementById('showDemo').checked = data.showDemo || false;
+        document.getElementById('showDisclaimer').checked = data.showDisclaimer || false;
+        document.getElementById('disclaimer').value = data.disclaimer || '';
+        window.demoImageBase64 = data.demoImage || null;
+      }
+    };
+    
+    /* ============================================================
+       VALIDATION
+       ============================================================ */
+    function validateConfig(data) {
+      if (!data.participantId) {
+        UI.toast('Participant ID is required!', 'error');
+        return false;
+      }
+      if (data.leftKey === data.rightKey) {
+        UI.toast('Left and right keys must be different!', 'error');
+        return false;
+      }
+      return true;
+    }
+    
+    /* ============================================================
+       ACTION HANDLERS
+       ============================================================ */
+    function saveConfig() {
+      const data = UI.getFormData();
+      if (!validateConfig(data)) return;
+      
+      if (Config.save(data)) {
+        UI.toast('Configuration saved successfully!');
+      }
+    }
+    
+    function loadConfig() {
+      const data = Config.load();
+      if (data) {
+        UI.setFormData(data);
+        UI.toast('Configuration loaded successfully!');
+      } else {
+        UI.toast('No saved configuration found.', 'error');
+      }
+    }
+    
+    function clearStorage() {
+      if (confirm('Are you sure you want to clear all saved configuration?')) {
+        if (Config.clear()) {
+          UI.toast('Storage cleared successfully!');
+          location.reload();
+        }
+      }
+    }
+    
+    function openSubjectView() {
+      const data = UI.getFormData();
+      if (!validateConfig(data)) return;
+      
+      // Save before opening
+      Config.save(data);
+      
+      // Open subject view with participant ID
+      const url = `subject.html?participant=${encodeURIComponent(data.participantId)}`;
+      window.open(url, '_blank');
+    }
+    
+    /* ============================================================
+       DEMO IMAGE HANDLER
+       ============================================================ */
+    let demoImageBase64 = null;
+    
+    document.getElementById('demoFile').addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      
+      const reader = new FileReader();
+      reader.onload = function(event) {
+        window.demoImageBase64 = event.target.result;
+        UI.toast('Demo image loaded successfully!');
+      };
+      reader.onerror = function() {
+        UI.toast('Failed to load demo image!', 'error');
+      };
+      reader.readAsDataURL(file);
+    });
+    
+    /* ============================================================
+       INITIALIZATION
+       ============================================================ */
+    window.addEventListener('DOMContentLoaded', function() {
+      // Try to load existing config
+      const saved = Config.load();
+      if (saved) {
+        UI.setFormData(saved);
+      }
+    });
+  </script>
+</body>
+</html>
