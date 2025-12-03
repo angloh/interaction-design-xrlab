@@ -21,6 +21,37 @@
 
   const stepPills = document.querySelectorAll(".step-pill");
 
+  // --- Experimenter controls DOM ---
+  const expToggle = document.getElementById("expToggle");
+  const expPanel = document.getElementById("expPanel");
+  const expClose = document.getElementById("expClose");
+
+  // ---------------------------------
+  // URL ?mode=config + password lock
+  // ---------------------------------
+  const urlParams = new URLSearchParams(window.location.search);
+  const urlMode = urlParams.get("mode"); // e.g., ?mode=config
+  const isExperimenterMode = urlMode === "config";
+
+  let experimenterUnlocked = false;
+
+  if (isExperimenterMode) {
+    const EXP_PASSWORD = "corsi2024"; // <--- change if you want
+    const entered = window.prompt("Experimenter password:");
+    if (entered === EXP_PASSWORD) {
+      experimenterUnlocked = true;
+    } else {
+      window.alert("Incorrect password. Showing participant view instead.");
+    }
+  }
+
+  // Hide experimenter button unless in config mode *and* password is correct
+  if (!isExperimenterMode || !experimenterUnlocked) {
+    expToggle.style.display = "none";
+  }
+
+  // ---------------------------------
+
   let blocks = [];
   let mode = "instructions"; // instructions | practice | experiment | done
   let practiceTrialIndex = 0;
@@ -96,7 +127,6 @@
       taskScreen.hidden = true;
     } else if (mode === "practice") {
       setStagePills("practice");
-      instructionsScreen.hidden = false; // keep step-strip on landing card reference, but hidden screen now task? Actually only task visible.
       instructionsScreen.hidden = true;
       taskScreen.hidden = false;
 
@@ -270,7 +300,17 @@
     clearResponseBtn.disabled = true;
   }
 
-  // Event wiring
+  // ---- Experimenter overlay events ----
+  expToggle.addEventListener("click", () => {
+    expPanel.classList.add("is-open");
+  });
+
+  expClose.addEventListener("click", () => {
+    expPanel.classList.remove("is-open");
+  });
+  // -------------------------------------
+
+  // Event wiring for participant view
 
   startPracticeBtn.addEventListener("click", () => {
     if (mode !== "instructions") return;
@@ -295,4 +335,9 @@
   // Init
   createGrid();
   setMode("instructions");
+
+  // If we came in via ?mode=config with correct password, auto-open panel
+  if (isExperimenterMode && experimenterUnlocked) {
+    expPanel.classList.add("is-open");
+  }
 })();
