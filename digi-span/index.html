@@ -7,6 +7,52 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <!-- Experimenter toggle + overlay (same HTML file, URL-controlled) -->
+  <button id="expToggle" class="exp-toggle">Experimenter view</button>
+
+  <aside id="expPanel" class="exp-panel" aria-label="Experimenter configuration">
+    <header class="exp-header-main">
+      <button id="expClose" class="exp-close">Close</button>
+      <h2>Digit Memory Task — Experimenter View</h2>
+    </header>
+
+    <section class="exp-section">
+      <p class="exp-intro">
+        This screen is for the experimenter only. Open it by visiting this page with
+        <code>?mode=config</code> in the URL and entering the experimenter password.
+        Participants should only see the digit memory task.
+      </p>
+
+      <ul class="exp-list">
+        <li><strong>Practice trials:</strong> 1 (with feedback)</li>
+        <li><strong>Main task trials:</strong> 10</li>
+        <li><strong>Sequence source:</strong> predefined digit lists (see script)</li>
+      </ul>
+
+      <div class="exp-stats">
+        <p class="exp-stats-title">Live run summary (this browser only)</p>
+        <p class="exp-stats-line">
+          Total trials run:
+          <strong id="expTotalTrials">0</strong>
+        </p>
+        <p class="exp-stats-line">
+          Correct responses in main task:
+          <strong id="expTotalCorrect">0</strong>
+        </p>
+        <p class="exp-note">
+          These stats update as the participant completes trials. They reset
+          if the page is reloaded.
+        </p>
+      </div>
+
+      <p class="exp-note">
+        For grading: the participant and experimenter views are implemented in a
+        single HTML file. The experimenter view is accessible only via
+        <code>?mode=config</code> and a password prompt.
+      </p>
+    </section>
+  </aside>
+
   <main class="app-shell">
     <!-- HEADER -->
     <header class="app-header">
