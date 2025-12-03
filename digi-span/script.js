@@ -52,6 +52,54 @@ const feedback = document.getElementById('feedback');
 const summaryTrials = document.getElementById('summaryTrials');
 const summaryCorrect = document.getElementById('summaryCorrect');
 
+// Experimenter view DOM
+const expToggle = document.getElementById('expToggle');
+const expPanel = document.getElementById('expPanel');
+const expClose = document.getElementById('expClose');
+const expTotalTrials = document.getElementById('expTotalTrials');
+const expTotalCorrect = document.getElementById('expTotalCorrect');
+
+// -------------------------------
+// URL ?mode=config + password lock
+// -------------------------------
+const urlParams = new URLSearchParams(window.location.search);
+const urlMode = urlParams.get('mode'); // e.g., ?mode=config
+const isExperimenterMode = urlMode === 'config';
+
+let experimenterUnlocked = false;
+
+if (isExperimenterMode) {
+  const EXP_PASSWORD = 'digit2024'; // <<< change this if you want
+  const entered = window.prompt('Experimenter password:');
+  if (entered === EXP_PASSWORD) {
+    experimenterUnlocked = true;
+  } else {
+    window.alert('Incorrect password. Showing participant view instead.');
+  }
+}
+
+// Hide experimenter button unless in config mode *and* password is correct
+if (!isExperimenterMode || !experimenterUnlocked) {
+  expToggle.style.display = 'none';
+}
+
+// Experimenter overlay open/close
+expToggle.addEventListener('click', () => {
+  expPanel.classList.add('is-open');
+});
+
+expClose.addEventListener('click', () => {
+  expPanel.classList.remove('is-open');
+});
+
+// -------------------------------
+
+function updateExperimenterStats() {
+  if (!expTotalTrials || !expTotalCorrect) return;
+  expTotalTrials.textContent = String(STATE.totalTrialsRun);
+  expTotalCorrect.textContent = String(STATE.totalCorrect);
+}
+
 function showScreen(name) {
   // Hide all
   screenInstructions.classList.remove('screen--active');
@@ -191,6 +239,8 @@ function finishTask() {
 
   summaryTrials.textContent = String(STATE.totalTrialsRun);
   summaryCorrect.textContent = String(STATE.totalCorrect);
+
+  updateExperimenterStats();
 }
 
 // Event handlers
@@ -249,6 +299,8 @@ responseForm.addEventListener('submit', (e) => {
   responseInput.setAttribute('aria-disabled', 'true');
   btnSubmit.disabled = true;
 
+  updateExperimenterStats();
+
   // Move to next trial after short pause
   setTimeout(() => {
     STATE.currentTrialIndex += 1;
@@ -260,3 +312,9 @@ responseForm.addEventListener('submit', (e) => {
 updateHeaderAndProgress();
 showScreen('instructions');
 setFeedback('');
+updateExperimenterStats();
+
+// If we came in via ?mode=config with correct password, auto-open panel
+if (isExperimenterMode && experimenterUnlocked) {
+  expPanel.classList.add('is-open');
+}
