@@ -21,6 +21,34 @@
   const expClose = document.getElementById('expClose');
   const expParticipantsDetail = document.getElementById('expParticipantsDetail');
 
+  // ---------------------------
+  // URL mode + experimenter lock
+  // ---------------------------
+  const params = new URLSearchParams(window.location.search);
+  const mode = params.get('mode');            // ?mode=config
+  const isExperimenterMode = mode === 'config';
+
+  // simple password lock – not real security, but enough so subjects
+  // can’t casually open the config screen
+  let experimenterUnlocked = false;
+
+  if (isExperimenterMode) {
+    const EXP_PASSWORD = 'antisaccade';  // <<< change if you want
+    const entered = window.prompt('Experimenter password:');
+
+    if (entered === EXP_PASSWORD) {
+      experimenterUnlocked = true;
+    } else {
+      window.alert('Incorrect password. Showing participant view instead.');
+    }
+  }
+
+  // If not experimenter mode OR wrong password, hide the toggle button
+  if (!isExperimenterMode || !experimenterUnlocked) {
+    expToggle.style.display = 'none';
+  }
+  // ---------------------------
+
   const COLOR_CLASSES = ['cue-circle--red', 'cue-circle--green'];
   const STATE_CLASSES = ['cue-circle--active'];
   const FEEDBACK_CLASSES = ['feedback-text--correct', 'feedback-text--incorrect'];
@@ -341,4 +369,9 @@
   loadParticipants();
   renderParticipantsDetail();
   showScreen('instructions');
+
+  // If URL is ?mode=config and password was correct, open experimenter view
+  if (isExperimenterMode && experimenterUnlocked) {
+    expPanel.classList.add('is-open');
+  }
 })();
