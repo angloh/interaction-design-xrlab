@@ -7,6 +7,34 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <!-- Experimenter toggle + overlay (shared HTML file) -->
+  <button id="expToggle" class="exp-toggle">Experimenter view</button>
+
+  <aside id="expPanel" class="exp-panel" aria-label="Experimenter configuration">
+    <header class="exp-header-main">
+      <button id="expClose" class="exp-close">Close</button>
+      <h2>Corsi Task — Experimenter View</h2>
+    </header>
+
+    <section class="exp-section">
+      <p class="exp-intro">
+        This screen is for configuring or monitoring the Corsi task.
+        You can customize this content to match your lab’s needs.
+      </p>
+
+      <ul class="exp-list">
+        <li><strong>Practice trials:</strong> 1</li>
+        <li><strong>Experiment trials:</strong> 10</li>
+        <li><strong>Sequence length:</strong> 4 blocks</li>
+      </ul>
+
+      <p class="exp-note">
+        To open this view, append <code>?mode=config</code> to the URL and enter the
+        experimenter password. Subjects should not know this URL or password.
+      </p>
+    </section>
+  </aside>
+
   <header class="site-header">
     <div class="site-title">
       <h1>Corsi Block Memory Task</h1>
