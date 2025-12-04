@@ -1,9 +1,120 @@
 (function () {
+  // ================================
+  // CONFIG CONSTANTS
+  // ================================
   const N_BLOCKS = 9;
   const PRACTICE_TRIALS = 1;
   const EXPERIMENT_TRIALS = 10;
   const SEQUENCE_LENGTH = 4;
 
+  // ================================
+  // EXPERIMENTER MODE (?mode=config)
+  // ================================
+  const urlParams = new URLSearchParams(window.location.search);
+  const isExperimenterMode = urlParams.get("mode") === "config";
+
+  let experimenterUnlocked = false;
+
+  if (isExperimenterMode) {
+    const EXP_PASSWORD = "corsi2024"; // change if you want
+    const entered = window.prompt("Experimenter password:");
+    if (entered === EXP_PASSWORD) {
+      experimenterUnlocked = true;
+    } else {
+      window.alert("Incorrect password. Showing participant view only.");
+    }
+  }
+
+  // Experimenter DOM (if present in HTML)
+  const expToggle = document.getElementById("expToggle");
+  const expPanel = document.getElementById("expPanel");
+  const expClose = document.getElementById("expClose");
+
+  const expParticipantId = document.getElementById("expParticipantId");
+  const expPracticeDone = document.getElementById("expPracticeDone");
+  const expExperimentDone = document.getElementById("expExperimentDone");
+  const expCorrect = document.getElementById("expCorrect");
+  const expLogBody = document.getElementById("expLogBody");
+
+  // Participant ID helper
+  function makeParticipantId() {
+    return "P" + String(Math.floor(Math.random() * 9000) + 1000);
+  }
+  const PARTICIPANT_ID = makeParticipantId();
+
+  // Apply lock: hide experimenter UI unless in config mode and unlocked
+  if (!experimenterUnlocked) {
+    if (expToggle) expToggle.style.display = "none";
+    if (expPanel) expPanel.classList.remove("is-open");
+  } else {
+    if (expToggle) expToggle.style.display = "inline-flex";
+    if (expPanel) expPanel.classList.add("is-open"); // auto-open when unlocked
+    if (expParticipantId) expParticipantId.textContent = PARTICIPANT_ID;
+  }
+
+  // Experimenter panel open/close
+  if (expToggle && expPanel) {
+    expToggle.addEventListener("click", () => {
+      expPanel.classList.add("is-open");
+    });
+  }
+
+  if (expClose && expPanel) {
+    expClose.addEventListener("click", () => {
+      expPanel.classList.remove("is-open");
+    });
+  }
+
+  // ================================
+  // EXPERIMENTER LOGGING
+  // ================================
+  const EXP_LOG = []; // each entry: { phase, trialNum, seq, resp, correct }
+
+  function updateExperimenterSummary() {
+    if (!experimenterUnlocked) return;
+    if (!expPracticeDone || !expExperimentDone || !expCorrect || !expLogBody) return;
+
+    const practiceTrials = EXP_LOG.filter((t) => t.phase === "practice").length;
+    const experimentTrials = EXP_LOG.filter((t) => t.phase === "experiment").length;
+    const correctExperimentTrials = EXP_LOG.filter(
+      (t) => t.phase === "experiment" && t.correct
+    ).length;
+
+    expPracticeDone.textContent = `${practiceTrials} / ${PRACTICE_TRIALS}`;
+    expExperimentDone.textContent = `${experimentTrials} / ${EXPERIMENT_TRIALS}`;
+    expCorrect.textContent = `${correctExperimentTrials} / ${EXPERIMENT_TRIALS}`;
+
+    // rebuild table
+    expLogBody.innerHTML = "";
+    EXP_LOG.forEach((t) => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${t.phase}</td>
+        <td>${t.trialNum}</td>
+        <td>${t.seq.join(", ")}</td>
+        <td>${t.resp.join(", ")}</td>
+        <td>${t.correct ? "✓" : "✕"}</td>
+      `;
+      expLogBody.appendChild(row);
+    });
+  }
+
+  function logTrial(phase, trialNum, seq, resp, correct) {
+    if (!experimenterUnlocked) return;
+    // store copies
+    EXP_LOG.push({
+      phase,
+      trialNum,
+      seq: seq.slice(),
+      resp: resp.slice(),
+      correct: !!correct,
+    });
+    updateExperimenterSummary();
+  }
+
+  // ================================
+  // PARTICIPANT VIEW DOM
+  // ================================
   const instructionsScreen = document.getElementById("instructions-screen");
   const taskScreen = document.getElementById("task-screen");
 
@@ -21,45 +132,21 @@
 
   const stepPills = document.querySelectorAll(".step-pill");
 
-  // --- Experimenter controls DOM ---
-  const expToggle = document.getElementById("expToggle");
-  const expPanel = document.getElementById("expPanel");
-  const expClose = document.getElementById("expClose");
-
-  // ---------------------------------
-  // URL ?mode=config + password lock
-  // ---------------------------------
-  const urlParams = new URLSearchParams(window.location.search);
-  const urlMode = urlParams.get("mode"); // e.g., ?mode=config
-  const isExperimenterMode = urlMode === "config";
-
-  let experimenterUnlocked = false;
-
-  if (isExperimenterMode) {
-    const EXP_PASSWORD = "corsi2024"; // <--- change if you want
-    const entered = window.prompt("Experimenter password:");
-    if (entered === EXP_PASSWORD) {
-      experimenterUnlocked = true;
-    } else {
-      window.alert("Incorrect password. Showing participant view instead.");
-    }
-  }
-
-  // Hide experimenter button unless in config mode *and* password is correct
-  if (!isExperimenterMode || !experimenterUnlocked) {
-    expToggle.style.display = "none";
-  }
-
-  // ---------------------------------
-
+  // ================================
+  // STATE
+  // ================================
   let blocks = [];
-  let mode = "instructions"; // instructions | practice | experiment | done
+  let mode = "instructions"; // "instructions" | "practice" | "experiment" | "done"
   let practiceTrialIndex = 0;
   let experimentTrialIndex = 0;
   let isShowingSequence = false;
   let isAwaitingResponse = false;
   let currentSequence = [];
   let currentResponse = [];
+
+  // ================================
+  // HELPERS
+  // ================================
 
   function createGrid() {
     const frag = document.createDocumentFragment();
@@ -94,10 +181,11 @@
     });
   }
 
-  function setStagePills(current) {
+  function setStagePills(currentStage) {
+    // expects each .step-pill to have data-stage="instructions|practice|experiment|done"
     stepPills.forEach((pill) => {
       const stage = pill.getAttribute("data-stage");
-      if (stage === current) {
+      if (stage === currentStage) {
         pill.classList.add("active");
       } else {
         pill.classList.remove("active");
@@ -106,6 +194,7 @@
   }
 
   function feedback(message, type) {
+    if (!feedbackEl) return;
     feedbackEl.textContent = message || "";
     feedbackEl.classList.remove("ok", "error");
     if (type === "ok") feedbackEl.classList.add("ok");
@@ -127,6 +216,8 @@
       taskScreen.hidden = true;
     } else if (mode === "practice") {
       setStagePills("practice");
+      instructionsScreen.hidden = false;
+      taskScreen.hidden = false; // we can show both if design wants
       instructionsScreen.hidden = true;
       taskScreen.hidden = false;
 
@@ -182,6 +273,9 @@
     return result;
   }
 
+  // ================================
+  // SEQUENCE PLAYBACK
+  // ================================
   function playSequence() {
     if (mode !== "practice" && mode !== "experiment") return;
     if (isShowingSequence) return;
@@ -227,6 +321,9 @@
     feedback("Now tap the same blocks in the same order.");
   }
 
+  // ================================
+  // RESPONSE HANDLING
+  // ================================
   function onBlockClick(idx) {
     if (!isAwaitingResponse) return;
     const block = blocks[idx];
@@ -259,6 +356,13 @@
       currentResponse.length === currentSequence.length &&
       currentResponse.every((v, i) => v === currentSequence[i]);
 
+    // 🔹 Log trial for experimenter view
+    const phaseName = mode === "practice" ? "practice" : "experiment";
+    const trialNum =
+      phaseName === "practice" ? practiceTrialIndex + 1 : experimentTrialIndex + 1;
+    logTrial(phaseName, trialNum, currentSequence, currentResponse, correct);
+
+    // Participant feedback
     if (correct) {
       feedback("Correct! You matched the sequence.", "ok");
     } else {
@@ -268,6 +372,7 @@
       );
     }
 
+    // Progress logic
     if (mode === "practice") {
       practiceTrialIndex++;
       if (practiceTrialIndex >= PRACTICE_TRIALS) {
@@ -300,23 +405,19 @@
     clearResponseBtn.disabled = true;
   }
 
-  // ---- Experimenter overlay events ----
-  expToggle.addEventListener("click", () => {
-    expPanel.classList.add("is-open");
-  });
+  // ================================
+  // EVENT WIRING
+  // ================================
 
-  expClose.addEventListener("click", () => {
-    expPanel.classList.remove("is-open");
-  });
-  // -------------------------------------
+  // Start button (from instructions)
+  if (startPracticeBtn) {
+    startPracticeBtn.addEventListener("click", () => {
+      if (mode !== "instructions") return;
+      setMode("practice");
+    });
+  }
 
-  // Event wiring for participant view
-
-  startPracticeBtn.addEventListener("click", () => {
-    if (mode !== "instructions") return;
-    setMode("practice");
-  });
-
+  // Space bar starts practice from instructions
   document.addEventListener("keydown", (evt) => {
     if (mode === "instructions" && (evt.code === "Space" || evt.key === " ")) {
       evt.preventDefault();
@@ -324,20 +425,21 @@
     }
   });
 
-  playSequenceBtn.addEventListener("click", () => {
-    playSequence();
-  });
+  if (playSequenceBtn) {
+    playSequenceBtn.addEventListener("click", () => {
+      playSequence();
+    });
+  }
 
-  clearResponseBtn.addEventListener("click", () => {
-    clearResponse();
-  });
+  if (clearResponseBtn) {
+    clearResponseBtn.addEventListener("click", () => {
+      clearResponse();
+    });
+  }
 
-  // Init
+  // ================================
+  // INIT
+  // ================================
   createGrid();
   setMode("instructions");
-
-  // If we came in via ?mode=config with correct password, auto-open panel
-  if (isExperimenterMode && experimenterUnlocked) {
-    expPanel.classList.add("is-open");
-  }
 })();
