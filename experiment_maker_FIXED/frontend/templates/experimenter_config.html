@@ -12,10 +12,13 @@ async function startRun(){
   const subject_id = document.getElementById('subject_id').value||'';
   const resp = await fetch(`/api/{{exp_type}}/start`, {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({config: cfg, subject_id})});
   const data = await resp.json(); document.getElementById('session').textContent=data.session_id||'ERROR';
-  document.getElementById('instructions').textContent=JSON.stringify(data.instructions,null,2);
+}
+function openInstructions(){
+  window.open('{{ url_for("static", filename="stroop_instructions.html") }}', '_blank');
 }
 </script></head><body>
 <h2>Experimenter — {{ exp_type }}</h2>
+<button onclick="openInstructions()" style="margin-bottom: 20px; background: #48bb78;">📖 View Instructions</button>
 <label>Subject ID <input id="subject_id" placeholder="optional"></label>
 <div id="form"><script>
 window.schema = {{ schema|tojson }};
@@ -33,7 +36,6 @@ if (window.schema.advanced && Object.keys(window.schema.advanced).length){
 </script></div>
 <button onclick="startRun()">Start Session</button>
 <p>Session ID: <code id="session"></code></p>
-<pre id="instructions" class="box"></pre>
 <hr>
 <h3>Upload GUI Snapshot</h3>
 <form method="post" action="/snapshot/upload" enctype="multipart/form-data">

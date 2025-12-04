@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stroop Experiment Instructions</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: #f5f7fa;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #1a202c;
+            margin-bottom: 0.5rem;
+            border-bottom: 3px solid #3182ce;
+            padding-bottom: 0.5rem;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            color: #2d3748;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid #3182ce;
+            padding-left: 1rem;
+        }
+
+        h3 {
+            font-size: 1.4rem;
+            color: #2d3748;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: #4a5568;
+        }
+
+        ul, ol {
+            margin-bottom: 1rem;
+            padding-left: 2rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+            color: #4a5568;
+        }
+
+        .info-box {
+            background: #ebf8ff;
+            border-left: 4px solid #3182ce;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+
+        .info-box.warning {
+            background: #fff5f5;
+            border-left-color: #e53e3e;
+        }
+
+        .info-box.success {
+            background: #f0fff4;
+            border-left-color: #38a169;
+        }
+
+        .key-display {
+            display: inline-block;
+            background: #2d3748;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-weight: bold;
+            margin: 0 0.25rem;
+        }
+
+        code {
+            background: #edf2f7;
+            padding: 0.2rem 0.5rem;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Courier New', monospace;
+            color: #e53e3e;
+            font-size: 0.9em;
+        }
+
+        .color-red { color: rgb(219, 38, 38); }
+        .color-green { color: rgb(23, 163, 74); }
+        .color-blue { color: rgb(38, 99, 237); }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        th {
+            background: #edf2f7;
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        tr:hover {
+            background: #f7fafc;
+        }
+
+        .section {
+            margin-bottom: 2rem;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .container {
+                box-shadow: none;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Stroop Experiment Instructions</h1>
+
+        <div class="section">
+            <h2>Overview</h2>
+            <p>The Stroop task is a classic cognitive psychology experiment that measures selective attention and processing speed. Participants are shown color words (e.g., "RED", "GREEN", "BLUE") displayed in different ink colors and must respond to the ink color while ignoring the word itself.</p>
+        </div>
+
+        <div class="section">
+            <h2>Task Instructions for Participants</h2>
+
+            <div class="info-box">
+                <strong>Primary Instruction:</strong> Press the key that matches the COLOR of the text, not what the word says.
+            </div>
+
+            <h3>Key Mappings</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Color</th>
+                        <th>Key to Press</th>
+                        <th>Arrow Direction</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="color-red">RED</span></td>
+                        <td><span class="key-display">←</span> Left Arrow</td>
+                        <td>Left</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-green">GREEN</span></td>
+                        <td><span class="key-display">↓</span> Down Arrow</td>
+                        <td>Down</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-blue">BLUE</span></td>
+                        <td><span class="key-display">→</span> Right Arrow</td>
+                        <td>Right</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Example Trials</h3>
+            <ul>
+                <li>If you see <span class="color-green">RED</span> → Press <span class="key-display">↓</span> (because the color is GREEN)</li>
+                <li>If you see <span class="color-red">BLUE</span> → Press <span class="key-display">←</span> (because the color is RED)</li>
+                <li>If you see <span class="color-blue">BLUE</span> → Press <span class="key-display">→</span> (because the color is BLUE)</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Experiment Structure</h2>
+
+            <h3>Trial Sequence</h3>
+            <ol>
+                <li><strong>Fixation Cross:</strong> A subtle "+" appears for 500ms to help focus attention</li>
+                <li><strong>Stimulus Delay:</strong> Brief blank screen (configurable, default 500ms)</li>
+                <li><strong>Stimulus Presentation:</strong> Color word appears - participant responds with arrow key</li>
+                <li><strong>Feedback:</strong> Checkmark (✓) for correct or X (✗) with correct answer for incorrect responses</li>
+                <li><strong>Next Trial:</strong> Automatically advances after feedback duration</li>
+            </ol>
+
+            <h3>Phases</h3>
+            <ul>
+                <li><strong>Practice Trials:</strong> Typically 3 trials with feedback to help participants learn the task</li>
+                <li><strong>Transition:</strong> Brief pause with reminder of key mappings</li>
+                <li><strong>Test Trials:</strong> Main experiment (default: 9 trials, must be multiple of 9)</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Configuration Options</h2>
+
+            <h3>Basic Settings</h3>
+            <ul>
+                <li><strong>Number of Test Trials:</strong> Total test trials (must be multiple of 9 to balance conditions)</li>
+                <li><strong>Practice Trials Toggle:</strong> Enable/disable practice phase</li>
+                <li><strong>Number of Practice Trials:</strong> How many practice trials to show (default: 3)</li>
+                <li><strong>Stimulus Delay:</strong> Time between fixation and stimulus (default: 500ms)</li>
+                <li><strong>Feedback Duration:</strong> How long to show feedback (default: 800ms)</li>
+            </ul>
+
+            <div class="info-box success">
+                <strong>Recommended Settings:</strong>
+                <ul style="margin-bottom: 0;">
+                    <li>Practice Trials: 3-6 trials</li>
+                    <li>Test Trials: 18-36 trials (multiples of 9)</li>
+                    <li>Stimulus Delay: 500ms</li>
+                    <li>Feedback Duration: 800ms</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Experimental Setup Guidelines</h2>
+
+            <h3>Display Settings</h3>
+            <ul>
+                <li>Use sRGB color space if available</li>
+                <li>Set brightness to comfortable level (avoid glare)</li>
+                <li>Ensure monitor is at 60Hz or higher refresh rate</li>
+            </ul>
+
+            <h3>Viewing Distance</h3>
+            <ul>
+                <li>Position participant 50-70cm from screen</li>
+                <li>Eye level should align with center of screen</li>
+                <li>Ensure consistent positioning across participants</li>
+            </ul>
+
+            <h3>Environment</h3>
+            <ul>
+                <li>Minimize distractions and ambient noise</li>
+                <li>Use consistent lighting conditions</li>
+                <li>Experiment will run in fullscreen mode</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Data Collection</h2>
+
+            <h3>Output File Format</h3>
+            <p>Results are automatically downloaded as CSV with filename: <code>stroop_[ParticipantID]_[Session]_[Date].csv</code></p>
+
+            <h3>Data Columns</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Column</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>session</code></td>
+                        <td>Session number</td>
+                    </tr>
+                    <tr>
+                        <td><code>participant</code></td>
+                        <td>Participant ID</td>
+                    </tr>
+                    <tr>
+                        <td><code>trial</code></td>
+                        <td>Trial number</td>
+                    </tr>
+                    <tr>
+                        <td><code>text</code></td>
+                        <td>Word displayed (red/green/blue)</td>
+                    </tr>
+                    <tr>
+                        <td><code>letterColor</code></td>
+                        <td>Ink color of the text</td>
+                    </tr>
+                    <tr>
+                        <td><code>congruent</code></td>
+                        <td>1 if word matches color, 0 if not</td>
+                    </tr>
+                    <tr>
+                        <td><code>userInput</code></td>
+                        <td>Color chosen by participant</td>
+                    </tr>
+                    <tr>
+                        <td><code>correct</code></td>
+                        <td>1 if correct, 0 if incorrect</td>
+                    </tr>
+                    <tr>
+                        <td><code>responseTime(ms)</code></td>
+                        <td>Reaction time in milliseconds</td>
+                    </tr>
+                    <tr>
+                        <td><code>rtValid</code></td>
+                        <td>1 if RT between 150-2000ms</td>
+                    </tr>
+                    <tr>
+                        <td><code>rtAnticipatory</code></td>
+                        <td>1 if RT < 150ms (too fast)</td>
+                    </tr>
+                    <tr>
+                        <td><code>rtAttentionLapse</code></td>
+                        <td>1 if RT > 2000ms (too slow)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>Data Quality Considerations</h2>
+
+            <div class="info-box warning">
+                <strong>Important:</strong> Reaction time validation flags help identify data quality issues.
+                <ul style="margin-bottom: 0; margin-top: 0.5rem;">
+                    <li><strong>Anticipatory responses</strong> (RT < 150ms): Participant may be guessing</li>
+                    <li><strong>Attention lapses</strong> (RT > 2000ms): Participant may be distracted</li>
+                    <li><strong>Tab visibility changes</strong>: Flagged automatically if participant switches tabs during trial</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Running the Experiment</h2>
+
+            <ol>
+                <li><strong>Configure:</strong> Access configuration via <code>?mode=config</code> URL parameter</li>
+                <li><strong>Set Parameters:</strong> Adjust trial counts, timing, and practice settings</li>
+                <li><strong>Save Configuration:</strong> Settings are stored in browser localStorage</li>
+                <li><strong>Start Session:</strong> Enter participant ID and session number</li>
+                <li><strong>Instructions:</strong> Participant reads on-screen instructions</li>
+                <li><strong>Fullscreen:</strong> Experiment enters fullscreen automatically</li>
+                <li><strong>Practice:</strong> Participant completes practice trials (if enabled)</li>
+                <li><strong>Test:</strong> Main experiment trials run</li>
+                <li><strong>Results:</strong> CSV file downloads automatically</li>
+            </ol>
+        </div>
+
+        <div class="section">
+            <h2>Troubleshooting</h2>
+
+            <h3>Common Issues</h3>
+            <ul>
+                <li><strong>Fullscreen doesn't work:</strong> Ensure browser permissions allow fullscreen. Experiment will continue without it.</li>
+                <li><strong>Keys not responding:</strong> Ensure focus is on the experiment window. Click the screen if needed.</li>
+                <li><strong>Configuration not saving:</strong> Check browser localStorage is enabled and not full.</li>
+                <li><strong>CSV not downloading:</strong> Check browser download permissions and pop-up blockers.</li>
+            </ul>
+
+            <h3>Emergency Exit</h3>
+            <p>Press <span class="key-display">ESC</span> at any time to exit the experiment (data will not be saved).</p>
+        </div>
+
+        <div class="section">
+            <h2>Technical Specifications</h2>
+
+            <ul>
+                <li><strong>Timing Precision:</strong> Uses <code>performance.now()</code> for millisecond-accurate RT measurement</li>
+                <li><strong>Double RAF:</strong> Double requestAnimationFrame ensures stimulus is actually painted before recording start time</li>
+                <li><strong>Refresh Rate Detection:</strong> Automatically detects monitor refresh rate for validation</li>
+                <li><strong>Color Consistency:</strong> Uses RGB values for consistent colors across displays</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

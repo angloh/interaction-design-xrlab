@@ -34,15 +34,18 @@
             display: none;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
             width: 100%;
             height: 100%;
+            padding-top: 5vh;
+            padding-bottom: 5vh;
+            overflow-y: auto;
         }
 
         .config-title {
             font-size: 4vh;
             font-weight: bold;
-            margin-bottom: 3vh;
+            margin-bottom: 1vh;
             color: black;
         }
 
@@ -376,12 +379,6 @@
             margin-top: 1vh;
         }
 
-        .practice-info {
-            font-size: 2vh;
-            color: black;
-            margin-top: 2vh;
-        }
-
         .start-prompt {
             font-size: 2.67vh;
             color: rgb(77, 153, 255);
@@ -416,6 +413,14 @@
             font-size: 12vh;
             font-weight: normal;
             margin-bottom: 5vh;
+        }
+
+        .fixation-cross {
+            font-size: 6vh;
+            font-weight: 50;
+            color: rgb(128, 128, 128);
+            margin-bottom: 5vh;
+            opacity: 0.4;
         }
 
         .bottom-instruction {
@@ -463,7 +468,7 @@
         }
 
         /* Transition Screen Styles */
-        #transition-screen {
+        #transition-screen, #pre-practice-screen {
             display: none;
             width: 100%;
             height: 100%;
@@ -527,11 +532,24 @@
         <!-- Configuration Screen -->
         <div id="config-screen">
             <div class="config-title">Experiment Configuration</div>
+
+            <!-- Button to open setup guidelines -->
+            <div style="text-align: center; margin: 1vh 0 2vh 0;">
+                <button onclick="window.open('../docs/experimental_setup_guidelines.html', '_blank')"
+                        style="background: #3182ce; color: white; border: none; padding: 12px 24px;
+                               border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer;
+                               box-shadow: 0 2px 4px rgba(0,0,0,0.1); transition: background 0.2s;"
+                        onmouseover="this.style.background='#2c5aa0'"
+                        onmouseout="this.style.background='#3182ce'">
+                    ⚙️ View Experimental Setup Guidelines
+                </button>
+            </div>
+
             <div class="config-form">
                 <div class="config-group">
                     <label for="config-num-trials">Number of Test Trials</label>
                     <div class="config-description">Total number of test trials (must be multiple of 9)</div>
-                    <input type="number" id="config-num-trials" class="config-input" value="9" min="9" step="9">
+                    <input type="number" id="config-num-trials" class="config-input" value="18" min="9" step="9">
                     <div class="config-error" id="config-num-trials-error"></div>
                 </div>
                 <div class="config-practice-container">
@@ -548,7 +566,7 @@
                     <div class="config-group" id="config-practice-trials-group">
                         <label for="config-practice-trials">Number of Practice Trials</label>
                         <div class="config-description">Number of practice trials before test trials</div>
-                        <input type="number" id="config-practice-trials" class="config-input" value="3" min="1" step="1">
+                        <input type="number" id="config-practice-trials" class="config-input" value="6" min="1" step="1">
                         <div class="config-error" id="config-practice-trials-error"></div>
                     </div>
                 </div>
@@ -606,14 +624,12 @@
             </div>
 
             <div class="example-section">
-                <div class="example-label">Example: If you see</div>
+                <div class="example-label">Example:</div>
                 <div class="example-word" id="example-word">red</div>
                 <div class="example-instruction">Press ↓ (for GREEN color)</div>
             </div>
 
-            <div class="practice-info"><span id="practice-trials-text">3</span> practice rounds with feedback → <span id="total-trials-text">9</span> test trials</div>
-            
-            <div class="start-prompt">Press any key to BEGIN EXPERIMENT</div>
+            <div class="start-prompt">Press any key to BEGIN </div>
         </div>
 
         <!-- Trial Screen -->
@@ -621,6 +637,7 @@
             <div class="progress-indicator" id="progress-text"></div>
             
             <div class="stimulus-container">
+                <div class="fixation-cross" id="fixation-cross" style="display: none;">+</div>
                 <div class="stimulus-word" id="stimulus-word"></div>
             </div>
 
@@ -632,6 +649,23 @@
             <div class="feedback-container">
                 <div class="feedback-result" id="feedback-result"></div>
                 <div class="feedback-correct-answer" id="feedback-correct-answer"></div>
+            </div>
+        </div>
+
+        <!-- Pre-Practice Screen (between instructions and practice) -->
+        <div id="pre-practice-screen">
+            <div class="transition-container">
+                <div class="transition-title">Ready to Practice?</div>
+                <div class="transition-message">
+                    You will now complete some practice trials.<br><br>
+                    Remember: Press the key matching the COLOR of the text.
+                </div>
+                <div class="key-boxes">
+                    <div class="key-box red">←</div>
+                    <div class="key-box green">↓</div>
+                    <div class="key-box blue">→</div>
+                </div>
+                <div class="transition-prompt">Press any key to begin practice</div>
             </div>
         </div>
 
@@ -673,8 +707,8 @@
         // Default configuration
         const DEFAULT_CONFIG = {
             practiceEnabled: true,
-            numPracticeTrials: 3,
-            numRepetitions: 1, // 1 repetition × 9 trial types = 9 trials
+            numPracticeTrials: 6,
+            numRepetitions: 2, // 2 repetitions × 9 trial types = 18 trials
             stimulusDelay: 500, // milliseconds
             feedbackDuration: 800, // milliseconds
             thanksScreenDuration: 2000 // milliseconds
@@ -707,6 +741,7 @@
         let participantId = '';
         let sessionNumber = '';
         let experimentDate = '';
+        let monitorRefreshRate = 0;
         let currentTrialIndex = 0;
         let isPractice = true;
         let trials = [];
@@ -735,18 +770,18 @@
         const sessionNumberInput = document.getElementById('session-number');
         const startButton = document.getElementById('start-button');
         const instructionScreen = document.getElementById('instruction-screen');
+        const prePracticeScreen = document.getElementById('pre-practice-screen');
         const trialScreen = document.getElementById('trial-screen');
         const feedbackScreen = document.getElementById('feedback-screen');
         const transitionScreen = document.getElementById('transition-screen');
         const thanksScreen = document.getElementById('thanks-screen');
         const progressText = document.getElementById('progress-text');
+        const fixationCross = document.getElementById('fixation-cross');
         const stimulusWord = document.getElementById('stimulus-word');
         const exampleWord = document.getElementById('example-word');
         const feedbackResult = document.getElementById('feedback-result');
         const feedbackCorrectAnswer = document.getElementById('feedback-correct-answer');
         const accuracyText = document.getElementById('accuracy-text');
-        const practiceTrialsText = document.getElementById('practice-trials-text');
-        const totalTrialsText = document.getElementById('total-trials-text');
 
         // Key mapping
         const keyMap = {
@@ -995,20 +1030,55 @@
             }
         }
 
+        // Detect monitor refresh rate
+        async function detectRefreshRate() {
+            return new Promise(resolve => {
+                let lastTime = performance.now();
+                let frames = 0;
+                let totalTime = 0;
+
+                function measure() {
+                    const currentTime = performance.now();
+                    const delta = currentTime - lastTime;
+
+                    if (delta > 0) {
+                        totalTime += delta;
+                        frames++;
+
+                        // Measure over 10 frames for accuracy
+                        if (frames >= 10) {
+                            const avgFrameTime = totalTime / frames;
+                            const refreshRate = Math.round(1000 / avgFrameTime);
+                            console.log(`Detected monitor refresh rate: ${refreshRate}Hz (avg frame time: ${avgFrameTime.toFixed(2)}ms)`);
+                            resolve(refreshRate);
+                            return;
+                        }
+                    }
+
+                    lastTime = currentTime;
+                    requestAnimationFrame(measure);
+                }
+
+                requestAnimationFrame(measure);
+            });
+        }
+
         // Initialize experiment
-        function initExperiment() {
+        async function initExperiment() {
             // Set example word color using color constant
             exampleWord.style.color = COLORS.GREEN;
-            
+
+            // Detect monitor refresh rate (important for timing validation)
+            monitorRefreshRate = await detectRefreshRate();
+
             // Update practice trials based on config
             updatePracticeTrials();
-            
+
             // Calculate total test trials for display
             const totalTestTrials = config.numRepetitions * trialTypes.length;
-            totalTrialsText.textContent = totalTestTrials;
-            practiceTrialsText.textContent = config.numPracticeTrials;
-            
+
             console.log(`${config.numPracticeTrials} practice trials + ${totalTestTrials} test trials`);
+            console.log(`System info: ${monitorRefreshRate}Hz refresh rate`);
         }
 
         // Handle start button click
@@ -1031,25 +1101,15 @@
             // Get current date
             experimentDate = new Date().toISOString().split('T')[0]; // YYYY-MM-DD format
 
-            // Update the total trials text on instruction screen
+            // Calculate total test trials
             const totalTestTrials = config.numRepetitions * trialTypes.length;
-            totalTrialsText.textContent = totalTestTrials;
-            
-            // Update practice trials text - hide if 0 practice trials
-            const practiceInfo = document.querySelector('.practice-info');
-            if (config.numPracticeTrials === 0) {
-                practiceInfo.innerHTML = `${totalTestTrials} test trials`;
-            } else {
-                practiceTrialsText.textContent = config.numPracticeTrials;
-                practiceInfo.innerHTML = `<span id="practice-trials-text">${config.numPracticeTrials}</span> practice rounds,  <span id="total-trials-text">${totalTestTrials}</span> test trials`;
-            }
 
             // Hide info screen, show instruction screen
             infoScreen.classList.add('hidden');
             instructionScreen.style.display = 'flex';
-            
-            // Listen for any key press to start experiment
-            document.addEventListener('keydown', startExperiment, { once: true });
+
+            // Listen for any key press to show pre-practice screen
+            document.addEventListener('keydown', showPrePracticeScreen, { once: true });
         }
 
         // Shuffle array in place (Fisher-Yates)
@@ -1060,15 +1120,53 @@
             }
         }
 
-        // Start experiment
-        function startExperiment(event) {
+        // Request fullscreen mode
+        async function enterFullscreen() {
+            try {
+                await document.documentElement.requestFullscreen();
+                console.log('Entered fullscreen mode');
+            } catch (err) {
+                console.warn('Fullscreen request failed:', err);
+                // Continue anyway - fullscreen is recommended but not required
+            }
+        }
+
+        // Show pre-practice screen (between instructions and practice)
+        async function showPrePracticeScreen(event) {
             // Check for escape key
             if (event.key === 'Escape') {
                 endExperiment();
                 return;
             }
 
+            // Request fullscreen for better experimental control
+            await enterFullscreen();
+
+            // If practice is disabled, skip pre-practice screen and go straight to trials
+            if (config.numPracticeTrials === 0 || practiceTrials.length === 0) {
+                instructionScreen.classList.add('hidden');
+                startExperiment(event);
+                return;
+            }
+
+            // Hide instruction screen, show pre-practice screen
             instructionScreen.classList.add('hidden');
+            prePracticeScreen.style.display = 'flex';
+
+            // Listen for any key press to start practice trials
+            document.addEventListener('keydown', startExperiment, { once: true });
+        }
+
+        // Start experiment (practice or real trials)
+        async function startExperiment(event) {
+            // Check for escape key
+            if (event.key === 'Escape') {
+                endExperiment();
+                return;
+            }
+
+            // Hide pre-practice screen, show trial screen
+            prePracticeScreen.style.display = 'none';
             trialScreen.style.display = 'block';
             
             // If practice is disabled, go straight to real trials
@@ -1117,20 +1215,38 @@
             // Clear previous stimulus
             stimulusWord.textContent = '';
             stimulusWord.style.color = 'transparent';
+            stimulusWord.style.display = 'none';
             awaitingResponse = false;
 
-            // Show stimulus after delay
+            // Show fixation cross first (500ms)
+            fixationCross.style.display = 'block';
+
             setTimeout(() => {
+                // Hide fixation, show stimulus
+                fixationCross.style.display = 'none';
+                stimulusWord.style.display = 'block';
                 stimulusWord.textContent = trial.text;
                 stimulusWord.style.color = trial.letterColor;
-                trialStartTime = performance.now();
-                trialStartTimestamp = new Date().toISOString();
-                awaitingResponse = true;
-            }, config.stimulusDelay);
+
+                // Use requestAnimationFrame to ensure timestamp is recorded AFTER browser paints
+                // This eliminates systematic timing errors from the rendering pipeline
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        // Double RAF ensures the frame is actually painted
+                        trialStartTime = performance.now();
+                        trialStartTimestamp = new Date().toISOString();
+                        awaitingResponse = true;
+                    });
+                });
+            }, 500 + config.stimulusDelay); // 500ms fixation + configured delay
         }
 
         // Handle keyboard response
         function handleResponse(event) {
+            // CRITICAL: Record timestamp IMMEDIATELY for accurate timing
+            // This must be the first line to minimize systematic delay
+            const responseTime = performance.now();
+
             // Always check for escape
             if (event.key === 'Escape') {
                 endExperiment();
@@ -1148,11 +1264,18 @@
 
             // Get trial from correct array based on practice mode
             const trial = isPractice ? practiceTrials[currentTrialIndex] : trials[currentTrialIndex];
-            
-            // Record response
-            const reactionTime = performance.now() - trialStartTime;
+
+            // Calculate reaction time from pre-recorded timestamp
+            const reactionTime = responseTime - trialStartTime;
             const trialEndTimestamp = new Date().toISOString();
             const isCorrect = pressedKey === trial.corrAns ? 1 : 0;
+
+            // RT validation flags for data quality
+            const rtFlags = {
+                anticipatory: reactionTime < 150,  // Likely anticipatory response
+                attentionLapse: reactionTime > 2000,  // Possible attention lapse
+                valid: reactionTime >= 150 && reactionTime <= 2000  // Within expected range
+            };
 
             // Convert RGB to color name using color constants
             const colorName = trial.letterColor === COLORS.RED ? 'red' :
@@ -1172,6 +1295,7 @@
                     participant: participantId,
                     session: sessionNumber,
                     date: experimentDate,
+                    monitorRefreshRate: monitorRefreshRate,
                     text: trial.text,
                     letterColor: colorName,
                     correctAns: correctAnsColor,
@@ -1181,7 +1305,10 @@
                     responseTime: reactionTime.toFixed(3),
                     responseKey: event.key,
                     trialStartTimestamp: trialStartTimestamp,
-                    trialEndTimestamp: trialEndTimestamp
+                    trialEndTimestamp: trialEndTimestamp,
+                    rtValid: rtFlags.valid ? 1 : 0,
+                    rtAnticipatory: rtFlags.anticipatory ? 1 : 0,
+                    rtAttentionLapse: rtFlags.attentionLapse ? 1 : 0
                 });
             }
 
@@ -1294,11 +1421,11 @@
 
         // Download results as CSV
         function downloadResults() {
-            const headers = ['session', 'participant', 'date', 'trial', 'text', 'letterColor', 'correctAns', 'congruent', 'responseKey', 'userInput', 'correct', 'trialStartTimestamp', 'trialEndTimestamp', 'responseTime(ms)'];
+            const headers = ['session', 'participant', 'date', 'monitorRefreshRate', 'trial', 'text', 'letterColor', 'correctAns', 'congruent', 'responseKey', 'userInput', 'correct', 'trialStartTimestamp', 'trialEndTimestamp', 'responseTime(ms)', 'rtValid', 'rtAnticipatory', 'rtAttentionLapse'];
             const csvContent = [
                 headers.join(','),
                 ...results.map(r => {
-                    return [r.session, r.participant, r.date, r.trial, r.text, r.letterColor, r.correctAns, r.congruent, r.responseKey, r.userInput, r.correct, r.trialStartTimestamp, r.trialEndTimestamp, r.responseTime].join(',');
+                    return [r.session, r.participant, r.date, r.monitorRefreshRate || 60, r.trial, r.text, r.letterColor, r.correctAns, r.congruent, r.responseKey, r.userInput, r.correct, r.trialStartTimestamp, r.trialEndTimestamp, r.responseTime, r.rtValid || 0, r.rtAnticipatory || 0, r.rtAttentionLapse || 0].join(',');
                 })
             ].join('\n');
 
@@ -1334,6 +1461,22 @@
         // Event listeners for experiment
         startButton.addEventListener('click', handleStartClick);
         document.addEventListener('keydown', handleResponse);
+
+        // Tab visibility detection - warn if participant switches tabs
+        let visibilityWarningShown = false;
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden && awaitingResponse) {
+                console.warn('⚠️ Tab became hidden during active trial - data quality may be affected');
+                // Flag this trial in the results
+                if (results.length > 0) {
+                    results[results.length - 1].tabHiddenDuringTrial = true;
+                }
+                if (!visibilityWarningShown) {
+                    visibilityWarningShown = true;
+                    // Note: We don't pause to avoid disrupting timing
+                }
+            }
+        });
 
         // Initialize when page loads
         window.addEventListener('load', () => {

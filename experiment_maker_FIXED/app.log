@@ -4763,3 +4763,739 @@ flask_wtf.csrf.CSRFError: 400 Bad Request: The CSRF token is missing.
 2025-11-20 05:57:46,119 - werkzeug - INFO - 127.0.0.1 - - [20/Nov/2025 05:57:46] "[36mGET /experiments/stroop_experiment_v3.2.html?mode=config HTTP/1.1[0m" 304 -
 2025-11-20 05:58:20,419 - werkzeug - INFO - 127.0.0.1 - - [20/Nov/2025 05:58:20] "[32mGET /subject/stroop HTTP/1.1[0m" 302 -
 2025-11-20 05:58:20,429 - werkzeug - INFO - 127.0.0.1 - - [20/Nov/2025 05:58:20] "[36mGET /experiments/stroop_experiment_v3.2.html HTTP/1.1[0m" 304 -
+2025-11-20 18:18:08,353 - __main__ - ERROR - Error serving doc STUDENT_HANDOFF.html: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+2025-11-20 18:18:08,355 - werkzeug - INFO - 127.0.0.1 - - [20/Nov/2025 18:18:08] "[33mGET /docs/STUDENT_HANDOFF.html HTTP/1.1[0m" 404 -
+2025-11-20 18:19:41,466 - __main__ - INFO - Database initialized successfully
+2025-11-20 18:19:41,487 - __main__ - INFO - Application starting...
+2025-11-20 18:19:41,513 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://100.117.212.243:5001
+2025-11-20 18:19:41,514 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-11-20 18:19:56,793 - werkzeug - INFO - 127.0.0.1 - - [20/Nov/2025 18:19:56] "GET / HTTP/1.1" 200 -
+2025-11-20 18:19:56,821 - werkzeug - INFO - 127.0.0.1 - - [20/Nov/2025 18:19:56] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-11-20 18:19:59,915 - werkzeug - INFO - 127.0.0.1 - - [20/Nov/2025 18:19:59] "GET /consent HTTP/1.1" 200 -
+2025-11-20 18:19:59,947 - werkzeug - INFO - 127.0.0.1 - - [20/Nov/2025 18:19:59] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-11-20 18:21:04,866 - werkzeug - INFO - 127.0.0.1 - - [20/Nov/2025 18:21:04] "GET / HTTP/1.1" 200 -
+2025-11-20 18:21:04,956 - werkzeug - INFO - 127.0.0.1 - - [20/Nov/2025 18:21:04] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-11-20 18:21:28,124 - werkzeug - INFO - 127.0.0.1 - - [20/Nov/2025 18:21:28] "[36mGET /docs/UNDERGRADUATE_TESTING_GUIDE.html HTTP/1.1[0m" 304 -
+2025-11-20 18:21:28,204 - werkzeug - INFO - 127.0.0.1 - - [20/Nov/2025 18:21:28] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-11-20 19:10:58,579 - werkzeug - INFO - 127.0.0.1 - - [20/Nov/2025 19:10:58] "GET / HTTP/1.1" 200 -
+2025-11-20 19:10:58,614 - werkzeug - INFO - 127.0.0.1 - - [20/Nov/2025 19:10:58] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-11-20 19:11:46,264 - werkzeug - INFO - 127.0.0.1 - - [20/Nov/2025 19:11:46] "[32mGET /experimenter/stroop HTTP/1.1[0m" 302 -
+2025-11-20 19:11:46,284 - werkzeug - INFO - 127.0.0.1 - - [20/Nov/2025 19:11:46] "GET /experiments/stroop_experiment_v3.2.html?mode=config HTTP/1.1" 200 -
+2025-11-20 19:12:20,785 - werkzeug - INFO - 127.0.0.1 - - [20/Nov/2025 19:12:20] "[36mGET /docs/UNDERGRADUATE_TESTING_GUIDE.html HTTP/1.1[0m" 304 -
+2025-11-20 19:12:20,979 - werkzeug - INFO - 127.0.0.1 - - [20/Nov/2025 19:12:20] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-11-20 19:12:26,293 - werkzeug - INFO - 127.0.0.1 - - [20/Nov/2025 19:12:26] "[36mGET /docs/UNDERGRADUATE_TESTING_GUIDE.md HTTP/1.1[0m" 304 -
+2025-11-20 19:12:40,602 - werkzeug - INFO - 127.0.0.1 - - [20/Nov/2025 19:12:40] "[32mGET /experimenter/stroop HTTP/1.1[0m" 302 -
+2025-11-20 19:12:40,612 - werkzeug - INFO - 127.0.0.1 - - [20/Nov/2025 19:12:40] "[36mGET /experiments/stroop_experiment_v3.2.html?mode=config HTTP/1.1[0m" 304 -
+2025-11-20 19:13:50,316 - werkzeug - INFO - 127.0.0.1 - - [20/Nov/2025 19:13:50] "[32mGET /experimenter/stroop HTTP/1.1[0m" 302 -
+2025-11-20 19:13:50,331 - werkzeug - INFO - 127.0.0.1 - - [20/Nov/2025 19:13:50] "[36mGET /experiments/stroop_experiment_v3.2.html?mode=config HTTP/1.1[0m" 304 -
+2025-11-20 19:14:17,051 - werkzeug - INFO - 127.0.0.1 - - [20/Nov/2025 19:14:17] "[32mGET /subject/stroop HTTP/1.1[0m" 302 -
+2025-11-20 19:14:17,067 - werkzeug - INFO - 127.0.0.1 - - [20/Nov/2025 19:14:17] "GET /experiments/stroop_experiment_v3.2.html HTTP/1.1" 200 -
+2025-11-20 19:44:40,147 - werkzeug - INFO - 127.0.0.1 - - [20/Nov/2025 19:44:40] "[32mGET /experimenter/stroop HTTP/1.1[0m" 302 -
+2025-11-20 19:44:40,156 - werkzeug - INFO - 127.0.0.1 - - [20/Nov/2025 19:44:40] "[36mGET /experiments/stroop_experiment_v3.2.html?mode=config HTTP/1.1[0m" 304 -
+2025-12-04 03:18:14,935 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 03:18:14] "GET / HTTP/1.1" 200 -
+2025-12-04 03:18:14,948 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 03:18:14] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-12-04 03:18:16,607 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/favicon.ico
+2025-12-04 03:18:16,616 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 03:18:16] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-12-04 03:18:35,557 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 03:18:35] "GET /experiments/stroop_experiment_v3.2.html?mode=config HTTP/1.1" 200 -
+2025-12-04 03:18:51,171 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 03:18:51] "[36mGET /experiments/stroop_experiment_v3.2.html?mode=config HTTP/1.1[0m" 304 -
+2025-12-04 03:18:54,976 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 03:18:54] "[32mGET /experimenter/stroop HTTP/1.1[0m" 302 -
+2025-12-04 03:18:54,983 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 03:18:54] "[36mGET /experiments/stroop_experiment_v3.2.html?mode=config HTTP/1.1[0m" 304 -
+2025-12-04 03:19:07,808 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 03:19:07] "[32mGET /subject/stroop HTTP/1.1[0m" 302 -
+2025-12-04 03:19:07,814 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 03:19:07] "GET /experiments/stroop_experiment_v3.2.html HTTP/1.1" 200 -
+2025-12-04 03:25:03,583 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 03:25:03] "GET / HTTP/1.1" 200 -
+2025-12-04 03:25:03,607 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 03:25:03] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-12-04 03:25:11,421 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 03:25:11] "GET /consent HTTP/1.1" 200 -
+2025-12-04 03:25:11,447 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 03:25:11] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 03:25:29,698 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 03:25:29] "[32mGET /subject/stroop HTTP/1.1[0m" 302 -
+2025-12-04 03:25:29,708 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 03:25:29] "GET /experiments/stroop_experiment_v3.2.html HTTP/1.1" 200 -
+2025-12-04 03:25:57,481 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 03:25:57] "[32mGET /subject/stroop HTTP/1.1[0m" 302 -
+2025-12-04 03:25:57,493 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 03:25:57] "[36mGET /experiments/stroop_experiment_v3.2.html HTTP/1.1[0m" 304 -
+2025-12-04 03:26:00,678 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 03:26:00] "[32mGET /experimenter/stroop HTTP/1.1[0m" 302 -
+2025-12-04 03:26:00,684 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 03:26:00] "GET /experiments/stroop_experiment_v3.2.html?mode=config HTTP/1.1" 200 -
+2025-12-04 03:26:12,223 - __main__ - INFO - Database initialized successfully
+2025-12-04 03:26:12,226 - __main__ - INFO - Application starting...
+2025-12-04 03:26:12,427 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://100.117.212.243:5001
+2025-12-04 03:26:12,427 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-12-04 03:26:18,932 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 03:26:18] "GET / HTTP/1.1" 200 -
+2025-12-04 03:26:18,957 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 03:26:18] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 03:26:23,359 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 03:26:23] "[32mGET /experimenter/stroop HTTP/1.1[0m" 302 -
+2025-12-04 03:26:23,366 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 03:26:23] "[36mGET /experiments/stroop_experiment_v3.2.html?mode=config HTTP/1.1[0m" 304 -
+2025-12-04 03:26:34,601 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 03:26:34] "[32mGET /subject/stroop HTTP/1.1[0m" 302 -
+2025-12-04 03:26:34,613 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 03:26:34] "[36mGET /experiments/stroop_experiment_v3.2.html HTTP/1.1[0m" 304 -
+2025-12-04 03:54:14,505 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 03:54:14] "[32mGET /subject/stroop HTTP/1.1[0m" 302 -
+2025-12-04 03:54:14,513 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 03:54:14] "GET /experiments/stroop_experiment_v3.2.html HTTP/1.1" 200 -
+2025-12-04 03:54:27,513 - __main__ - INFO - Database initialized successfully
+2025-12-04 03:54:27,514 - __main__ - INFO - Application starting...
+2025-12-04 03:54:27,524 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://100.117.212.243:5001
+2025-12-04 03:54:27,524 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-12-04 03:55:40,785 - __main__ - INFO - Database initialized successfully
+2025-12-04 03:55:40,787 - __main__ - INFO - Application starting...
+2025-12-04 03:55:40,797 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://100.117.212.243:5001
+2025-12-04 03:55:40,797 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-12-04 03:55:43,055 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 03:55:43] "[36mGET /experiments/stroop_experiment_v3.2.html HTTP/1.1[0m" 304 -
+2025-12-04 04:01:04,910 - __main__ - INFO - Database initialized successfully
+2025-12-04 04:01:04,911 - __main__ - INFO - Application starting...
+2025-12-04 04:01:04,922 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://100.117.212.243:5001
+2025-12-04 04:01:04,922 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-12-04 04:01:23,637 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:01:23] "GET / HTTP/1.1" 200 -
+2025-12-04 04:01:23,664 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:01:23] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 04:01:28,287 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:01:28] "[32mGET /subject/stroop HTTP/1.1[0m" 302 -
+2025-12-04 04:01:28,295 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:01:28] "GET /experiments/stroop_experiment_v3.2.html HTTP/1.1" 200 -
+2025-12-04 04:07:10,775 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:07:10] "[32mGET /experimenter/stroop HTTP/1.1[0m" 302 -
+2025-12-04 04:07:10,788 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:07:10] "GET /experiments/stroop_experiment_v3.2.html?mode=config HTTP/1.1" 200 -
+2025-12-04 04:07:36,423 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:07:36] "GET /docs/UNDERGRADUATE_TESTING_GUIDE.html HTTP/1.1" 200 -
+2025-12-04 04:07:36,439 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:07:36] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 04:32:58,245 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:32:58] "GET /consent HTTP/1.1" 200 -
+2025-12-04 04:32:58,269 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:32:58] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 04:33:41,302 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:33:41] "[32mGET /experimenter/stroop HTTP/1.1[0m" 302 -
+2025-12-04 04:33:41,312 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:33:41] "[36mGET /experiments/stroop_experiment_v3.2.html?mode=config HTTP/1.1[0m" 304 -
+2025-12-04 04:37:46,284 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:37:46] "GET /consent HTTP/1.1" 200 -
+2025-12-04 04:37:46,315 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:37:46] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 04:40:21,273 - __main__ - INFO - Subject 8918b3c9-c6a2-48a3-89c0-bc2744639d00 consented
+2025-12-04 04:40:21,274 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:40:21] "[32mPOST /consent HTTP/1.1[0m" 302 -
+2025-12-04 04:40:21,279 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:40:21] "GET /?subject_id=8918b3c9-c6a2-48a3-89c0-bc2744639d00 HTTP/1.1" 200 -
+2025-12-04 04:40:21,321 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:40:21] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 04:40:23,042 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:40:23] "GET /consent HTTP/1.1" 200 -
+2025-12-04 04:40:23,073 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:40:23] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 04:41:18,865 - __main__ - INFO - Database initialized successfully
+2025-12-04 04:41:18,866 - __main__ - INFO - Application starting...
+2025-12-04 04:41:18,877 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://100.117.212.243:5001
+2025-12-04 04:41:18,878 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-12-04 04:41:33,363 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:41:33] "GET /?subject_id=8918b3c9-c6a2-48a3-89c0-bc2744639d00 HTTP/1.1" 200 -
+2025-12-04 04:41:33,384 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:41:33] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 04:41:35,507 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:41:35] "GET /?subject_id=8918b3c9-c6a2-48a3-89c0-bc2744639d00 HTTP/1.1" 200 -
+2025-12-04 04:41:35,522 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:41:35] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 04:41:38,638 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:41:38] "[32mGET /experimenter/stroop HTTP/1.1[0m" 302 -
+2025-12-04 04:41:38,645 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:41:38] "GET /experiments/stroop_experiment_v3.2.html?mode=config HTTP/1.1" 200 -
+2025-12-04 04:42:47,496 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:42:47] "GET / HTTP/1.1" 200 -
+2025-12-04 04:42:47,504 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:42:47] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 04:43:04,328 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:43:04] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 04:43:04,339 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 04:43:04,349 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:43:04] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 04:45:22,399 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/favicon.ico
+2025-12-04 04:45:22,400 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:45:22] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-12-04 04:45:26,460 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:45:26] "[32mGET /experimenter/stroop HTTP/1.1[0m" 302 -
+2025-12-04 04:45:26,471 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:45:26] "GET /login?next=http://127.0.0.1:5001/experimenter/stroop HTTP/1.1" 200 -
+2025-12-04 04:45:26,490 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:45:26] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 04:45:35,272 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:45:35] "GET /consent HTTP/1.1" 200 -
+2025-12-04 04:45:35,292 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:45:35] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 04:45:40,064 - __main__ - INFO - Subject qweeqw consented
+2025-12-04 04:45:40,065 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:45:40] "[32mPOST /consent HTTP/1.1[0m" 302 -
+2025-12-04 04:45:40,069 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:45:40] "GET /?subject_id=qweeqw HTTP/1.1" 200 -
+2025-12-04 04:45:40,095 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:45:40] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 04:45:42,084 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:45:42] "[32mGET /subject/stroop HTTP/1.1[0m" 302 -
+2025-12-04 04:45:42,094 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:45:42] "GET /experiments/stroop_experiment_v3.2.html HTTP/1.1" 200 -
+2025-12-04 04:45:45,878 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:45:45] "[32mGET /subject/stroop HTTP/1.1[0m" 302 -
+2025-12-04 04:45:45,887 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:45:45] "[36mGET /experiments/stroop_experiment_v3.2.html HTTP/1.1[0m" 304 -
+2025-12-04 04:46:36,868 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:46:36] "[32mGET /experimenter/stroop HTTP/1.1[0m" 302 -
+2025-12-04 04:46:36,881 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:46:36] "GET /login?next=http://127.0.0.1:5001/experimenter/stroop HTTP/1.1" 200 -
+2025-12-04 04:46:36,903 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:46:36] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 04:46:43,989 - __main__ - WARNING - Failed login attempt for user: user
+2025-12-04 04:46:43,991 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:46:43] "POST /login HTTP/1.1" 200 -
+2025-12-04 04:46:44,012 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:46:44] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 04:47:18,574 - __main__ - INFO - Database initialized successfully
+2025-12-04 04:47:18,575 - __main__ - INFO - Application starting...
+2025-12-04 04:47:18,585 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://100.117.212.243:5001
+2025-12-04 04:47:18,585 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-12-04 04:47:23,267 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:47:23] "GET /?subject_id=qweeqw HTTP/1.1" 200 -
+2025-12-04 04:47:23,296 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:47:23] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 04:47:27,545 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:47:27] "GET / HTTP/1.1" 200 -
+2025-12-04 04:47:27,566 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:47:27] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 04:47:53,801 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:47:53] "[32mGET /experimenter/stroop HTTP/1.1[0m" 302 -
+2025-12-04 04:47:53,824 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:47:53] "GET /login?next=http://127.0.0.1:5001/experimenter/stroop HTTP/1.1" 200 -
+2025-12-04 04:47:53,844 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:47:53] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 04:48:00,350 - __main__ - INFO - User user logged in
+2025-12-04 04:48:00,353 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:48:00] "[32mPOST /login HTTP/1.1[0m" 302 -
+2025-12-04 04:48:00,357 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:48:00] "GET / HTTP/1.1" 200 -
+2025-12-04 04:48:00,383 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:48:00] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 04:48:06,094 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:48:06] "[32mGET /experimenter/stroop HTTP/1.1[0m" 302 -
+2025-12-04 04:48:06,100 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:48:06] "[36mGET /experiments/stroop_experiment_v3.2.html?mode=config HTTP/1.1[0m" 304 -
+2025-12-04 04:49:11,731 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 04:49:11,737 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:49:11] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 04:49:31,512 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:49:31] "GET /experiments/stroop_experiment_v3.2.html?mode=config HTTP/1.1" 200 -
+2025-12-04 04:49:31,531 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 04:49:31,533 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:49:31] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 04:49:31,562 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/favicon.ico
+2025-12-04 04:49:31,566 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:49:31] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-12-04 04:51:31,963 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:51:31] "GET /experiments/stroop_experiment_v3.2.html?mode=config HTTP/1.1" 200 -
+2025-12-04 04:51:31,978 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 04:51:31,979 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:51:31] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 04:51:32,008 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/favicon.ico
+2025-12-04 04:51:32,009 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:51:32] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-12-04 04:52:03,140 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:52:03] "GET / HTTP/1.1" 200 -
+2025-12-04 04:52:03,160 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 04:52:03,161 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:52:03] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 04:52:03,163 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:52:03] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-12-04 04:52:05,343 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 04:52:05,343 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:52:05] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 04:52:05,361 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 04:52:05,362 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:52:05] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 04:59:04,586 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:59:04] "GET /consent HTTP/1.1" 200 -
+2025-12-04 04:59:04,609 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 04:59:04] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 05:01:24,883 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:01:24] "GET / HTTP/1.1" 200 -
+2025-12-04 05:01:24,906 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:01:24] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 05:01:26,668 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:01:26] "GET / HTTP/1.1" 200 -
+2025-12-04 05:01:26,690 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:01:26] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 05:01:30,278 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:01:30] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 05:01:30,294 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 05:01:30,297 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:01:30] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 05:01:31,956 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:01:31] "GET / HTTP/1.1" 200 -
+2025-12-04 05:01:31,968 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 05:01:31,969 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:01:31] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 05:01:31,973 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:01:31] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-12-04 05:01:32,005 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/favicon.ico
+2025-12-04 05:01:32,006 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:01:32] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-12-04 05:01:35,569 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:01:35] "[32mGET /experimenter/stroop HTTP/1.1[0m" 302 -
+2025-12-04 05:01:35,577 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:01:35] "GET /experiments/stroop_experiment_v3.2.html?mode=config HTTP/1.1" 200 -
+2025-12-04 05:01:35,610 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 05:01:35,611 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:01:35] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 05:01:42,836 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:01:42] "GET /docs/experimental_setup_guidelines.html HTTP/1.1" 200 -
+2025-12-04 05:01:56,357 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:01:56] "[36mGET /docs/experimental_setup_guidelines.html HTTP/1.1[0m" 304 -
+2025-12-04 05:02:06,900 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:02:06] "[36mGET /docs/experimental_setup_guidelines.html HTTP/1.1[0m" 304 -
+2025-12-04 05:02:20,678 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:02:20] "GET /consent HTTP/1.1" 200 -
+2025-12-04 05:02:20,708 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:02:20] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 05:02:22,490 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:02:22] "GET /consent HTTP/1.1" 200 -
+2025-12-04 05:02:22,509 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:02:22] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 05:02:26,227 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:02:26] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 05:02:26,245 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 05:02:26,246 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:02:26] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 05:02:26,745 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:02:26] "GET /consent HTTP/1.1" 200 -
+2025-12-04 05:02:26,760 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 05:02:26,760 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:02:26] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 05:02:26,769 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:02:26] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-12-04 05:04:40,686 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:04:40] "GET /consent HTTP/1.1" 200 -
+2025-12-04 05:04:40,714 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:04:40] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 05:04:42,383 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:04:42] "GET /consent HTTP/1.1" 200 -
+2025-12-04 05:04:42,403 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:04:42] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 05:04:42,569 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:04:42] "GET /consent HTTP/1.1" 200 -
+2025-12-04 05:04:42,585 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:04:42] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 05:04:45,075 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:04:45] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 05:04:45,090 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 05:04:45,092 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:04:45] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 05:04:45,339 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:04:45] "GET /consent HTTP/1.1" 200 -
+2025-12-04 05:04:45,355 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 05:04:45,356 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:04:45] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 05:04:45,362 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:04:45] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-12-04 05:04:46,772 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:04:46] "GET /consent HTTP/1.1" 200 -
+2025-12-04 05:04:46,786 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 05:04:46,786 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:04:46] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 05:04:46,793 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:04:46] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-12-04 05:04:46,814 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/favicon.ico
+2025-12-04 05:04:46,815 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:04:46] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-12-04 05:04:47,921 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:04:47] "GET / HTTP/1.1" 200 -
+2025-12-04 05:04:47,951 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 05:04:47,952 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:04:47] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 05:04:47,958 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:04:47] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-12-04 05:04:55,166 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:04:55] "GET / HTTP/1.1" 200 -
+2025-12-04 05:04:55,189 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:04:55] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-12-04 05:04:55,234 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/favicon.ico
+2025-12-04 05:04:55,235 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:04:55] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-12-04 05:04:57,021 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:04:57] "[32mGET /experimenter/stroop HTTP/1.1[0m" 302 -
+2025-12-04 05:04:57,031 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:04:57] "GET /experiments/stroop_experiment_v3.2.html?mode=config HTTP/1.1" 200 -
+2025-12-04 05:04:59,975 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:04:59] "GET /consent HTTP/1.1" 200 -
+2025-12-04 05:04:59,998 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:04:59] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 05:06:46,398 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:06:46] "GET /consent HTTP/1.1" 200 -
+2025-12-04 05:06:46,421 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:06:46] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 05:06:47,146 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:06:47] "GET /consent HTTP/1.1" 200 -
+2025-12-04 05:06:47,163 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:06:47] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 05:06:49,598 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:06:49] "GET /consent HTTP/1.1" 200 -
+2025-12-04 05:06:49,625 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:06:49] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-12-04 05:06:49,662 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/favicon.ico
+2025-12-04 05:06:49,663 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:06:49] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-12-04 05:06:50,036 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:06:50] "GET /consent HTTP/1.1" 200 -
+2025-12-04 05:06:50,066 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:06:50] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-12-04 05:06:50,107 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/favicon.ico
+2025-12-04 05:06:50,108 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:06:50] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-12-04 05:06:50,180 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:06:50] "GET /consent HTTP/1.1" 200 -
+2025-12-04 05:06:50,198 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:06:50] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-12-04 05:06:50,240 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/favicon.ico
+2025-12-04 05:06:50,241 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:06:50] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-12-04 05:06:50,312 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:06:50] "GET /consent HTTP/1.1" 200 -
+2025-12-04 05:06:50,329 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:06:50] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-12-04 05:06:50,371 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/favicon.ico
+2025-12-04 05:06:50,372 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:06:50] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-12-04 05:06:54,352 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:06:54] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 05:06:54,370 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 05:06:54,372 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:06:54] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 05:06:56,130 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:06:56] "GET /consent HTTP/1.1" 200 -
+2025-12-04 05:06:56,142 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 05:06:56,143 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:06:56] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 05:06:56,150 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:06:56] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-12-04 05:06:56,168 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/favicon.ico
+2025-12-04 05:06:56,169 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:06:56] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-12-04 05:06:59,596 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:06:59] "GET / HTTP/1.1" 200 -
+2025-12-04 05:06:59,623 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 05:06:59,625 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:06:59] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 05:06:59,628 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:06:59] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-12-04 05:07:00,777 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:07:00] "[32mGET /experimenter/stroop HTTP/1.1[0m" 302 -
+2025-12-04 05:07:00,783 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:07:00] "GET /experiments/stroop_experiment_v3.2.html?mode=config HTTP/1.1" 200 -
+2025-12-04 05:07:00,824 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 05:07:00,825 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:07:00] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 05:07:02,421 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:07:02] "GET /docs/experimental_setup_guidelines.html HTTP/1.1" 200 -
+2025-12-04 05:07:05,545 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 05:07:05,545 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:07:05] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 05:07:05,547 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:07:05] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 05:07:05,552 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 05:07:05,553 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:07:05] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 05:07:21,996 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:07:21] "[32mGET /experimenter/stroop HTTP/1.1[0m" 302 -
+2025-12-04 05:07:22,006 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:07:22] "[36mGET /experiments/stroop_experiment_v3.2.html?mode=config HTTP/1.1[0m" 304 -
+2025-12-04 05:07:25,106 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:07:25] "[32mGET /subject/stroop HTTP/1.1[0m" 302 -
+2025-12-04 05:07:25,111 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:07:25] "GET /experiments/stroop_experiment_v3.2.html HTTP/1.1" 200 -
+2025-12-04 05:07:35,186 - __main__ - INFO - Database initialized successfully
+2025-12-04 05:07:35,187 - __main__ - INFO - Application starting...
+2025-12-04 05:07:35,197 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://100.117.212.243:5001
+2025-12-04 05:07:35,198 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-12-04 05:07:36,895 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:07:36] "GET / HTTP/1.1" 200 -
+2025-12-04 05:07:36,932 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:07:36] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 05:07:39,689 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:07:39] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 05:07:39,703 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 05:07:39,710 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:07:39] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 05:07:41,126 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:07:41] "GET / HTTP/1.1" 200 -
+2025-12-04 05:07:41,149 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 05:07:41,149 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:07:41] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 05:07:41,156 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:07:41] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-12-04 05:07:41,189 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/favicon.ico
+2025-12-04 05:07:41,190 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:07:41] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-12-04 05:07:43,159 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:07:43] "GET /consent HTTP/1.1" 200 -
+2025-12-04 05:07:43,193 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 05:07:43,194 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:07:43] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 05:07:43,204 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:07:43] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-12-04 05:09:05,877 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:09:05] "GET /consent HTTP/1.1" 200 -
+2025-12-04 05:09:05,899 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:09:05] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 05:09:08,704 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:09:08] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 05:09:08,721 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 05:09:08,723 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:09:08] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 05:09:10,138 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:09:10] "GET /consent HTTP/1.1" 200 -
+2025-12-04 05:09:10,150 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 05:09:10,151 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:09:10] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 05:09:10,154 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:09:10] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-12-04 05:09:10,181 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/favicon.ico
+2025-12-04 05:09:10,182 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:09:10] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-12-04 05:09:12,594 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:09:12] "GET /consent HTTP/1.1" 200 -
+2025-12-04 05:09:12,614 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 05:09:12,615 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:09:12] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 05:09:12,619 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:09:12] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-12-04 05:09:13,113 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:09:13] "GET / HTTP/1.1" 200 -
+2025-12-04 05:09:13,138 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 05:09:13,138 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:09:13] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 05:09:13,143 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:09:13] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-12-04 05:09:13,764 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:09:13] "GET / HTTP/1.1" 200 -
+2025-12-04 05:09:13,778 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 05:09:13,779 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:09:13] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 05:09:13,784 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:09:13] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-12-04 05:09:14,762 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:09:14] "[32mGET /experimenter/stroop HTTP/1.1[0m" 302 -
+2025-12-04 05:09:14,770 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:09:14] "GET /experiments/stroop_experiment_v3.2.html?mode=config HTTP/1.1" 200 -
+2025-12-04 05:09:14,807 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 05:09:14,807 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:09:14] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 05:09:16,489 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 05:09:16,490 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:09:16] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 05:09:16,492 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:09:16] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 05:09:16,493 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 05:09:16,494 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:09:16] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 05:09:17,268 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:09:17] "GET /consent HTTP/1.1" 200 -
+2025-12-04 05:09:17,303 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 05:09:17,304 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:09:17] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 05:09:17,311 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:09:17] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-12-04 05:09:18,044 - __main__ - INFO - Subject ce34ac65-f98e-4f1e-89f2-0b73239b6b28 consented
+2025-12-04 05:09:18,045 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:09:18] "[32mPOST /consent HTTP/1.1[0m" 302 -
+2025-12-04 05:09:18,052 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:09:18] "GET /?subject_id=ce34ac65-f98e-4f1e-89f2-0b73239b6b28 HTTP/1.1" 200 -
+2025-12-04 05:09:18,103 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 05:09:18,104 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:09:18] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 05:09:18,107 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:09:18] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-12-04 05:09:19,561 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 05:09:19,562 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:09:19] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 05:09:19,563 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:09:19] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 05:09:19,568 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 05:09:19,569 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:09:19] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 05:09:22,338 - __main__ - INFO - Subject sdfdfad consented
+2025-12-04 05:09:22,339 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:09:22] "[32mPOST /consent HTTP/1.1[0m" 302 -
+2025-12-04 05:09:22,345 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:09:22] "GET /?subject_id=sdfdfad HTTP/1.1" 200 -
+2025-12-04 05:09:22,383 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 05:09:22,385 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:09:22] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 05:09:22,385 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:09:22] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-12-04 05:09:29,819 - __main__ - INFO - Database initialized successfully
+2025-12-04 05:09:29,820 - __main__ - INFO - Application starting...
+2025-12-04 05:09:29,828 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://100.117.212.243:5001
+2025-12-04 05:09:29,828 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-12-04 05:09:32,448 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:09:32] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 05:09:32,458 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 05:09:32,469 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:09:32] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 05:09:33,703 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:09:33] "GET /?subject_id=sdfdfad HTTP/1.1" 200 -
+2025-12-04 05:09:33,718 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 05:09:33,719 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:09:33] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 05:09:33,723 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:09:33] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-12-04 05:09:33,741 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/favicon.ico
+2025-12-04 05:09:33,742 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:09:33] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-12-04 05:09:37,017 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:09:37] "GET /consent HTTP/1.1" 200 -
+2025-12-04 05:09:37,046 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 05:09:37,047 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:09:37] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 05:09:37,052 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:09:37] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-12-04 05:10:54,229 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:10:54] "GET /consent HTTP/1.1" 200 -
+2025-12-04 05:10:54,247 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 05:10:54,247 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:10:54] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 05:10:54,254 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:10:54] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-12-04 05:10:59,201 - __main__ - INFO - Database initialized successfully
+2025-12-04 05:10:59,202 - __main__ - INFO - Application starting...
+2025-12-04 05:10:59,212 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://100.117.212.243:5001
+2025-12-04 05:10:59,212 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-12-04 05:11:00,409 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 05:11:00,418 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:11:00] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 05:11:00,429 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 05:11:00,430 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:11:00] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 05:11:00,434 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:11:00] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 05:11:03,573 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:11:03] "GET /?subject_id=sdfdfad HTTP/1.1" 200 -
+2025-12-04 05:11:03,587 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 05:11:03,587 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:11:03] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 05:11:03,602 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:11:03] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-12-04 05:11:03,614 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/favicon.ico
+2025-12-04 05:11:03,615 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:11:03] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-12-04 05:11:09,316 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:11:09] "GET /?subject_id=sdfdfad HTTP/1.1" 200 -
+2025-12-04 05:11:09,339 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 05:11:09,339 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:11:09] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 05:11:09,350 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:11:09] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-12-04 05:11:09,369 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/favicon.ico
+2025-12-04 05:11:09,370 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:11:09] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-12-04 05:11:10,809 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:11:10] "[32mGET /experimenter/stroop HTTP/1.1[0m" 302 -
+2025-12-04 05:11:10,815 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:11:10] "GET /experiments/stroop_experiment_v3.2.html?mode=config HTTP/1.1" 200 -
+2025-12-04 05:11:10,847 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 05:11:10,848 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:11:10] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 05:11:13,443 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 05:11:13,443 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:11:13] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 05:11:13,449 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:11:13] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 05:11:13,457 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 05:11:13,457 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:11:13] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 05:11:14,291 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:11:14] "GET /consent HTTP/1.1" 200 -
+2025-12-04 05:11:14,324 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 05:11:14,324 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:11:14] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 05:11:14,332 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:11:14] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-12-04 05:11:17,879 - __main__ - INFO - Subject 742aa9fa-9195-4a6b-9cb3-81151e9ae3c8 consented
+2025-12-04 05:11:17,880 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:11:17] "[32mPOST /consent HTTP/1.1[0m" 302 -
+2025-12-04 05:11:17,885 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:11:17] "GET /?subject_id=742aa9fa-9195-4a6b-9cb3-81151e9ae3c8 HTTP/1.1" 200 -
+2025-12-04 05:11:17,914 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:11:17] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 05:11:48,117 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:11:48] "GET /consent HTTP/1.1" 200 -
+2025-12-04 05:11:48,137 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:11:48] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 05:12:03,683 - __main__ - INFO - Database initialized successfully
+2025-12-04 05:12:03,684 - __main__ - INFO - Application starting...
+2025-12-04 05:12:03,694 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://100.117.212.243:5001
+2025-12-04 05:12:03,694 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-12-04 05:12:15,503 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:12:15] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 05:12:15,507 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 05:12:15,519 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:12:15] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 05:12:16,809 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:12:16] "GET /consent HTTP/1.1" 200 -
+2025-12-04 05:12:16,824 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 05:12:16,826 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:12:16] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 05:12:16,833 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:12:16] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-12-04 05:12:16,852 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/favicon.ico
+2025-12-04 05:12:16,853 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:12:16] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-12-04 05:13:22,475 - __main__ - INFO - Database initialized successfully
+2025-12-04 05:13:22,476 - __main__ - INFO - Application starting...
+2025-12-04 05:13:22,486 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://100.117.212.243:5001
+2025-12-04 05:13:22,486 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-12-04 05:13:25,092 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:13:25] "GET /consent HTTP/1.1" 200 -
+2025-12-04 05:13:25,109 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 05:13:25,118 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:13:25] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 05:13:25,122 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:13:25] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-12-04 05:13:25,136 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/favicon.ico
+2025-12-04 05:13:25,137 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:13:25] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-12-04 05:13:55,262 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:13:55] "GET /consent HTTP/1.1" 200 -
+2025-12-04 05:13:55,276 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 05:13:55,277 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:13:55] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 05:13:55,286 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:13:55] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-12-04 05:13:55,762 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:13:55] "GET /consent HTTP/1.1" 200 -
+2025-12-04 05:13:55,774 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 05:13:55,775 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:13:55] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 05:13:55,785 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:13:55] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-12-04 05:14:02,598 - __main__ - INFO - Database initialized successfully
+2025-12-04 05:14:02,599 - __main__ - INFO - Application starting...
+2025-12-04 05:14:02,607 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://100.117.212.243:5001
+2025-12-04 05:14:02,607 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-12-04 05:14:06,303 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:14:06] "GET /consent HTTP/1.1" 200 -
+2025-12-04 05:14:06,319 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 05:14:06,327 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:14:06] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 05:14:06,336 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:14:06] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-12-04 05:14:06,347 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/favicon.ico
+2025-12-04 05:14:06,351 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:14:06] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-12-04 05:14:12,319 - __main__ - INFO - Subject c74ecc38-0769-410a-8792-cbe95ec04d49 consented
+2025-12-04 05:14:12,321 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:14:12] "[32mPOST /consent HTTP/1.1[0m" 302 -
+2025-12-04 05:14:12,330 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:14:12] "GET /?subject_id=c74ecc38-0769-410a-8792-cbe95ec04d49 HTTP/1.1" 200 -
+2025-12-04 05:14:12,361 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:14:12] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 05:14:20,491 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:14:20] "[32mGET /subject/stroop HTTP/1.1[0m" 302 -
+2025-12-04 05:14:20,501 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:14:20] "GET /experiments/stroop_experiment_v3.2.html HTTP/1.1" 200 -
+2025-12-04 05:14:24,073 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:14:24] "GET /subject/sart HTTP/1.1" 200 -
+2025-12-04 05:14:24,098 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:14:24] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 05:14:24,099 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:14:24] "GET /static/js/subject_runner.js HTTP/1.1" 200 -
+2025-12-04 05:14:25,915 - __main__ - ERROR - Error starting sart session: BaseExperiment.__init__() missing 2 required positional arguments: 'experiment_id' and 'configuration'
+2025-12-04 05:14:25,916 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:14:25] "[35m[1mPOST /api/sart/start HTTP/1.1[0m" 500 -
+2025-12-04 05:14:25,920 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:14:25] "[31m[1mPOST /api/sart/next HTTP/1.1[0m" 400 -
+2025-12-04 05:14:26,384 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:14:26] "GET /api/sart/help HTTP/1.1" 200 -
+2025-12-04 05:18:18,794 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:18:18] "[32mGET /experimenter/stroop HTTP/1.1[0m" 302 -
+2025-12-04 05:18:18,799 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:18:18] "GET /experiments/stroop_experiment_v3.2.html?mode=config HTTP/1.1" 200 -
+2025-12-04 05:21:04,420 - __main__ - INFO - Database initialized successfully
+2025-12-04 05:21:04,421 - __main__ - INFO - Application starting...
+2025-12-04 05:21:04,430 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://100.117.212.243:5001
+2025-12-04 05:21:04,431 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-12-04 05:21:06,746 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:21:06] "GET /experiments/stroop_experiment_v3.2.html?mode=config HTTP/1.1" 200 -
+2025-12-04 05:21:17,822 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:21:17] "GET /docs/experimental_setup_guidelines.html HTTP/1.1" 200 -
+2025-12-04 05:25:25,994 - __main__ - INFO - Database initialized successfully
+2025-12-04 05:25:25,995 - __main__ - INFO - Application starting...
+2025-12-04 05:25:26,004 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://100.117.212.243:5001
+2025-12-04 05:25:26,004 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-12-04 05:25:48,382 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:25:48] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 05:25:48,390 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 05:25:48,400 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:25:48] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 05:25:50,211 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:25:50] "GET /?subject_id=c74ecc38-0769-410a-8792-cbe95ec04d49 HTTP/1.1" 200 -
+2025-12-04 05:25:50,220 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 05:25:50,221 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:25:50] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 05:25:50,225 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:25:50] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-12-04 05:25:50,248 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/favicon.ico
+2025-12-04 05:25:50,249 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:25:50] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-12-04 05:25:53,237 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:25:53] "GET /consent HTTP/1.1" 200 -
+2025-12-04 05:25:53,256 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:25:53] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 05:25:58,563 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:25:58] "[32mGET /experimenter/stroop HTTP/1.1[0m" 302 -
+2025-12-04 05:25:58,569 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:25:58] "GET /experiments/stroop_experiment_v3.2.html?mode=config HTTP/1.1" 200 -
+2025-12-04 05:26:29,148 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:26:29] "GET /docs/experimental_setup_guidelines.html HTTP/1.1" 200 -
+2025-12-04 05:29:05,828 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:29:05] "[36mGET /docs/experimental_setup_guidelines.html HTTP/1.1[0m" 304 -
+2025-12-04 05:29:12,478 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:29:12] "GET /experiments/stroop_experiment_v3.2.html?mode=config HTTP/1.1" 200 -
+2025-12-04 05:37:25,632 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:37:25] "GET / HTTP/1.1" 200 -
+2025-12-04 05:37:41,437 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:37:41] "GET /consent HTTP/1.1" 200 -
+2025-12-04 05:37:41,462 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:37:41] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 05:37:53,436 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:37:53] "[32mGET /experimenter/stroop HTTP/1.1[0m" 302 -
+2025-12-04 05:37:53,443 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:37:53] "[36mGET /experiments/stroop_experiment_v3.2.html?mode=config HTTP/1.1[0m" 304 -
+2025-12-04 05:37:57,336 - __main__ - ERROR - Error in experimenter route for sart: BaseExperiment.__init__() missing 2 required positional arguments: 'experiment_id' and 'configuration'
+2025-12-04 05:37:57,337 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:37:57] "[35m[1mGET /experimenter/sart HTTP/1.1[0m" 500 -
+2025-12-04 05:37:57,360 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:37:57] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 05:38:10,652 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:38:10] "[32mGET /subject/stroop HTTP/1.1[0m" 302 -
+2025-12-04 05:38:10,661 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:38:10] "GET /experiments/stroop_experiment_v3.2.html HTTP/1.1" 200 -
+2025-12-04 05:38:22,057 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:38:22] "[32mGET /experimenter/stroop HTTP/1.1[0m" 302 -
+2025-12-04 05:38:22,064 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:38:22] "[36mGET /experiments/stroop_experiment_v3.2.html?mode=config HTTP/1.1[0m" 304 -
+2025-12-04 05:38:22,841 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:38:22] "[36mGET /docs/experimental_setup_guidelines.html HTTP/1.1[0m" 304 -
+2025-12-04 05:42:54,161 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:42:54] "GET /docs/UNDERGRADUATE_TESTING_GUIDE.html HTTP/1.1" 200 -
+2025-12-04 05:58:37,336 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:58:37] "[32mGET /experimenter/stroop HTTP/1.1[0m" 302 -
+2025-12-04 05:58:37,342 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:58:37] "[36mGET /experiments/stroop_experiment_v3.2.html?mode=config HTTP/1.1[0m" 304 -
+2025-12-04 05:58:40,965 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:58:40] "[32mGET /subject/stroop HTTP/1.1[0m" 302 -
+2025-12-04 05:58:40,972 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 05:58:40] "[36mGET /experiments/stroop_experiment_v3.2.html HTTP/1.1[0m" 304 -
+2025-12-04 06:00:30,675 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:00:30] "[32mGET /subject/stroop HTTP/1.1[0m" 302 -
+2025-12-04 06:00:30,684 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:00:30] "[36mGET /experiments/stroop_experiment_v3.2.html HTTP/1.1[0m" 304 -
+2025-12-04 06:03:03,511 - __main__ - INFO - Database initialized successfully
+2025-12-04 06:03:03,512 - __main__ - INFO - Application starting...
+2025-12-04 06:03:03,604 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://100.117.212.243:5001
+2025-12-04 06:03:03,605 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-12-04 06:03:13,088 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:03:13] "GET / HTTP/1.1" 200 -
+2025-12-04 06:03:13,091 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 06:03:13,092 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:03:13] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 06:03:13,096 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:03:13] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 06:03:22,006 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:03:22] "GET / HTTP/1.1" 200 -
+2025-12-04 06:03:22,022 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 06:03:22,023 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:03:22] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 06:03:22,037 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:03:22] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-12-04 06:03:22,049 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/favicon.ico
+2025-12-04 06:03:22,052 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:03:22] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-12-04 06:03:30,940 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:03:30] "[32mGET /experimenter/stroop HTTP/1.1[0m" 302 -
+2025-12-04 06:03:30,948 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:03:30] "GET /experiments/stroop_experiment_v3.2.html?mode=config HTTP/1.1" 200 -
+2025-12-04 06:03:30,974 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 06:03:30,975 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:03:30] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 06:03:33,325 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 06:03:33,325 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:03:33] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 06:03:33,341 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 06:03:33,341 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:03:33] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 06:03:33,342 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:03:33] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 06:03:34,477 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:03:34] "[32mGET /subject/stroop HTTP/1.1[0m" 302 -
+2025-12-04 06:03:34,485 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:03:34] "GET /experiments/stroop_experiment_v3.2.html HTTP/1.1" 200 -
+2025-12-04 06:03:34,512 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 06:03:34,512 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:03:34] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 06:27:12,922 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:27:12] "GET / HTTP/1.1" 200 -
+2025-12-04 06:27:12,951 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 06:27:12,952 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:27:12] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 06:27:12,952 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:27:12] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-12-04 06:34:50,581 - __main__ - INFO - Database initialized successfully
+2025-12-04 06:34:50,583 - __main__ - INFO - Application starting...
+2025-12-04 06:34:50,592 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://100.117.212.243:5001
+2025-12-04 06:34:50,592 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-12-04 06:35:01,069 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:35:01] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 06:35:01,071 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 06:35:01,082 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:35:01] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 06:35:02,966 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:35:02] "GET / HTTP/1.1" 200 -
+2025-12-04 06:35:02,978 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 06:35:02,980 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:35:02] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 06:35:02,983 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:35:02] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-12-04 06:35:03,004 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/favicon.ico
+2025-12-04 06:35:03,005 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:35:03] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-12-04 06:35:12,484 - __main__ - ERROR - Error in experimenter route for corsi: Can't instantiate abstract class PlaceholderExperiment without an implementation for abstract method 'get_experiment_type'
+2025-12-04 06:35:12,485 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:35:12] "[35m[1mGET /experimenter/corsi HTTP/1.1[0m" 500 -
+2025-12-04 06:35:12,513 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:35:12] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 06:35:14,014 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:35:14] "GET / HTTP/1.1" 200 -
+2025-12-04 06:35:14,040 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:35:14] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 06:35:15,228 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:35:15] "GET /subject/corsi HTTP/1.1" 200 -
+2025-12-04 06:35:15,258 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:35:15] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 06:35:15,262 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:35:15] "GET /static/js/subject_runner.js HTTP/1.1" 200 -
+2025-12-04 06:35:16,561 - __main__ - ERROR - Error starting corsi session: Can't instantiate abstract class PlaceholderExperiment without an implementation for abstract method 'get_experiment_type'
+2025-12-04 06:35:16,561 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:35:16] "[35m[1mPOST /api/corsi/start HTTP/1.1[0m" 500 -
+2025-12-04 06:35:16,566 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:35:16] "[31m[1mPOST /api/corsi/next HTTP/1.1[0m" 400 -
+2025-12-04 06:35:17,056 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:35:17] "GET /api/corsi/help HTTP/1.1" 200 -
+2025-12-04 06:35:20,214 - __main__ - ERROR - Error in experimenter route for butterfly_simon: Can't instantiate abstract class PlaceholderExperiment without an implementation for abstract method 'get_experiment_type'
+2025-12-04 06:35:20,215 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:35:20] "[35m[1mGET /experimenter/butterfly_simon HTTP/1.1[0m" 500 -
+2025-12-04 06:35:20,243 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:35:20] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 06:35:21,355 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:35:21] "GET / HTTP/1.1" 200 -
+2025-12-04 06:35:21,382 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:35:21] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 06:35:22,649 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:35:22] "GET /subject/butterfly_simon HTTP/1.1" 200 -
+2025-12-04 06:35:22,683 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:35:22] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 06:35:22,686 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:35:22] "[36mGET /static/js/subject_runner.js HTTP/1.1[0m" 304 -
+2025-12-04 06:35:32,745 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:35:32] "[32mGET /experimenter/stroop HTTP/1.1[0m" 302 -
+2025-12-04 06:35:32,750 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:35:32] "GET /experiments/stroop_experiment_v3.2.html?mode=config HTTP/1.1" 200 -
+2025-12-04 06:35:35,176 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:35:35] "GET /docs/experimental_setup_guidelines.html HTTP/1.1" 200 -
+2025-12-04 06:36:03,213 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:36:03] "[32mGET /subject/stroop HTTP/1.1[0m" 302 -
+2025-12-04 06:36:03,226 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:36:03] "GET /experiments/stroop_experiment_v3.2.html HTTP/1.1" 200 -
+2025-12-04 06:39:23,367 - __main__ - INFO - Database initialized successfully
+2025-12-04 06:39:23,368 - __main__ - INFO - Application starting...
+2025-12-04 06:39:23,377 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://100.117.212.243:5001
+2025-12-04 06:39:23,377 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-12-04 06:39:25,897 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:39:25] "GET / HTTP/1.1" 200 -
+2025-12-04 06:39:25,928 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:39:25] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-12-04 06:42:39,313 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:42:39] "GET / HTTP/1.1" 200 -
+2025-12-04 06:42:39,334 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:42:39] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-12-04 06:43:18,424 - __main__ - ERROR - Error in experimenter route for sart: BaseExperiment.__init__() missing 2 required positional arguments: 'experiment_id' and 'configuration'
+2025-12-04 06:43:18,430 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:43:18] "[35m[1mGET /experimenter/sart HTTP/1.1[0m" 500 -
+2025-12-04 06:43:18,453 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:43:18] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 06:43:20,996 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:43:20] "[32mGET /experimenter/stroop HTTP/1.1[0m" 302 -
+2025-12-04 06:43:21,003 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:43:21] "[36mGET /experiments/stroop_experiment_v3.2.html?mode=config HTTP/1.1[0m" 304 -
+2025-12-04 06:43:25,782 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:43:25] "[32mGET /subject/stroop HTTP/1.1[0m" 302 -
+2025-12-04 06:43:25,789 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:43:25] "[36mGET /experiments/stroop_experiment_v3.2.html HTTP/1.1[0m" 304 -
+2025-12-04 06:46:39,199 - __main__ - INFO - Database initialized successfully
+2025-12-04 06:46:39,200 - __main__ - INFO - Application starting...
+2025-12-04 06:46:39,212 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://100.117.212.243:5001
+2025-12-04 06:46:39,212 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-12-04 06:46:41,321 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:46:41] "GET / HTTP/1.1" 200 -
+2025-12-04 06:46:41,345 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:46:41] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-12-04 06:46:44,401 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:46:44] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 06:46:44,417 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 06:46:44,424 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:46:44] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 06:46:45,851 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:46:45] "GET / HTTP/1.1" 200 -
+2025-12-04 06:46:45,860 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 06:46:45,861 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:46:45] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 06:46:45,868 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:46:45] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-12-04 06:46:45,891 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/favicon.ico
+2025-12-04 06:46:45,892 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:46:45] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-12-04 06:50:19,442 - __main__ - ERROR - Error in experimenter route for digit_span: BaseExperiment.__init__() missing 2 required positional arguments: 'experiment_id' and 'configuration'
+2025-12-04 06:50:19,449 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:50:19] "[35m[1mGET /experimenter/digit_span HTTP/1.1[0m" 500 -
+2025-12-04 06:50:19,479 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:50:19] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 06:50:21,942 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:50:21] "[32mGET /experimenter/stroop HTTP/1.1[0m" 302 -
+2025-12-04 06:50:21,951 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:50:21] "GET /experiments/stroop_experiment_v3.2.html?mode=config HTTP/1.1" 200 -
+2025-12-04 06:50:29,685 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:50:29] "[32mGET /subject/stroop HTTP/1.1[0m" 302 -
+2025-12-04 06:50:29,691 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:50:29] "GET /experiments/stroop_experiment_v3.2.html HTTP/1.1" 200 -
+2025-12-04 06:56:22,304 - __main__ - INFO - Database initialized successfully
+2025-12-04 06:56:22,305 - __main__ - INFO - Application starting...
+2025-12-04 06:56:22,315 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://100.117.212.243:5001
+2025-12-04 06:56:22,315 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-12-04 06:56:24,457 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:56:24] "GET / HTTP/1.1" 200 -
+2025-12-04 06:56:24,483 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:56:24] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 06:56:27,227 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:56:27] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 06:56:27,242 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 06:56:27,252 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:56:27] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 06:56:28,893 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:56:28] "GET / HTTP/1.1" 200 -
+2025-12-04 06:56:28,904 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 06:56:28,906 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:56:28] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 06:56:28,909 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:56:28] "GET /static/css/styles.css HTTP/1.1" 200 -
+2025-12-04 06:56:28,932 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/favicon.ico
+2025-12-04 06:56:28,932 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:56:28] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-12-04 06:57:06,026 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:57:06] "[32mGET /subject/stroop HTTP/1.1[0m" 302 -
+2025-12-04 06:57:06,036 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:57:06] "GET /experiments/stroop_experiment_v3.2.html HTTP/1.1" 200 -
+2025-12-04 06:57:06,059 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 06:57:06,059 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:57:06] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 06:57:56,818 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 06:57:56,818 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:57:56] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 06:57:56,827 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:57:56] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 06:57:56,834 - __main__ - WARNING - 404 error: http://127.0.0.1:5001/.well-known/appspecific/com.chrome.devtools.json
+2025-12-04 06:57:56,834 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 06:57:56] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 07:01:27,572 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 07:01:27] "[32mGET /experimenter/stroop HTTP/1.1[0m" 302 -
+2025-12-04 07:01:27,579 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 07:01:27] "GET /experiments/stroop_experiment_v3.2.html?mode=config HTTP/1.1" 200 -
+2025-12-04 07:04:31,866 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 07:04:31] "GET /docs/experimental_setup_guidelines.html HTTP/1.1" 200 -
+2025-12-04 07:18:54,989 - __main__ - INFO - Database initialized successfully
+2025-12-04 07:18:54,991 - __main__ - INFO - Application starting...
+2025-12-04 07:18:55,062 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://100.117.212.243:5001
+2025-12-04 07:18:55,062 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-12-04 07:19:10,474 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 07:19:10] "GET / HTTP/1.1" 200 -
+2025-12-04 07:19:10,502 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 07:19:10] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 07:19:12,128 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 07:19:12] "GET / HTTP/1.1" 200 -
+2025-12-04 07:19:12,154 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 07:19:12] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2025-12-04 07:19:16,953 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 07:19:16] "[32mGET /experimenter/stroop HTTP/1.1[0m" 302 -
+2025-12-04 07:19:16,961 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 07:19:16] "GET /experiments/stroop_experiment_v3.2.html?mode=config HTTP/1.1" 200 -
+2025-12-04 07:19:19,606 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 07:19:19] "[32mGET /subject/stroop HTTP/1.1[0m" 302 -
+2025-12-04 07:19:19,611 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 07:19:19] "GET /experiments/stroop_experiment_v3.2.html HTTP/1.1" 200 -
+2025-12-04 07:19:21,832 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 07:19:21] "[32mGET /experimenter/digit_span HTTP/1.1[0m" 302 -
+2025-12-04 07:19:21,837 - __main__ - ERROR - Error serving experiment digit_span_experiment.html: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+2025-12-04 07:19:21,838 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 07:19:21] "[33mGET /experiments/digit_span_experiment.html?mode=config HTTP/1.1[0m" 404 -
+2025-12-04 07:19:23,943 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 07:19:23] "[32mGET /subject/digit_span HTTP/1.1[0m" 302 -
+2025-12-04 07:19:23,952 - __main__ - ERROR - Error serving experiment digit_span_experiment.html: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+2025-12-04 07:19:23,953 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 07:19:23] "[33mGET /experiments/digit_span_experiment.html HTTP/1.1[0m" 404 -
+2025-12-04 07:19:25,786 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 07:19:25] "[32mGET /experimenter/sart HTTP/1.1[0m" 302 -
+2025-12-04 07:19:25,795 - __main__ - ERROR - Error serving experiment sart_experiment.html: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+2025-12-04 07:19:25,795 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 07:19:25] "[33mGET /experiments/sart_experiment.html?mode=config HTTP/1.1[0m" 404 -
+2025-12-04 07:19:27,850 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 07:19:27] "[32mGET /subject/sart HTTP/1.1[0m" 302 -
+2025-12-04 07:19:27,857 - __main__ - ERROR - Error serving experiment sart_experiment.html: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+2025-12-04 07:19:27,858 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 07:19:27] "[33mGET /experiments/sart_experiment.html HTTP/1.1[0m" 404 -
+2025-12-04 07:19:30,117 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 07:19:30] "[32mGET /experimenter/antisaccade HTTP/1.1[0m" 302 -
+2025-12-04 07:19:30,121 - __main__ - ERROR - Error serving experiment antisaccade_experiment.html: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+2025-12-04 07:19:30,122 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 07:19:30] "[33mGET /experiments/antisaccade_experiment.html?mode=config HTTP/1.1[0m" 404 -

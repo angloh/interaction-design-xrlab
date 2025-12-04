@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experimental Setup Guidelines</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: #f5f7fa;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #1a202c;
+            margin-bottom: 0.5rem;
+            border-bottom: 3px solid #3182ce;
+            padding-bottom: 0.5rem;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            color: #2d3748;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid #3182ce;
+            padding-left: 1rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: #4a5568;
+        }
+
+        ul {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+            color: #4a5568;
+        }
+
+        .info-box {
+            background: #ebf8ff;
+            border-left: 4px solid #3182ce;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+
+        .section {
+            margin-bottom: 2rem;
+        }
+
+        strong {
+            color: #2d3748;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        th {
+            background: #edf2f7;
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        tr:hover {
+            background: #f7fafc;
+        }
+
+        .success-box {
+            background: #f0fff4;
+            border-left: 4px solid #38a169;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .container {
+                box-shadow: none;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>⚙️ Experimental Setup Guidelines</h1>
+
+        <div class="section">
+            <p>Follow these guidelines to ensure consistent and valid experimental conditions across all participants.</p>
+        </div>
+
+        <div class="section">
+            <h2>Display Settings</h2>
+            <ul>
+                <li>Use sRGB color space if available</li>
+                <li>Set brightness to comfortable level (avoid glare)</li>
+                <li>Ensure monitor is at 60Hz or higher refresh rate</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Viewing Distance</h2>
+            <ul>
+                <li>Position participant 50-70cm from screen</li>
+                <li>Eye level should align with center of screen</li>
+                <li>Ensure consistent positioning across participants</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Environment</h2>
+            <ul>
+                <li>Minimize distractions and ambient noise</li>
+                <li>Use consistent lighting conditions</li>
+                <li>Experiment will run in fullscreen mode</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Recommended Configuration Settings</h2>
+            <p>These recommended settings provide a good balance between data quality and participant comfort for the Stroop task:</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Parameter</th>
+                        <th>Recommended Value</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Number of Test Trials</strong></td>
+                        <td>18-36 trials</td>
+                        <td>Must be a multiple of 9 to balance conditions. 18 trials for quick screening, 36 for more robust data.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Practice Trials</strong></td>
+                        <td>Enabled</td>
+                        <td>Recommended to ensure participants understand the task before data collection.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Number of Practice Trials</strong></td>
+                        <td>3-6 trials</td>
+                        <td>3 trials minimum to familiarize participants with the task. 6 trials if participants are inexperienced.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Stimulus Delay</strong></td>
+                        <td>500ms</td>
+                        <td>Time between fixation and stimulus. Standard delay that prevents anticipation while maintaining engagement.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Feedback Duration</strong></td>
+                        <td>800ms</td>
+                        <td>Duration of feedback display. Sufficient for participants to register correct/incorrect responses.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="success-box">
+                <strong>Tip:</strong> For research purposes, we recommend using 27 or 36 test trials with 3 practice trials, 500ms stimulus delay, and 800ms feedback duration. These settings have been validated in cognitive psychology research and provide reliable Stroop effect measurements.
+            </div>
+        </div>
+
+        <div class="info-box">
+            <strong>Note:</strong> Maintaining consistent experimental conditions is crucial for data quality and reproducibility. These guidelines apply to all cognitive experiments run on this platform.
+        </div>
+    </div>
+</body>
+</html>

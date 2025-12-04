@@ -1,9 +1,15 @@
 
 <!doctype html><html><head><meta charset="utf-8"><title>Consent</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}"></head><body>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head><body>
 <h1>Consent</h1><p>Demo consent screen. In production, add IRB copy and checkbox.</p>
 <form method="post" action="/consent">
 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-<label>Subject ID (optional)<input name="subject_id" placeholder="e.g., S001"></label>
-<button type="submit">I Consent</button>
+<div style="padding-bottom: 16px;">
+    <span>Subject ID (optional)</span>
+    <input name="subject_id" placeholder="e.g. S001" style="width: 200px; justify-content: flex-start; margin-left: 20px;">
+</div>
+<div>
+    <button type="submit">I Consent</button>
+</div>
 </form></body></html>

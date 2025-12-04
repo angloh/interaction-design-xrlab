@@ -30,11 +30,6 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-from backend.experiments.base_experiment import BaseExperiment, ExperimentType
-from backend.experiments.digit_span import DigitSpanExperiment
-from backend.experiments.sart import SARTExperiment
-from backend.experiments.stroop import StroopExperiment
-
 # Configuration
 class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY') or os.urandom(32).hex()
@@ -45,17 +40,44 @@ class Config:
     SESSION_COOKIE_HTTPONLY = True
     SESSION_COOKIE_SAMESITE = 'Lax'
     WTF_CSRF_ENABLED = True
-    
+
     # Simple auth (for student testing - replace with real auth for production)
     DEFAULT_USERNAME = os.environ.get('ADMIN_USERNAME', 'admin')
     DEFAULT_PASSWORD = os.environ.get('ADMIN_PASSWORD', 'change_me_now')
 
-# Experiment registry
-EXPERIMENT_REGISTRY = {
-    'digit_span': DigitSpanExperiment,
-    'sart': SARTExperiment,
-    'stroop': StroopExperiment,
-}
+# Experiment registry - simple list format
+EXPERIMENT_REGISTRY = [
+    {
+        "experiment_type": "stroop",
+        "title": "Stroop Task",
+        "description": "Measure selective attention and processing speed with color-word interference."
+    },
+    {
+        "experiment_type": "digit_span",
+        "title": "Digit Span",
+        "description": "Assess working memory capacity through digit sequence recall."
+    },
+    {
+        "experiment_type": "sart",
+        "title": "SART",
+        "description": "Sustained Attention to Response Task - measure sustained attention and response inhibition."
+    },
+    {
+        "experiment_type": "antisaccade",
+        "title": "Antisaccade",
+        "description": "Measures inhibitory control by requiring participants to look away from a sudden stimulus."
+    },
+    {
+        "experiment_type": "corsi",
+        "title": "Corsi",
+        "description": "Visuospatial working memory task using block-tapping sequences."
+    },
+    {
+        "experiment_type": "butterfly_simon",
+        "title": "Butterfly Simon",
+        "description": "Selective attention task responding to butterfly color while ignoring location."
+    }
+]
 
 # Initialize Flask app
 app = Flask(__name__,
@@ -221,12 +243,8 @@ def home():
     """Home page with experiment list"""
     try:
         subject_id = request.args.get('subject_id', '').strip()
-        cards = [{
-            'experiment_type': key,
-            'title': key.replace('_', ' ').title(),
-            'description': f'Run or configure the {key} task.'
-        } for key in EXPERIMENT_REGISTRY.keys()]
-        
+        cards = EXPERIMENT_REGISTRY
+
         return render_template('index.html', cards=cards, subject_id=subject_id)
     except Exception as e:
         logger.error(f"Error in home route: {e}")
@@ -241,7 +259,7 @@ def consent():
             sid = request.form.get('subject_id', '').strip() or str(uuid.uuid4())
             
             # Validate subject ID format
-            if len(sid) > 100:
+            if len(sid) > 50:
                 flash('Subject ID too long', 'danger')
                 return redirect(url_for('consent'))
             
@@ -271,22 +289,30 @@ def consent():
 def experimenter(exp_type):
     """Experimenter configuration page"""
     try:
-        # Validate experiment type
-        if exp_type not in EXPERIMENT_REGISTRY:
+        # Validate experiment type exists in registry
+        exp_exists = any(exp['experiment_type'] == exp_type for exp in EXPERIMENT_REGISTRY)
+        if not exp_exists:
             logger.warning(f"Unknown experiment type requested: {exp_type}")
             return render_template('error.html', error='Unknown experiment type'), 404
 
-        # Special handling for Stroop - redirect to external HTML file
-        if exp_type == 'stroop':
-            return redirect('/experiments/stroop_experiment_v3.2.html?mode=config')
+        # Map experiment type to HTML file
+        exp_file_map = {
+            'stroop': 'stroop_experiment_v3.2.html',
+            'digit_span': 'digit_span_experiment.html',
+            'sart': 'sart_experiment.html',
+            'antisaccade': 'antisaccade_experiment.html',
+            'corsi': 'corsi_experiment.html',
+            'butterfly_simon': 'butterfly_simon_experiment.html'
+        }
 
-        # Get configuration schema
-        inst = EXPERIMENT_REGISTRY[exp_type]()
-        schema = inst.get_configuration_schema()
+        # Get the HTML file for this experiment
+        html_file = exp_file_map.get(exp_type)
+        if html_file:
+            return redirect(f'/experiments/{html_file}?mode=config')
 
-        return render_template('experimenter_config.html',
-                             exp_type=exp_type,
-                             schema=schema)
+        # Fallback for unmapped experiments
+        logger.warning(f"No HTML file mapped for experiment type: {exp_type}")
+        return render_template('error.html', error='Experiment not yet implemented'), 501
 
     except Exception as e:
         logger.error(f"Error in experimenter route for {exp_type}: {e}")
@@ -347,19 +373,29 @@ def export_data(session_id):
 def subject(exp_type):
     """Subject run page"""
     try:
-        # Validate experiment type
-        if exp_type not in EXPERIMENT_REGISTRY:
+        # Validate experiment type exists in registry
+        exp_exists = any(exp['experiment_type'] == exp_type for exp in EXPERIMENT_REGISTRY)
+        if not exp_exists:
             return render_template('error.html', error='Unknown experiment type'), 404
 
-        # Special handling for Stroop - redirect to external HTML file
-        if exp_type == 'stroop':
-            return redirect('/experiments/stroop_experiment_v3.2.html')
+        # Map experiment type to HTML file
+        exp_file_map = {
+            'stroop': 'stroop_experiment_v3.2.html',
+            'digit_span': 'digit_span_experiment.html',
+            'sart': 'sart_experiment.html',
+            'antisaccade': 'antisaccade_experiment.html',
+            'corsi': 'corsi_experiment.html',
+            'butterfly_simon': 'butterfly_simon_experiment.html'
+        }
 
-        subject_id = request.args.get('subject_id', '').strip()
+        # Get the HTML file for this experiment
+        html_file = exp_file_map.get(exp_type)
+        if html_file:
+            return redirect(f'/experiments/{html_file}')
 
-        return render_template('subject_run.html',
-                             exp_type=exp_type,
-                             subject_id=subject_id)
+        # Fallback for unmapped experiments
+        logger.warning(f"No HTML file mapped for experiment type: {exp_type}")
+        return render_template('error.html', error='Experiment not yet implemented'), 501
 
     except Exception as e:
         logger.error(f"Error in subject route for {exp_type}: {e}")
@@ -416,7 +452,7 @@ def api_start(exp_type):
         if not isinstance(config, dict):
             return jsonify({'error': 'Invalid configuration format'}), 400
         
-        if len(subject_id) > 100:
+        if len(subject_id) > 50:
             return jsonify({'error': 'Subject ID too long'}), 400
         
         # Handle keymap if it's a string
