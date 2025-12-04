@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Butterfly Simon — Experimenter Setup</title>
+<style>
+  :root{
+    --bg:#0e3a1f;
+    --card:#ffffff;
+    --ink:#0b1b0c;
+    --ink-sub:#3b5140;
+    --accent:#1e7a31;
+    --border:#d9e6d8;
+    --muted:#f4fbf0;
+    --focus:#2ea44f;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+    color:var(--ink);
+    background: radial-gradient(1200px 600px at 50% 20%, #c8f7a4 0%, #5aa151 35%, #1c6125 100%) fixed;
+    min-height:100vh; display:grid; place-items:center;
+  }
+  main{width:min(1100px,96vw); padding:20px}
+  .card{
+    background:var(--card);
+    border-radius:18px; padding:20px 20px 10px;
+    box-shadow:0 12px 32px rgba(0,0,0,.25);
+  }
+  h1{margin:.2rem 0 0.6rem}
+  .subtitle{color:var(--ink-sub); margin:0 0 1rem}
+  fieldset{border:1px solid var(--border); border-radius:14px; margin:14px 0; padding:12px}
+  legend{padding:0 8px; font-weight:700}
+  .grid{display:grid; grid-template-columns:repeat(2,1fr); gap:12px}
+  .row{display:flex; gap:10px; align-items:center}
+  label{font-weight:600; font-size:14px}
+  input[type="text"], input[type="number"], textarea, input[type="color"]{
+    width:100%; padding:10px 12px; border:1px solid var(--border); border-radius:10px; font:inherit;
+    background:#fff;
+  }
+  textarea{min-height:80px}
+  .hint{font-size:12px; color:var(--ink-sub)}
+  .actions{display:flex; gap:10px; flex-wrap:wrap; margin:12px 0}
+  button{
+    font:600 15px/1 ui-sans-serif, system-ui; padding:12px 16px; border-radius:12px; cursor:pointer;
+    border:2px solid var(--accent); background:var(--accent); color:#fff;
+  }
+  button.ghost{background:#fff; color:var(--accent)}
+  .kbd{border:1px solid #333;border-bottom-width:3px;border-radius:6px;padding:.1rem .35rem;background:#fff}
+  .keyrow{display:flex; gap:8px; align-items:center}
+  .footer{margin-top:8px; font-size:12px; color:var(--ink-sub)}
+  @media (max-width: 800px){ .grid{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+<main id="expApp">
+  <div class="card">
+    <h1>Experimenter Setup</h1>
+    <p class="subtitle">Configure parameters and author the instruction text. Saving writes to <code>localStorage["ButterflySimonConfig"]</code>.</p>
+
+    <form id="form">
+      <fieldset>
+        <legend>Parameters</legend>
+        <div class="grid">
+          <label>Participant ID
+            <input name="participantId" type="text" placeholder="e.g., S001" required/>
+          </label>
+          <label>Practice trials
+            <input name="practiceTrials" type="number" min="1" value="6"/>
+          </label>
+          <label>Main trials
+            <input name="mainTrials" type="number" min="1" value="24"/>
+          </label>
+          <label>ISI (ms)
+            <input name="isiMs" type="number" min="100" step="10" value="400"/>
+          </label>
+          <label>Min RT (ms)
+            <input name="minRtMs" type="number" min="0" step="10" value="120"/>
+          </label>
+          <label class="keyrow">Enable mouse clicks
+            <input name="enableClicks" type="checkbox" checked style="margin-left:8px"/>
+          </label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Instruction Authoring</legend>
+        <div class="grid">
+          <label>Title
+            <input name="title" type="text" value="Butterfly Simon Task"/>
+          </label>
+          <label>Continue button text
+            <input name="continueText" type="text" value="Continue"/>
+          </label>
+          <label>PURPLE rule (left)
+            <input name="purpleRule" type="text" value="When you see a PURPLE butterfly, select the LEFT butterfly."/>
+          </label>
+          <label>YELLOW rule (right)
+            <input name="yellowRule" type="text" value="When you see a YELLOW butterfly, select the RIGHT butterfly."/>
+          </label>
+          <label>Location rule
+            <input name="locationRule" type="text" value="Ignore where the colored butterfly is located. Color decides the side."/>
+          </label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Colors & Media</legend>
+        <div class="grid">
+          <label>Purple color
+            <input name="purpleHex" type="color" value="#6a1b9a"/>
+          </label>
+          <label>Yellow color
+            <input name="yellowHex" type="color" value="#f9a825"/>
+          </label>
+          <label>Show demo illustration on instruction screen
+            <input name="showDemo" type="checkbox"/>
+          </label>
+          <label>Show disclaimer text
+            <input name="showDisclaimer" type="checkbox"/>
+          </label>
+          <label>Disclaimer text
+            <textarea name="disclaimer">This is a reaction-time task. Please read the instructions carefully and respond quickly and accurately.</textarea>
+          </label>
+          <label>Optional logo/image (shown small on instruction screen)
+            <input name="demoFile" type="file" accept="image/*"/>
+            <div class="hint">Stored as a data URL in localStorage for offline use.</div>
+          </label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Keys</legend>
+        <div class="grid">
+          <label>Left key
+            <input name="leftKey" type="text" value="f"/>
+          </label>
+          <label>Right key
+            <input name="rightKey" type="text" value="j"/>
+          </label>
+        </div>
+        <p class="hint">Participants can press the keys or (optionally) click butterflies.</p>
+      </fieldset>
+
+      <fieldset>
+        <legend>Admin Access</legend>
+        <div class="grid">
+          <label>Admin PIN (optional)
+            <input name="adminPin" type="password" placeholder="Set or change experimenter PIN"/>
+          </label>
+          <p class="hint">This PIN is required to access the experimenter view via <code>?mode=config</code>.</p>
+        </div>
+      </fieldset>
+
+      <div class="actions">
+        <button type="button" id="save">Save Config</button>
+        <button type="button" id="open" class="ghost">Open subject view</button>
+        <button type="button" id="load" class="ghost">Load Existing</button>
+        <button type="button" id="clear" class="ghost">Clear Storage</button>
+      </div>
+    </form>
+
+    <p class="footer">Safe storage wrapper guards JSON parse/stringify and quota errors.</p>
+  </div>
+</main>
+
+<script>
+const STORE_KEY = "ButterflySimonConfig";
+const PIN_KEY = "ButterflySimonAdminPin";
+
+function hasConfigMode(){
+  try{
+    return new URLSearchParams(window.location.search).get("mode") === "config";
+  }catch(e){
+    return false;
+  }
+}
+
+// Gate experimenter UI so it only appears with ?mode=config and a valid PIN (if set).
+(function secureExperimenterGate(){
+  const app = document.getElementById("expApp") || document.querySelector("main");
+  // No ?mode=config: hide app and show a small message only.
+  if(!hasConfigMode()){
+    if(app) app.style.display = "none";
+    const msg = document.createElement("div");
+    msg.textContent = "Experimenter setup is locked. To run the task, open subject.html.";
+    msg.style.margin = "40px auto";
+    msg.style.maxWidth = "640px";
+    msg.style.padding = "16px 20px";
+    msg.style.borderRadius = "12px";
+    msg.style.background = "#ffffffcc";
+    msg.style.color = "#0b1b0c";
+    msg.style.fontFamily = "ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif";
+    document.body.appendChild(msg);
+    return;
+  }
+  // In config mode: if no PIN exists yet, allow direct access but show a bootstrap hint.
+  let storedPin = "";
+  try{
+    storedPin = localStorage.getItem(PIN_KEY) || "";
+  }catch(e){ storedPin = ""; }
+  if(!storedPin){
+    if(app){
+      const note = document.createElement("div");
+      note.textContent = "No Admin PIN is set yet on this device. After entering your settings, create a PIN in the Admin PIN field and click Save.";
+      note.style.marginBottom = "12px";
+      note.style.padding = "10px 14px";
+      note.style.borderRadius = "12px";
+      note.style.background = "#fffbe6";
+      note.style.border = "1px solid #ffe58f";
+      note.style.color = "#614700";
+      note.style.fontSize = "13px";
+      const target = app.firstElementChild || app;
+      target.insertBefore(note, target.firstChild);
+    }
+    return;
+  }
+  // PIN exists: show overlay gate.
+  if(app) app.style.display = "none";
+  const overlay = document.createElement("div");
+  overlay.id = "expPinGate";
+  Object.assign(overlay.style, {
+    position:"fixed",
+    inset:"0",
+    background:"rgba(0,0,0,.6)",
+    display:"flex",
+    alignItems:"center",
+    justifyContent:"center",
+    zIndex:"9999"
+  });
+  const panel = document.createElement("div");
+  panel.style.background = "#123c1d";
+  panel.style.padding = "20px 22px";
+  panel.style.borderRadius = "16px";
+  panel.style.maxWidth = "420px";
+  panel.style.width = "92vw";
+  panel.style.color = "#fff";
+  panel.style.fontFamily = "ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif";
+  const h2 = document.createElement("h2");
+  h2.textContent = "Experimenter Access";
+  h2.style.marginTop = "0";
+  h2.style.marginBottom = "8px";
+  const p = document.createElement("p");
+  p.textContent = "Enter the Admin PIN to edit experiment settings.";
+  p.style.fontSize = "13px";
+  p.style.opacity = "0.9";
+  p.style.marginTop = "0";
+  p.style.marginBottom = "12px";
+  const label = document.createElement("label");
+  label.textContent = "Admin PIN";
+  label.style.display = "block";
+  label.style.fontSize = "14px";
+  label.style.marginBottom = "10px";
+  const input = document.createElement("input");
+  input.type = "password";
+  input.style.marginTop = "6px";
+  input.style.width = "100%";
+  input.style.padding = "8px 10px";
+  input.style.borderRadius = "8px";
+  input.style.border = "1px solid #d9e6d8";
+  label.appendChild(input);
+  const btnRow = document.createElement("div");
+  btnRow.style.display = "flex";
+  btnRow.style.gap = "8px";
+  btnRow.style.flexWrap = "wrap";
+  btnRow.style.marginTop = "4px";
+  const btn = document.createElement("button");
+  btn.textContent = "Unlock";
+  btn.style.flex = "1";
+  btn.style.minWidth = "120px";
+  btn.style.padding = "9px 12px";
+  btn.style.borderRadius = "10px";
+  btn.style.border = "2px solid #1e7a31";
+  btn.style.background = "#1e7a31";
+  btn.style.color = "#fff";
+  btn.style.fontWeight = "600";
+  btn.style.cursor = "pointer";
+  const msg = document.createElement("p");
+  msg.style.fontSize = "12px";
+  msg.style.marginTop = "8px";
+  msg.style.minHeight = "1em";
+  btnRow.appendChild(btn);
+  panel.append(h2,p,label,btnRow,msg);
+  overlay.appendChild(panel);
+  document.body.appendChild(overlay);
+  btn.onclick = function(){
+    const val = input.value.trim();
+    if(!val){
+      msg.textContent = "Enter your Admin PIN.";
+      return;
+    }
+    if(val === storedPin){
+      if(app) app.style.display = "";
+      overlay.remove();
+    }else{
+      msg.textContent = "Incorrect PIN.";
+    }
+  };
+})();
+
+
+const SafeStore = {
+  get(){
+    try{
+      const raw = localStorage.getItem(STORE_KEY);
+      if(!raw) return null;
+      return JSON.parse(raw);
+    }catch(e){
+      console.warn("Config parse failed", e);
+      return null;
+    }
+  },
+  set(obj){
+    try{
+      localStorage.setItem(STORE_KEY, JSON.stringify(obj));
+      return true;
+    }catch(e){
+      alert("Saving failed (possibly storage quota). Try clearing storage.");
+      console.error(e);
+      return false;
+    }
+  },
+  clear(){ try{ localStorage.removeItem(STORE_KEY);}catch(_){} }
+};
+
+const form = document.getElementById("form");
+document.getElementById("save").onclick = async () => {
+  const fd = new FormData(form);
+  const obj = Object.fromEntries(fd.entries());
+  // Coerce types
+  obj.practiceTrials = +obj.practiceTrials || 6;
+  obj.mainTrials = +obj.mainTrials || 24;
+  obj.isiMs = +obj.isiMs || 400;
+  obj.minRtMs = +obj.minRtMs || 120;
+  obj.adminPin = (obj.adminPin || "").trim();
+  obj.enableClicks = fd.get("enableClicks") === "on";
+  obj.showDemo = fd.get("showDemo") === "on";
+  obj.showDisclaimer = fd.get("showDisclaimer") === "on";
+  obj.leftKey = (obj.leftKey||"f").toLowerCase();
+  obj.rightKey = (obj.rightKey||"j").toLowerCase();
+  // Load file if picked
+  const file = fd.get("demoFile");
+  if(file && file.size){
+    const dataUrl = await new Promise(r=>{ const rd = new FileReader(); rd.onload=()=>r(rd.result); rd.readAsDataURL(file); });
+    obj.demoDataUrl = dataUrl;
+  } else {
+    const prev = SafeStore.get();
+    if(prev && prev.demoDataUrl) obj.demoDataUrl = prev.demoDataUrl;
+  }
+  if(obj.adminPin){
+    try{ localStorage.setItem(PIN_KEY, obj.adminPin); }catch(e){}
+  }
+  if(SafeStore.set(obj)){
+    alert("Config saved to localStorage[\"" + STORE_KEY + "\"]");
+  }
+};
+
+document.getElementById("open").onclick = () => {
+  const cfg = SafeStore.get();
+  if(!cfg){ alert("Save config first."); return; }
+  const pid = encodeURIComponent(cfg.participantId || "anon");
+  window.open("subject.html?participant=" + pid, "_blank");
+};
+
+document.getElementById("load").onclick = () => {
+  const cfg = SafeStore.get();
+  if(!cfg){ alert("No config found."); return; }
+  for(const [k,v] of Object.entries(cfg)){
+    const el = form.elements[k];
+    if(!el) continue;
+    if(el.type === "checkbox"){ el.checked = !!v; }
+    else if(el.tagName === "TEXTAREA" || el.tagName === "INPUT"){ el.value = v; }
+  }
+  alert("Loaded existing config into the form.");
+};
+
+document.getElementById("clear").onclick = () => {
+  SafeStore.clear();
+  alert("Cleared localStorage config.");
+};
+</script>
+</body>
+</html>

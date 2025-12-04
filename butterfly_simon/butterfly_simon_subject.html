@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Butterfly Simon — Subject</title>
+<style>
+  :root{
+    --ink:#0c1a0c;
+    --muted:#eef9e8;
+    --card:rgba(255,255,255,.96);
+    --accent:#1e7a31;
+    --border:#d7efcf;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+    color:var(--ink);
+    background: radial-gradient(1200px 600px at 50% 20%, #c8f7a4 0%, #5aa151 35%, #1c6125 100%) fixed;
+    display:flex; flex-direction:column;
+  }
+  header.sticky{
+    position:sticky; top:0; z-index:10; backdrop-filter:saturate(160%) blur(2px);
+    background:rgba(0,0,0,.35); color:#fff; padding:8px 12px;
+    display:flex; align-items:center; justify-content:space-between; gap:8px;
+  }
+  .title{font-weight:800}
+  .status{opacity:.9}
+  .wrap{width:min(1100px,96vw); margin:0 auto; padding:16px}
+  .card{background:var(--card); border-radius:18px; padding:20px; box-shadow:0 12px 32px rgba(0,0,0,.25)}
+  .rulegrid{display:grid; grid-template-columns:1fr; gap:12px; margin:12px 0}
+  .rule{display:flex; gap:10px; align-items:center; background:var(--muted); border:1px solid var(--border); padding:10px; border-radius:12px}
+  .swatch{width:28px; height:28px; border-radius:6px; border:2px solid #222}
+  .actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px}
+  button{font:600 15px/1 ui-sans-serif, system-ui; padding:12px 16px; border-radius:12px; border:2px solid var(--accent); background:var(--accent); color:#fff; cursor:pointer}
+  button.ghost{background:#fff; color:var(--accent)}
+  .kbd{border:1px solid #333;border-bottom-width:3px;border-radius:6px;padding:.1rem .35rem;background:#fff}
+  /* Task area */
+  .arena{position:relative; height:min(54vh,540px); background:rgba(255,255,255,.2); border:2px dashed rgba(255,255,255,.6); border-radius:18px;
+         display:flex; align-items:center; justify-content:space-evenly; padding:6px; margin-top:10px}
+  .butterfly{filter: drop-shadow(0 4px 10px rgba(0,0,0,.35)); cursor:pointer}
+  .butterfly.left{transform:scaleX(1)}
+  .butterfly.right{transform:scaleX(-1)}
+  .hud{display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-top:10px}
+  .progress{flex:1; height:10px; background:#e4f1e1; border-radius:999px; overflow:hidden}
+  .bar{height:100%; width:0%; background:#1e7a31}
+  .stack{display:none}
+  .stack.active{display:block}
+  .hint{font-size:12px; opacity:.8}
+  .footer{margin-top:10px; font-size:12px; color:#fff; text-align:center}
+  @media (max-width: 720px){ .arena{height:46vh} }
+</style>
+</head>
+<body>
+<header class="sticky">
+  <div class="title" id="hdrTitle">Butterfly Simon</div>
+  <div class="status" id="hdrStatus">ID: <span id="pid">anon</span> • <span id="phase">Instructions</span></div>
+  <div class="actions">
+    <button id="btnFull" class="ghost" title="Toggle Fullscreen">Fullscreen</button>
+  </div>
+</header>
+
+<main class="wrap">
+  <!-- Screen A: Instructions -->
+  <section id="screenA" class="card stack active">
+    <h2 id="insTitle">Butterfly Simon Task</h2>
+    <p>ID: <strong id="insPid">anon</strong></p>
+    <div class="rulegrid">
+      <div class="rule">
+        <div id="swPurple" class="swatch" style="background:#6a1b9a"></div>
+        <div id="txtPurple">When you see a <b style="color:#6a1b9a">PURPLE</b> butterfly, select the <b>LEFT</b> butterfly. Press <span class="kbd">F</span>.</div>
+      </div>
+      <div class="rule">
+        <div id="swYellow" class="swatch" style="background:#f9a825"></div>
+        <div id="txtYellow">When you see a <b style="color:#f9a825">YELLOW</b> butterfly, select the <b>RIGHT</b> butterfly. Press <span class="kbd">J</span>.</div>
+      </div>
+      <div class="rule">
+        <div>ℹ️</div>
+        <div id="txtLocation">Ignore where the colored butterfly appears — <b>color decides the side</b>.</div>
+      </div>
+    </div>
+
+    <figure id="demoFig" style="display:none; text-align:center">
+      <svg viewBox="0 0 480 170" width="100%" aria-hidden="true">
+        <defs>
+          <linearGradient id="pG"><stop offset="0%" stop-color="#b388ff"/><stop offset="100%" stop-color="#6a1b9a"/></linearGradient>
+          <linearGradient id="yG"><stop offset="0%" stop-color="#fff176"/><stop offset="100%" stop-color="#f9a825"/></linearGradient>
+        </defs>
+        <g transform="translate(60,10)"><rect x="-50" y="-5" width="220" height="160" rx="12" fill="rgba(255,255,255,.7)"/>
+          <text x="60" y="150" text-anchor="middle" font-size="14">Left</text>
+          <g transform="translate(60,20) scale(.9)"><g class="w"><path d="M0,20 C-30,0 -65,-5 -70,25 C-75,55 -40,55 -10,45 Z" fill="url(#pG)"/><path d="M-10,45 C-45,45 -65,70 -50,80 C-35,90 -15,75 -5,60 Z" fill="url(#pG)"/><path d="M0,20 C30,0 65,-5 70,25 C75,55 40,55 10,45 Z" fill="url(#pG)"/><path d="M10,45 C45,45 65,70 50,80 C35,90 15,75 5,60 Z" fill="url(#pG)"/></g></g>
+        </g>
+        <g transform="translate(360,10)"><rect x="-50" y="-5" width="220" height="160" rx="12" fill="rgba(255,255,255,.7)"/>
+          <text x="60" y="150" text-anchor="middle" font-size="14">Right</text>
+          <g transform="translate(60,20) scale(.9)"><g class="w"><path d="M0,20 C-30,0 -65,-5 -70,25 C-75,55 -40,55 -10,45 Z" fill="url(#yG)"/><path d="M-10,45 C-45,45 -65,70 -50,80 C-35,90 -15,75 -5,60 Z" fill="url(#yG)"/><path d="M0,20 C30,0 65,-5 70,25 C75,55 40,55 10,45 Z" fill="url(#yG)"/><path d="M10,45 C45,45 65,70 50,80 C35,90 15,75 5,60 Z" fill="url(#yG)"/></g></g>
+        </g>
+      </svg>
+      <figcaption class="hint">Demo (optional). Actual task may place the colored butterfly on either side; color still decides.</figcaption>
+    </figure>
+
+    <div id="disclaimerWrap" class="hint" style="display:none; margin-top:8px"></div>
+
+    <div class="actions">
+      <button id="btnContinue">Continue</button>
+    </div>
+  </section>
+
+  <!-- Screen B: Task -->
+  <section id="screenB" class="card stack">
+    <h2 id="taskTitle">Task</h2>
+    <div class="actions">
+      <button id="btnPractice">Run practice</button>
+      <button id="btnMain" class="ghost">Run main</button>
+      <button id="btnCsv" class="ghost">Download CSV</button>
+    </div>
+    <div id="arena" class="arena" aria-label="stimulus area"></div>
+    <div class="hud">
+      <div id="hudText">Ready</div>
+      <div class="progress"><div id="bar" class="bar"></div></div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">Keyboard: Left=<span id="kLeft">F</span> • Right=<span id="kRight">J</span></footer>
+
+<template id="tmpl-butterfly">
+  <svg class="butterfly" viewBox="0 0 200 150" width="260" height="195" aria-hidden="true">
+    <defs>
+      <linearGradient id="gradNeutral" x1="0" x2="1" y1="0" y2="1">
+        <stop offset="0%" stop-color="#e9ecef"/><stop offset="100%" stop-color="#98a1a8"/>
+      </linearGradient>
+    </defs>
+    <g stroke="#222" stroke-width="3" fill="none">
+      <line x1="100" y1="40" x2="100" y2="110"/><circle cx="100" cy="35" r="8" fill="#222"/>
+      <path d="M100,40 C85,15 70,15 60,28"/><path d="M100,40 C115,15 130,15 140,28"/>
+    </g>
+    <g class="wings" fill="url(#gradNeutral)">
+      <path d="M100,60 C70,40 35,35 30,65 C25,95 60,95 90,85 Z"/>
+      <path d="M90,85 C55,85 35,110 50,120 C65,130 85,115 95,100 Z"/>
+      <path d="M100,60 C130,40 165,35 170,65 C175,95 140,95 110,85 Z"/>
+      <path d="M110,85 C145,85 165,110 150,120 C135,130 115,115 105,100 Z"/>
+    </g>
+  </svg>
+</template>
+
+<script>
+const PIN_KEY = "ButterflySimonAdminPin";
+
+// If subject.html is opened with ?mode=config, gate access with Admin PIN
+// and then redirect to experimenter.html?mode=config.
+(function subjectConfigGate(){
+  let params;
+  try{
+    params = new URLSearchParams(window.location.search);
+  }catch(e){
+    return;
+  }
+  if(params.get("mode") !== "config") return;
+
+  let storedPin = "";
+  try{
+    storedPin = localStorage.getItem(PIN_KEY) || "";
+  }catch(e){ storedPin = ""; }
+
+  const overlay = document.createElement("div");
+  overlay.id = "subjectConfigGate";
+  Object.assign(overlay.style, {
+    position:"fixed",
+    inset:"0",
+    background:"rgba(0,0,0,.6)",
+    display:"flex",
+    alignItems:"center",
+    justifyContent:"center",
+    zIndex:"9999"
+  });
+  const panel = document.createElement("div");
+  panel.style.background = "#123c1d";
+  panel.style.padding = "20px 22px";
+  panel.style.borderRadius = "16px";
+  panel.style.maxWidth = "420px";
+  panel.style.width = "92vw";
+  panel.style.color = "#fff";
+  panel.style.fontFamily = "ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif";
+
+  const h2 = document.createElement("h2");
+  h2.textContent = "Experimenter Mode";
+  h2.style.marginTop = "0";
+  h2.style.marginBottom = "8px";
+
+  const info = document.createElement("p");
+  info.style.fontSize = "13px";
+  info.style.opacity = "0.9";
+  info.style.marginTop = "0";
+  info.style.marginBottom = "12px";
+  if(storedPin){
+    info.textContent = "Enter the Admin PIN to open the experimenter setup screen.";
+  }else{
+    info.textContent = "No Admin PIN is set yet on this device. You can open the experimenter setup to create one.";
+  }
+
+  const label = document.createElement("label");
+  label.textContent = "Admin PIN";
+  label.style.display = "block";
+  label.style.fontSize = "14px";
+  label.style.marginBottom = "10px";
+  const input = document.createElement("input");
+  input.type = "password";
+  input.style.marginTop = "6px";
+  input.style.width = "100%";
+  input.style.padding = "8px 10px";
+  input.style.borderRadius = "8px";
+  input.style.border = "1px solid #d9e6d8";
+  label.appendChild(input);
+
+  const btnRow = document.createElement("div");
+  btnRow.style.display = "flex";
+  btnRow.style.gap = "8px";
+  btnRow.style.flexWrap = "wrap";
+  btnRow.style.marginTop = "4px";
+
+  const openBtn = document.createElement("button");
+  openBtn.textContent = "Open Experimenter";
+  openBtn.style.flex = "1";
+  openBtn.style.minWidth = "140px";
+  openBtn.style.padding = "9px 12px";
+  openBtn.style.borderRadius = "10px";
+  openBtn.style.border = "2px solid #1e7a31";
+  openBtn.style.background = "#1e7a31";
+  openBtn.style.color = "#fff";
+  openBtn.style.fontWeight = "600";
+  openBtn.style.cursor = "pointer";
+
+  const cancelBtn = document.createElement("button");
+  cancelBtn.textContent = "Cancel";
+  cancelBtn.style.flex = "1";
+  cancelBtn.style.minWidth = "100px";
+  cancelBtn.style.padding = "9px 12px";
+  cancelBtn.style.borderRadius = "10px";
+  cancelBtn.style.border = "2px solid #fff";
+  cancelBtn.style.background = "#fff";
+  cancelBtn.style.color = "#123c1d";
+  cancelBtn.style.fontWeight = "600";
+  cancelBtn.style.cursor = "pointer";
+
+  const msg = document.createElement("p");
+  msg.style.fontSize = "12px";
+  msg.style.marginTop = "8px";
+  msg.style.minHeight = "1em";
+
+  btnRow.append(openBtn, cancelBtn);
+  panel.append(h2, info, label, btnRow, msg);
+  overlay.appendChild(panel);
+  document.body.appendChild(overlay);
+
+  cancelBtn.onclick = () => {
+    overlay.remove();
+  };
+
+  openBtn.onclick = () => {
+    const participant = params.get("participant") || "";
+    const target = "experimenter.html?mode=config" + (participant ? ("&participant=" + encodeURIComponent(participant)) : "");
+    if(storedPin){
+      const val = input.value.trim();
+      if(!val){
+        msg.textContent = "Enter your Admin PIN.";
+        return;
+      }
+      if(val !== storedPin){
+        msg.textContent = "Incorrect PIN.";
+        return;
+      }
+    }
+    window.location.href = target;
+  };
+})();
+
+
+const STORE_KEY = "ButterflySimonConfig";
+function getConfig(){
+  const dflt = {
+    participantId: new URLSearchParams(location.search).get("participant") || "anon",
+    practiceTrials: 6, mainTrials: 24, isiMs: 400, minRtMs: 120,
+    purpleHex:"#6a1b9a", yellowHex:"#f9a825",
+    title:"Butterfly Simon Task",
+    purpleRule:"When you see a PURPLE butterfly, select the LEFT butterfly.",
+    yellowRule:"When you see a YELLOW butterfly, select the RIGHT butterfly.",
+    locationRule:"Ignore where the colored butterfly is located. Color decides the side.",
+    continueText:"Continue",
+    leftKey:"f", rightKey:"j",
+    enableClicks:true,
+    showDemo:false, showDisclaimer:false, disclaimer:""
+  };
+  try{
+    const raw = localStorage.getItem(STORE_KEY);
+    if(!raw) return dflt;
+    const cfg = Object.assign(dflt, JSON.parse(raw)||{});
+    return cfg;
+  }catch(e){ return dflt; }
+}
+const cfg = getConfig();
+
+// Header context
+document.getElementById("pid").textContent = cfg.participantId;
+document.getElementById("insPid").textContent = cfg.participantId;
+document.getElementById("hdrTitle").textContent = cfg.title;
+document.getElementById("insTitle").textContent = cfg.title;
+document.getElementById("taskTitle").textContent = cfg.title;
+document.getElementById("kLeft").textContent = cfg.leftKey.toUpperCase();
+document.getElementById("kRight").textContent = cfg.rightKey.toUpperCase();
+
+// Instruction text & colors
+function colorize(el, text, hex){
+  el.innerHTML = text.replace(/PURPLE|YELLOW/gi, m => `<b style="color:${hex}">${m.toUpperCase()}</b>`);
+}
+colorize(document.getElementById("txtPurple"), cfg.purpleRule, cfg.purpleHex);
+colorize(document.getElementById("txtYellow"), cfg.yellowRule, cfg.yellowHex);
+document.getElementById("txtLocation").textContent = cfg.locationRule;
+document.getElementById("swPurple").style.background = cfg.purpleHex;
+document.getElementById("swYellow").style.background = cfg.yellowHex;
+document.getElementById("btnContinue").textContent = cfg.continueText;
+
+// Optional media & disclaimer
+if(cfg.showDemo){ document.getElementById("demoFig").style.display = ""; }
+if(cfg.showDisclaimer){
+  const d = document.getElementById("disclaimerWrap");
+  d.style.display = ""; d.textContent = cfg.disclaimer || "";
+}
+if(cfg.demoDataUrl && cfg.showDemo){
+  const img = new Image(); img.src = cfg.demoDataUrl; img.style.maxWidth="180px"; img.style.margin="8px";
+  document.getElementById("screenA").appendChild(img);
+}
+
+// Screen switching
+const screenA = document.getElementById("screenA");
+const screenB = document.getElementById("screenB");
+function showB(){ screenA.classList.remove("active"); screenA.style.display="none"; screenB.classList.add("active"); screenB.style.display="block"; document.getElementById("phase").textContent="Task"; }
+document.getElementById("btnContinue").onclick = showB;
+
+// Fullscreen
+document.getElementById("btnFull").onclick = async () => {
+  if(!document.fullscreenElement){ await document.documentElement.requestFullscreen().catch(()=>{}); }
+  else{ await document.exitFullscreen().catch(()=>{}); }
+};
+
+// Task logic
+const state = { phase:"idle", idx:0, total:0, data:[] };
+
+function mkButterfly(colorHex, side){
+  const s = document.getElementById("tmpl-butterfly").content.firstElementChild.cloneNode(true);
+  s.classList.add(side);
+  if(colorHex){
+    s.querySelector(".wings").setAttribute("fill", colorHex);
+  }
+  return s;
+}
+function randSide(){ return Math.random() < 0.5 ? "left" : "right"; }
+function setProgress(i, total){
+  const pct = Math.max(0, Math.min(100, Math.round((i/total)*100)));
+  document.getElementById("bar").style.width = pct + "%";
+}
+
+function runBlock(kind){ // "practice" | "main"
+  state.phase = kind; state.idx = 0;
+  state.total = (kind === "practice" ? cfg.practiceTrials : cfg.mainTrials);
+  state.data = state.data; // keep accumulating
+  document.getElementById("hudText").textContent = kind.charAt(0).toUpperCase()+kind.slice(1) + " — Trial 1/"+state.total;
+  setProgress(0, state.total);
+  nextTrial();
+}
+function nextTrial(){
+  const total = state.total;
+  if(state.idx >= total){
+    document.getElementById("hudText").textContent = "Block finished";
+    return;
+  }
+  const arena = document.getElementById("arena");
+  arena.innerHTML = "";
+  const targetColor = Math.random() < 0.5 ? cfg.purpleHex : cfg.yellowHex;
+  const colorName = (targetColor === cfg.purpleHex) ? "purple" : "yellow";
+  const targetSide = randSide();
+  const otherSide = (targetSide === "left") ? "right" : "left";
+  const correct = (colorName === "purple") ? "left" : "right";
+  // place
+  const colored = mkButterfly(targetColor, targetSide);
+  const neutral = mkButterfly(null, otherSide);
+  arena.appendChild(targetSide === "left" ? colored : neutral);
+  arena.appendChild(targetSide === "left" ? neutral : colored);
+
+  const trial = {participant: cfg.participantId, phase: state.phase, trial: state.idx+1,
+    targetColor: colorName, targetSideOnScreen: targetSide, correctResponse: correct,
+    responseSide:null, responseKey:null, rt_ms:null, correct:null, ts: performance.now() };
+
+  function choose(side, via){
+    if(trial.rt_ms !== null) return;
+    trial.rt_ms = Math.round(performance.now() - trial.ts);
+    trial.responseSide = side; trial.responseKey = via;
+    trial.correct = (side === correct) && (trial.rt_ms >= (cfg.minRtMs||0));
+    state.data.push(trial);
+    window.removeEventListener("keydown", onKey);
+    setProgress(state.idx+1, total);
+    state.idx++;
+    document.getElementById("hudText").textContent = `${state.phase[0].toUpperCase()+state.phase.slice(1)} — Trial ${Math.min(state.idx+1,total)}/${total}`;
+    setTimeout(nextTrial, cfg.isiMs || 300);
+  }
+  function onKey(e){
+    const k = e.key.toLowerCase();
+    if(k === cfg.leftKey.toLowerCase()) choose("left", "key:"+k.toUpperCase());
+    if(k === cfg.rightKey.toLowerCase()) choose("right", "key:"+k.toUpperCase());
+  }
+  window.addEventListener("keydown", onKey);
+  if(cfg.enableClicks){
+    arena.onclick = (e)=>{
+      const svg = e.target.closest("svg.butterfly");
+      if(!svg) return;
+      const side = svg.classList.contains("right") ? "right" : "left";
+      choose(side,"mouse");
+    };
+  } else {
+    arena.onclick = null;
+  }
+}
+
+document.getElementById("btnPractice").onclick = () => runBlock("practice");
+document.getElementById("btnMain").onclick = () => runBlock("main");
+
+document.getElementById("btnCsv").onclick = () => {
+  const rows = state.data;
+  const header = ["participant","phase","trial","targetColor","targetSideOnScreen","correctResponse","responseSide","responseKey","rt_ms","correct"];
+  const body = rows.map(r => header.map(h => r[h]).join(","));
+  const csv = [header.join(","), ...body].join("\n");
+  const blob = new Blob([csv], {type:"text/csv"});
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "butterfly_simon_log.csv";
+  a.click();
+  URL.revokeObjectURL(a.href);
+};
+
+// Progressively reveal only A screen initially
+screenB.style.display = "none";
+</script>
+</body>
+</html>
