@@ -7,34 +7,66 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <!-- Experimenter toggle + overlay (shared HTML file) -->
-  <button id="expToggle" class="exp-toggle">Experimenter view</button>
+  <!-- Experimenter: toggle button (only visible in ?mode=config) -->
+  <button id="expToggle" class="exp-toggle" type="button">
+    Experimenter view
+  </button>
 
-  <aside id="expPanel" class="exp-panel" aria-label="Experimenter configuration">
+  <!-- Experimenter: overlay panel -->
+  <aside id="expPanel" class="exp-panel" aria-label="Experimenter view">
     <header class="exp-header-main">
-      <button id="expClose" class="exp-close">Close</button>
-      <h2>Corsi Task — Experimenter View</h2>
+      <div>
+        <h2>Corsi Block Task — Experimenter View</h2>
+        <p class="exp-meta">
+          Participant ID: <span id="expParticipantId">—</span>
+        </p>
+      </div>
+      <button id="expClose" class="exp-close" type="button">Close</button>
     </header>
+
+    <section class="exp-summary">
+      <div class="box">
+        <p class="label">Practice completed</p>
+        <p id="expPracticeDone" class="value">0 / 1</p>
+      </div>
+      <div class="box">
+        <p class="label">Experiment completed</p>
+        <p id="expExperimentDone" class="value">0 / 10</p>
+      </div>
+      <div class="box">
+        <p class="label">Correct trials</p>
+        <p id="expCorrect" class="value">0 / 10</p>
+      </div>
+    </section>
 
     <section class="exp-section">
       <p class="exp-intro">
-        This screen is for configuring or monitoring the Corsi task.
-        You can customize this content to match your lab’s needs.
+        This screen shows progress and trial-by-trial responses for the Corsi task.
       </p>
-
-      <ul class="exp-list">
-        <li><strong>Practice trials:</strong> 1</li>
-        <li><strong>Experiment trials:</strong> 10</li>
-        <li><strong>Sequence length:</strong> 4 blocks</li>
-      </ul>
-
       <p class="exp-note">
-        To open this view, append <code>?mode=config</code> to the URL and enter the
-        experimenter password. Subjects should not know this URL or password.
+        To reach this view, open the page with
+        <code>?mode=config</code> and enter the experimenter password.
+        Subjects should not know this URL or password.
       </p>
+    </section>
+
+    <section class="exp-table-wrap" aria-label="Trial log">
+      <table class="exp-table">
+        <thead>
+          <tr>
+            <th>Phase</th>
+            <th>Trial</th>
+            <th>Sequence</th>
+            <th>Response</th>
+            <th>Correct?</th>
+          </tr>
+        </thead>
+        <tbody id="expLogBody"></tbody>
+      </table>
     </section>
   </aside>
 
+  <!-- Participant header -->
   <header class="site-header">
     <div class="site-title">
       <h1>Corsi Block Memory Task</h1>
@@ -43,8 +75,12 @@
   </header>
 
   <main class="page-layout">
-    <!-- SCREEN 1: Instructions only -->
-    <section id="instructions-screen" class="panel instructions-panel" aria-label="Visual instructions">
+    <!-- SCREEN 1: Instructions -->
+    <section
+      id="instructions-screen"
+      class="panel instructions-panel"
+      aria-label="Visual instructions"
+    >
       <h2 class="section-title">Before you begin</h2>
 
       <div class="step-strip" aria-label="Overall flow">
@@ -131,8 +167,9 @@
       </div>
 
       <div class="cta-block">
-        <button id="start-practice-btn" class="btn primary">
-          Start practice<span class="hint"> or press <kbd>space</kbd></span>
+        <button id="start-practice-btn" class="btn primary" type="button">
+          Start practice
+          <span class="hint">or press <kbd>space</kbd></span>
         </button>
         <p class="cta-caption">
           You can only move on to the experiment after the practice trial.
@@ -140,8 +177,13 @@
       </div>
     </section>
 
-    <!-- SCREEN 2: Task only (practice + experiment + thank you) -->
-    <section id="task-screen" class="panel task-panel" aria-label="Block tapping area" hidden>
+    <!-- SCREEN 2: Task (practice + experiment + thank-you) -->
+    <section
+      id="task-screen"
+      class="panel task-panel"
+      aria-label="Block tapping area"
+      hidden
+    >
       <header class="task-header">
         <div class="task-header-text">
           <p id="stage-label" class="stage-label">Practice</p>
@@ -154,31 +196,53 @@
 
       <div id="task-content">
         <div class="grid-wrapper">
-          <div id="corsi-grid" class="corsi-grid" aria-label="Corsi block grid">
-            <!-- blocks added by JS -->
+          <div
+            id="corsi-grid"
+            class="corsi-grid"
+            aria-label="Corsi block grid"
+          >
+            <!-- blocks injected by JS -->
           </div>
         </div>
 
         <div class="controls-row">
-          <button id="play-sequence-btn" class="btn primary">Show the sequence</button>
-          <button id="clear-response-btn" class="btn ghost" disabled>Clear taps</button>
+          <button id="play-sequence-btn" class="btn primary" type="button">
+            Show the sequence
+          </button>
+          <button
+            id="clear-response-btn"
+            class="btn ghost"
+            type="button"
+            disabled
+          >
+            Clear taps
+          </button>
         </div>
 
         <div class="feedback-row">
-          <p id="feedback-text" class="feedback-text" aria-live="polite"></p>
+          <p
+            id="feedback-text"
+            class="feedback-text"
+            aria-live="polite"
+          ></p>
         </div>
       </div>
 
       <div id="thankyou-content" class="thankyou" hidden>
         <h2>All done!</h2>
         <p>Thank you for taking part in this memory task.</p>
-        <p class="subtle">Please tell the experimenter that you have finished.</p>
+        <p class="subtle">
+          Please tell the experimenter that you have finished.
+        </p>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <p>This is a standalone HTML prototype inspired by the Pavlovia “corsi_blocks” demo. No data is stored or sent anywhere.</p>
+    <p>
+      This is a standalone HTML prototype inspired by the Pavlovia
+      “corsi_blocks” demo. No data is stored or sent anywhere.
+    </p>
   </footer>
 
   <script src="script.js"></script>
