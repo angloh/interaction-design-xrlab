@@ -294,6 +294,12 @@ body {
   background: #f9fafb;
 }
 
+.key-hint--arrow {
+  font-size: 1.6rem;
+  padding: 6px 14px;
+  min-width: 2.4em;
+}
+
 .hint-line {
   margin: 4px 0;
 }
