@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Balloon Pumping Challenge — Participant View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- SCREEN 1: INSTRUCTIONS -->
+  <section id="screen-intro" class="screen screen--intro">
+    <div class="intro-card">
+      <header class="intro-header">
+        <h1>Balloon Pumping Challenge!</h1>
+        <p class="intro-subtitle">Welcome to the game</p>
+      </header>
+
+      <div class="intro-steps">
+        <article class="intro-step">
+          <div class="step-icon step-icon--pump" aria-hidden="true">
+            <span class="keycap keycap--accent">SPACE</span>
+          </div>
+          <h2>Pump to earn money</h2>
+          <p>
+            Press <span class="keycap-inline">SPACE</span> to pump the balloon.
+            Each pump makes it grow and adds money to this round.
+          </p>
+        </article>
+
+        <article class="intro-step">
+          <div class="step-icon step-icon--risk" aria-hidden="true">
+            <span class="balloon-dot"></span>
+          </div>
+          <h2>Stop before it pops!</h2>
+          <p>
+            The balloon can burst at any time. If it pops, you lose this round's money.
+          </p>
+        </article>
+
+        <article class="intro-step">
+          <div class="step-icon step-icon--bank" aria-hidden="true">
+            <span class="keycap keycap--accent-secondary">ENTER</span>
+          </div>
+          <h2>Bank your earnings</h2>
+          <p>
+            Press <span class="keycap-inline">ENTER</span> to save this balloon's money
+            and move to the next one.
+          </p>
+        </article>
+      </div>
+
+      <div class="intro-footer">
+        <p class="intro-note">
+          You will start with <strong>1 practice balloon</strong> that does not count,
+          then play <strong>10 balloons that count</strong>. Try to finish with as much money as you can.
+        </p>
+        <button id="btn-start" class="btn btn--primary">
+          Press <span class="keycap-inline">SPACE</span> to start
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCREEN 2: GAMEPLAY -->
+  <section id="screen-game" class="screen screen--game hidden" aria-label="Balloon pumping task">
+    <header class="game-header">
+      <div class="game-pill">
+        <span class="pill-label">Balloon value</span>
+        <span id="round-value" class="pill-value">$0.00</span>
+      </div>
+      <div class="game-pill">
+        <span class="pill-label">Total banked</span>
+        <span id="total-banked" class="pill-value">$0.00</span>
+      </div>
+      <div class="game-pill">
+        <span class="pill-label">Balloon</span>
+        <span id="balloon-count" class="pill-value">Practice</span>
+      </div>
+    </header>
+
+    <main class="game-main">
+      <div class="balloon-stage" aria-hidden="true">
+        <div id="balloon" class="balloon">
+          <div class="balloon-highlight"></div>
+          <div class="balloon-knot"></div>
+        </div>
+        <div class="balloon-string"></div>
+      </div>
+
+      <div class="controls">
+        <button id="btn-pump" class="btn btn--primary">
+          Press <span class="keycap-inline">SPACE</span> to pump balloon
+        </button>
+        <button id="btn-bank" class="btn btn--ghost">
+          Press <span class="keycap-inline">ENTER</span> to bank balloon
+        </button>
+      </div>
+
+      <p id="game-message" class="game-message" aria-live="polite">
+        Pump the balloon to earn money. Bank it before it pops.
+      </p>
+    </main>
+  </section>
+
+  <!-- SCREEN 3: RESULTS -->
+  <section id="screen-result" class="screen screen--result hidden">
+    <div class="result-card">
+      <h1>Well done!</h1>
+      <p class="result-subtitle">You banked a total of</p>
+      <p id="final-total" class="result-total">$0.00</p>
+
+      <div class="result-actions">
+        <button id="btn-exit" class="btn btn--ghost">Exit</button>
+        <button id="btn-play-again" class="btn btn--primary">Play again</button>
+      </div>
+
+      <p class="hint">If you are in the lab, please tell the experimenter you have finished.</p>
+    </div>
+  </section>
+
+  <!-- SCREEN 4: EXPERIMENTER VIEW -->
+  <section id="screen-experimenter" class="screen screen--experimenter hidden" aria-label="Experimenter view">
+    <div class="exp-shell">
+      <header class="exp-header">
+        <button id="exp-close" class="exp-close-btn">Close</button>
+        <h1>Experimenter view</h1>
+      </header>
+
+      <main class="exp-main">
+        <section class="exp-participant">
+          <header class="exp-participant-header">
+            <h2>Participant 1</h2>
+            <p>0/10 correct · Avg RT: 2383 ms</p>
+          </header>
+          <table>
+            <thead>
+              <tr>
+                <th>Trial</th>
+                <th>Color</th>
+                <th>Side</th>
+                <th>Correct</th>
+                <th>RT (ms)</th>
+              </tr>
+            </thead>
+            <tbody id="exp-p1-body">
+            </tbody>
+          </table>
+        </section>
+
+        <section class="exp-participant">
+          <header class="exp-participant-header">
+            <h2>Participant 2</h2>
+            <p>10/10 correct · Avg RT: 774 ms</p>
+          </header>
+          <table>
+            <thead>
+              <tr>
+                <th>Trial</th>
+                <th>Color</th>
+                <th>Side</th>
+                <th>Correct</th>
+                <th>RT (ms)</th>
+              </tr>
+            </thead>
+            <tbody id="exp-p2-body">
+            </tbody>
+          </table>
+        </section>
+
+        <section class="exp-participant">
+          <header class="exp-participant-header">
+            <h2>Participant 3</h2>
+            <p>8/10 correct · Avg RT: 567 ms</p>
+          </header>
+          <table>
+            <thead>
+              <tr>
+                <th>Trial</th>
+                <th>Color</th>
+                <th>Side</th>
+                <th>Correct</th>
+                <th>RT (ms)</th>
+              </tr>
+            </thead>
+            <tbody id="exp-p3-body">
+            </tbody>
+          </table>
+        </section>
+      </main>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
