@@ -209,7 +209,9 @@
     feedbackText.textContent = '';
     feedbackText.classList.remove(...FEEDBACK_CLASSES);
     bottomHint.style.visibility = 'visible';
-    bottomHint.textContent = 'Press ← or → based on the cue.';
+    bottomHint.innerHTML =
+      'Press <span class="key-hint key-hint--arrow">←</span> or ' +
+      '<span class="key-hint key-hint--arrow">→</span> based on the cue.';
     updateTrialHeader();
 
     setCue(currentTrial.side, currentTrial.color);
@@ -305,7 +307,9 @@
       const totalCorrect = trials.filter((t) => t.correct).length;
       const avgRT =
         trials.length > 0
-          ? Math.round(trials.reduce((sum, t) => sum + (t.rt || 0), 0) / trials.length)
+          ? Math.round(
+              trials.reduce((sum, t) => sum + (t.rt || 0), 0) / trials.length
+            )
           : null;
 
       const block = document.createElement('div');
